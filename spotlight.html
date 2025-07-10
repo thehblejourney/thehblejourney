@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Business Spotlight – HBLE</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body style="background-image: url('../images/image5.jpg'); background-size: cover; background-position: center;">
+
+  <!-- Music Toggle -->
+  <audio id="bg-music" loop>
+    <source src="../Audio hble/Phantom of the Opera.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+  <button class="audio-toggle" onclick="toggleMusic()">⏸️</button>
+
+  <!-- Content -->
+  <div class="content-container" style="background-color: rgba(0, 0, 0, 0.6); padding: 2rem; border-radius: 15px;">
+    <h1 class="section-title"><span class="highlight">Local</span> Business Spotlight</h1>
+    <p>
+      We honor the businesses that power our communities with purpose. HBLE’s spotlight series celebrates local entrepreneurs making legendary moves —
+      from small-town passion to regional recognition.
+    </p>
+
+    <!-- Business 1 -->
+    <div class="business-card fade-in">
+      <img src="../images/tk-logo.png" alt="TK Equipment Logo" class="business-logo" style="max-width: 120px; border-radius: 10px; margin-bottom: 10px;" />
+      <h2 class="business-name">TK Equipment Services</h2>
+      <p>Delivering top-tier heavy equipment solutions with professionalism and heart. When your job demands excellence, TK delivers.</p>
+      <a href="https://tkequipmentservices.com/" class="business-link" target="_blank">Visit Website</a>
+    </div>
+
+    <!-- Business 2 -->
+    <div class="business-card fade-in">
+      <img src="../images/uou-logo.png" alt="UOU Skincare Logo" class="business-logo" style="max-width: 120px; border-radius: 10px; margin-bottom: 10px;" />
+      <h2 class="business-name">UOU Skincare</h2>
+      <p>Natural skincare handcrafted with intention. UOU blends culture and care to help you love the skin you're in.</p>
+      <a href="https://www.uouskin.com/" class="business-link" target="_blank">Visit Website</a>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+      <a href="mission.html" class="next-button">← Previous</a>
+      <a href="sports.html" class="next-button">→ Next</a>
+    </div>
+  </div>
+
+  <!-- Music Script -->
+  <script>
+    const music = document.getElementById("bg-music");
+    const toggleBtn = document.querySelector(".audio-toggle");
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        toggleBtn.textContent = "⏸️";
+      } else {
+        music.pause();
+        toggleBtn.textContent = "🎵";
+      }
+    }
+
+    document.body.addEventListener("click", function initAudio() {
+      music.play();
+      document.body.removeEventListener("click", initAudio);
+    });
+  </script>
+
+</body>
+</html>

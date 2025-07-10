@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Local Sports Legends – HBLE</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body style="background-image: url('../images/image8.jpg'); background-size: cover; background-position: center;">
+
+  <!-- Music Toggle -->
+  <audio id="bg-music" loop>
+    <source src="../Audio hble/Phantom of the Opera.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <button class="audio-toggle" onclick="toggleMusic()">⏸️</button>
+
+  <div class="content-container" style="background-color: rgba(0, 0, 0, 0.6); padding: 2rem; border-radius: 15px;">
+    <h1 class="section-title"><span class="highlight">Local</span> Sports Legends</h1>
+    <p>
+      From Friday night lights to big league dreams, HBLE shines a spotlight on the athletes who’ve made their mark. These are the stories of grit, glory, and greatness — born in our neighborhoods and raised through sweat and sacrifice.
+    </p>
+
+    <!-- Featured Legend -->
+    <div class="business-card fade-in">
+      <h2 class="business-name">Steven Howard</h2>
+      <p>
+        <strong>Basketball Personal Trainer @ The Lab</strong><br/>
+        237 Capital Blvd., Houma, LA<br/>
+        <a href="tel:9857904376" style="color: #fff; text-decoration: underline;">985-790-4376</a>
+      </p>
+      <p>
+        Known for his relentless drive and skill development expertise, Steven Howard transforms potential into performance. From dribbling drills to championship vision, he's helping the next generation of ballers level up their game.
+      </p>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+      <a href="spotlight.html" class="next-button">← Previous</a>
+      <a href="dining.html" class="next-button">→ Next</a>
+    </div>
+  </div>
+
+  <!-- Music Script -->
+  <script>
+    const music = document.getElementById("bg-music");
+    const toggleBtn = document.querySelector(".audio-toggle");
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        toggleBtn.textContent = "⏸️";
+      } else {
+        music.pause();
+        toggleBtn.textContent = "🎵";
+      }
+    }
+
+    document.body.addEventListener("click", function initAudio() {
+      music.play();
+      document.body.removeEventListener("click", initAudio);
+    });
+  </script>
+
+</body>
+</html>

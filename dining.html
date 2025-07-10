@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Local Dining – HBLE</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body style="background-image: url('../images/image6.jpg'); background-size: cover; background-position: center;">
+
+  <!-- Music Toggle -->
+  <audio id="bg-music" loop>
+    <source src="../Audio hble/Phantom of the Opera.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+  <button class="audio-toggle" onclick="toggleMusic()">⏸️</button>
+
+  <!-- Content -->
+  <div class="content-container" style="background-color: rgba(0, 0, 0, 0.6); padding: 2rem; border-radius: 15px;">
+    <h1 class="section-title"><span class="highlight">Local</span> Dining Gems</h1>
+    <p>
+      From food trucks to family-owned kitchens, HBLE highlights the places where flavor meets culture. Here, cooking is legacy — and every bite tells a story.
+    </p>
+
+    <!-- Business Card -->
+    <div class="business-card fade-in">
+      <img src="../images/image7.jpg" alt="Better Than Your Mama's Logo" class="business-logo" style="max-width: 140px; border-radius: 12px; margin-bottom: 10px;" />
+      <h2 class="business-name">Better Than Your Mama's Catering</h2>
+      <p><em>Life is Short, Lick the Bowl</em></p>
+      <!-- Facebook link was removed as requested -->
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div style="display: flex; justify-content: flex-start; margin-top: 2rem;">
+      <a href="sports.html" class="next-button">← Previous</a>
+    </div>
+  </div>
+
+  <!-- Music Script -->
+  <script>
+    const music = document.getElementById("bg-music");
+    const toggleBtn = document.querySelector(".audio-toggle");
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        toggleBtn.textContent = "⏸️";
+      } else {
+        music.pause();
+        toggleBtn.textContent = "🎵";
+      }
+    }
+
+    document.body.addEventListener("click", function initAudio() {
+      music.play();
+      document.body.removeEventListener("click", initAudio);
+    });
+  </script>
+
+</body>
+</html>

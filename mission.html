@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mission Statement – HBLE</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body style="background-image: url('../images/image4.jpg'); background-size: cover; background-position: center;">
+
+  <!-- Music Toggle -->
+  <audio id="bg-music" loop>
+    <source src="../Audio hble/Phantom of the Opera.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+  <button class="audio-toggle" onclick="toggleMusic()">⏸️</button>
+
+  <!-- Page Content -->
+  <div class="content-container" style="background-color: rgba(0, 0, 0, 0.6); padding: 2rem; border-radius: 15px;">
+    <h1 class="section-title"><span class="highlight">Our</span> Mission</h1>
+
+    <p>
+      At Humble Beginnings Legendary Endings, our mission is to shine a spotlight on local businesses and the passionate individuals behind them.
+      We are dedicated to elevating community voices, celebrating entrepreneurial journeys, and fostering regional growth by bringing awareness to the
+      hard work, talent, and impact of local business owners. From modest starts to remarkable legacies, we believe every business has a story worth sharing.
+    </p>
+
+    <p>
+      Humble Beginnings Legendary Endings exists to amplify the voices of local businesses and the trailblazers behind them.
+      We spotlight the passion and purpose that fuel our communities — turning everyday hustle into legendary impact. By championing small businesses,
+      we drive awareness, spark pride, and help local legacies rise.
+    </p>
+
+    <p>
+      HBLE is on a mission to spotlight the businesses that shape our communities. We amplify local voices, celebrate entrepreneurial grit,
+      and turn everyday stories into legendary ones. By connecting people to the passion behind local brands, we help small businesses get seen, heard, and remembered.
+    </p>
+
+    <!-- Navigation Buttons -->
+    <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+      <a href="../index.html" class="next-button">← Previous</a>
+      <a href="spotlight.html" class="next-button">→ Next</a>
+    </div>
+  </div>
+
+  <!-- Music Script -->
+  <script>
+    const music = document.getElementById("bg-music");
+    const toggleBtn = document.querySelector(".audio-toggle");
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        toggleBtn.textContent = "⏸️";
+      } else {
+        music.pause();
+        toggleBtn.textContent = "🎵";
+      }
+    }
+
+    document.body.addEventListener("click", function initAudio() {
+      music.play();
+      document.body.removeEventListener("click", initAudio);
+    });
+  </script>
+
+</body>
+</html>
