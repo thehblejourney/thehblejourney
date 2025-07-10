@@ -1,0 +1,140 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* General Body Styling */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  background-color: black;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Headings */
+h1,
+h2 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.section-title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.highlight {
+  color: gold;
+  font-weight: bold;
+}
+
+/* Tagline */
+.landing-tagline {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  color: #ddd;
+}
+
+/* Buttons */
+.next-button {
+  display: inline-block;
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 12px 28px;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: 0.3s ease;
+  margin-top: 20px;
+}
+
+.next-button:hover {
+  background-color: gold;
+  color: black;
+}
+
+/* Audio Toggle */
+.audio-toggle {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: gold;
+  color: black;
+  border: none;
+  padding: 10px 14px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Logo Image (if used on homepage) */
+.logo {
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Content Container */
+.content-container {
+  max-width: 800px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Business Cards */
+.business-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+  box-shadow: 0 0 8px rgba(255,255,255,0.2);
+  transition: transform 0.3s ease;
+}
+
+.business-card:hover {
+  transform: scale(1.02);
+}
+
+.business-logo {
+  max-width: 150px;
+  height: auto;
+  margin-bottom: 15px;
+  border-radius: 12px;
+}
+
+.business-name {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  color: gold;
+}
+
+.business-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #00eaff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.business-link:hover {
+  text-decoration: underline;
+}

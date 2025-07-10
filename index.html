@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HBLE – Humble Beginnings Legendary Endings</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      border: 2px solid yellow;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 30px yellow;
+      background-color: #000000d0;
+    }
+
+    .site-title {
+      font-size: 5rem;
+      font-weight: bold;
+      animation: colorShift 6s infinite alternate;
+      text-shadow: 0 0 10px #fff;
+      margin: 0;
+    }
+
+    @keyframes colorShift {
+      0% { color: gold; }
+      25% { color: red; }
+      50% { color: white; }
+      75% { color: limegreen; }
+      100% { color: orange; }
+    }
+
+    .tagline {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 1.8rem;
+      margin-top: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid white;
+      width: 0;
+      animation: typing 4s steps(40, end) forwards;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .images-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .images-row img {
+      width: 100px;
+      height: 140px;
+      border-radius: 10px;
+      animation: spinIn 1s ease-in-out;
+    }
+
+    @keyframes spinIn {
+      from {
+        transform: rotateY(720deg) scale(0);
+        opacity: 0;
+      }
+      to {
+        transform: rotateY(0deg) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .enter-button {
+      margin-top: 20px;
+      padding: 10px 30px;
+      border: 2px solid white;
+      background: transparent;
+      color: white;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .enter-button:hover {
+      background-color: white;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="site-title">HBLE</h1>
+    <div class="tagline">Humble Beginnings Legendary Endings</div>
+
+    <div class="images-row">
+      <img src="Images/image1.jpg" alt="Model 1" />
+      <img src="Images/image2.jpg" alt="Design" />
+      <img src="Images/image3.jpg" alt="Logo" />
+    </div>
+
+    <button class="enter-button" onclick="startSite()">→ Enter</button>
+  </div>
+
+  <audio id="bg-music" src="audio/PhantomoftheOpera.mp3" preload="auto" loop></audio>
+
+  <script>
+    function startSite() {
+      const audio = document.getElementById("bg-music");
+      audio.volume = 0;
+      audio.play().then(() => {
+        const fade = setInterval(() => {
+          if (audio.volume < 1) {
+            audio.volume = Math.min(audio.volume + 0.05, 1);
+          } else {
+            clearInterval(fade);
+          }
+        }, 200);
+        window.location.href = "mission.html";
+      }).catch((error) => {
+        alert("Audio playback failed. Tap again if needed.");
+        console.error(error);
+      });
+    }
+  </script>
+</body>
+</html>
