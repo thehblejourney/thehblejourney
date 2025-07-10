@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HBLE Stories</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .video-box {
+      background-color: #111;
+      border: 3px solid yellow;
+      box-shadow: 0 0 25px yellow;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #000;
+    }
+
+    .caption {
+      margin-top: 10px;
+      font-style: italic;
+      color: #ccc;
+    }
+
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 40px;
+    }
+
+    .nav-bar a {
+      flex: 1;
+      background-color: black;
+      border: 2px solid white;
+      color: white;
+      text-decoration: none;
+      padding: 12px;
+      text-align: center;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-bar a:hover {
+      background-color: white;
+      color: black;
+      font-weight: bold;
+    }
+
+    .music-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: gold;
+      color: black;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-size: 18px;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="music-toggle" onclick="toggleMusic()">🎵</button>
+
+  <div class="container">
+    <h1>HBLE Stories</h1>
+
+    <div class="video-box">
+      <iframe src="https://player.vimeo.com/video/000000000" allowfullscreen></iframe>
+      <div class="caption">“Out the Mud” – Resilience in the Bayou</div>
+    </div>
+
+    <div class="video-box">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+      <div class="caption">“Local Legend” – Community Hero Highlight</div>
+    </div>
+
+    <div class="nav-bar">
+      <a href="dining.html">← Previous</a>
+      <a href="index.html">🏠 Home</a>
+      <a href="index.html">⟶ Next</a>
+    </div>
+  </div>
+
+  <audio id="bg-music" src="audio/PhantomoftheOpera.mp3" preload="auto" loop></audio>
+
+  <script>
+    const music = document.getElementById("bg-music");
+    const toggleBtn = document.querySelector(".music-toggle");
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play().catch(console.error);
+        toggleBtn.textContent = "⏸️";
+      } else {
+        music.pause();
+        toggleBtn.textContent = "🎵";
+      }
+    }
+
+    window.addEventListener("load", () => {
+      music.volume = 0;
+      music.play().catch(() => {});
+      const fadeIn = setInterval(() => {
+        if (music.volume < 1) {
+          music.volume += 0.05;
+        } else {
+          clearInterval(fadeIn);
+        }
+      }, 200);
+    });
+  </script>
+</body>
+</html>
