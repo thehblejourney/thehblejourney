@@ -88,7 +88,7 @@ h2 {
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
-/* Content Container */
+/* Content Container */ĺ
 .content-container {
   max-width: 800px;
   background-color: rgba(0, 0, 0, 0.6);
@@ -137,4 +137,18 @@ h2 {
 
 .business-link:hover {
   text-decoration: underline;
+}
+#cursor {
+  display: inline-block;
+  font-weight: bold;
+  animation: blink 0.7s step-start infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+#cursor.hidden {
+  display: none !important;
+  animation: none !important;
 }

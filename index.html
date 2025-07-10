@@ -111,11 +111,12 @@
       <img src="Images/image2.jpg" alt="Design" />
       <img src="Images/image3.jpg" alt="Logo" />
     </div>
-
+<h1 id="typing-text"></h1><span id="cursor">|</span>
+<button id="enter-btn" style="display: none;">Enter</button>
     <button class="enter-button" onclick="startSite()">→ Enter</button>
   </div>
 
-  <audio id="bg-music" src="audio/PhantomoftheOpera.mp3" preload="auto" loop></audio>
+
 
   <script>
     function startSite() {
@@ -136,5 +137,10 @@
       });
     }
   </script>
+  <!-- Script -->
+<script src="script.js"></script>
+
+<!-- Dummy visible audio control to unlock mobile playback -->
+<audio id="bg-music" src="audio/PhantomoftheOpera.mp3" preload="auto" playsinline controls style="opacity:0; height:0;"></audio>
 </body>
 </html>
