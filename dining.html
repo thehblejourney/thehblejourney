@@ -5,59 +5,131 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Local Dining – HBLE</title>
   <link rel="stylesheet" href="../style.css" />
+  <style>
+    nav {
+      background: #111;
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 2px solid orange;
+      box-shadow: 0 0 15px green;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    h1.section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      color: gold;
+      margin-top: 2rem;
+      text-shadow: 0 0 15px orange;
+    }
+
+    .content-container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 20px;
+    }
+
+    .business-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #fff;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 30px 0;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    }
+
+    .business-logo {
+      max-width: 140px;
+      height: auto;
+      margin-bottom: 15px;
+      border-radius: 12px;
+    }
+
+    .business-name {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      color: gold;
+    }
+
+    .business-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #00eaff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .business-link:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
+
 <body style="background-image: url('../images/image6.jpg'); background-size: cover; background-position: center;">
 
-  <!-- Music Toggle -->
-  <audio id="bg-music" loop>
-    <source src="../audio/PhantomoftheOpera.mp3" type="audio/mpeg" />
-    Your browser does not support the audio element.
-  </audio>
-  <button class="audio-toggle" onclick="toggleMusic()">⏸️</button>
+  <!-- Nav Bar -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="mission.html">Mission</a>
+    <a href="spotlight.html">Spotlight</a>
+    <a href="dining.html">Dining</a>
+    <a href="stories.html">Stories</a>
+    <a href="talent.html">Talent</a>
+  </nav>
 
-  <!-- Content -->
-  <div class="content-container" style="background-color: rgba(0, 0, 0, 0.6); padding: 2rem; border-radius: 15px;">
+  <!-- Music -->
+  <audio id="bg-music" loop autoplay>
+    <source src="audio/PhantomoftheOpera.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Main Content -->
+  <div class="content-container">
     <h1 class="section-title"><span class="highlight">Local</span> Dining Gems</h1>
-    <p>
+    <p style="text-align: center;">
       From food trucks to family-owned kitchens, HBLE highlights the places where flavor meets culture. Here, cooking is legacy — and every bite tells a story.
     </p>
 
-    <!-- Business Card -->
+    <!-- Business 1: Better Than Your Mama's -->
     <div class="business-card fade-in">
-      <img src="../images/image7.jpg" alt="Better Than Your Mama's Logo" class="business-logo" style="max-width: 140px; border-radius: 12px; margin-bottom: 10px;" />
+      <img src="../images/image7.jpg" alt="Better Than Your Mama's Logo" class="business-logo" />
       <h2 class="business-name">Better Than Your Mama's Catering</h2>
       <p><em>Life is Short, Lick the Bowl</em></p>
-      <!-- Facebook link was removed as requested -->
+      <p>Phone: 985-360-1269</p>
     </div>
 
-    <!-- Navigation Buttons -->
-    <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
-  <a href="sports.html">← Previous</a>
-  <a href="stories.html">→ Next</a>
-</div>
+    <!-- Business 2: SHREDSKIZ -->
+    <div class="business-card fade-in" style="box-shadow: 0 0 20px #fff, 0 0 10px limegreen;">
+      <img src="../images/shredskiz.jpg" alt="SHREDSKIZ Nutrition & Wellness" class="business-logo" />
+      <h2 class="business-name">SHREDSKIZ Nutrition & Wellness</h2>
+      <p>Experience the SHREDSKIZ Difference! When you're ready for results, we make it easy to make HEALTHY your new lifestyle.</p>
+      <p>
+        203 West Second St<br>
+        Thibodaux, LA 70301
+      </p>
+      <p>Phone: 985-856-8942</p>
+      <a href="https://www.shredskiz.com/" class="business-link" target="_blank">Visit Website</a>
+    </div>
+
+    <!-- Business 3: Nadie B's -->
+    <div class="business-card fade-in" style="box-shadow: 0 0 20px #fff, 0 0 10px green;">
+      <img src="../images/nadieb.jpg" alt="Nadie B's Taste of Home-Ah" class="business-logo" />
+      <h2 class="business-name">Nadie B's Taste of Home-Ah</h2>
+      <p><em>Seafood, Soulfood, and Catering</em></p>
+      <p>"Bringing a little bit of our home to yours"</p>
+      <p>3059 West Main Street<br>Gray, LA 70359</p>
+      <p>Phone: 985-346-6735</p>
+      <a href="https://www.facebook.com/profile.php?id=100064022326134&mibextid=ZbWKwL" class="business-link" target="_blank">Visit Facebook Page</a>
     </div>
   </div>
-
-  <!-- Music Script -->
-  <script>
-    const music = document.getElementById("bg-music");
-    const toggleBtn = document.querySelector(".audio-toggle");
-
-    function toggleMusic() {
-      if (music.paused) {
-        music.play();
-        toggleBtn.textContent = "⏸️";
-      } else {
-        music.pause();
-        toggleBtn.textContent = "🎵";
-      }
-    }
-
-    document.body.addEventListener("click", function initAudio() {
-      music.play();
-      document.body.removeEventListener("click", initAudio);
-    });
-  </script>
-
 </body>
 </html>

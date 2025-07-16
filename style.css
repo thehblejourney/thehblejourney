@@ -152,3 +152,42 @@ h2 {
   display: none !important;
   animation: none !important;
 }
+/* Glowing Navigation Bar */
+}nav.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: black;
+  padding: 1rem;
+  gap: 20px;
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.2);
+}
+
+nav.main-nav a {
+  color: #ff33cc;
+  font-weight: 900;
+  font-size: 1.05rem;
+  letter-spacing: 0.7px;
+  text-decoration: none;
+  text-shadow:
+    0 0 3px #ff33cc,
+    0 0 8px #ff33cc,
+    0 0 12px #ff33cc;
+  transition: all 0.2s ease-in-out;
+}
+
+nav.main-nav a:hover {
+  transform: scale(1.08);
+  text-shadow:
+    0 0 4px #ff66e6,
+    0 0 12px #ff66e6,
+    0 0 18px #ff66e6;
+}
+nav a {
+  text-shadow: none !important;
+}

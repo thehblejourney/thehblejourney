@@ -5,18 +5,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mission Statement – HBLE</title>
   <link rel="stylesheet" href="../style.css" />
-</head>
-<body style="background-image: url('../images/image4.jpg'); background-size: cover; background-position: center;">
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
 
-  <!-- Music Toggle -->
+    nav {
+      background: #111;
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 2px solid #00d0ff;
+      box-shadow: 0 0 15px #ffffff, 0 0 30px #00d0ff;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .glow-line {
+      height: 4px;
+      background-color: #00ff88;
+      box-shadow: 0 0 10px #00ff88, 0 0 20px white;
+      margin-bottom: 2rem;
+    }
+
+    .content-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background-color: rgba(0, 0, 0, 0.65);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    h1.section-title {
+      font-size: 2.5rem;
+      text-align: center;
+      color: gold;
+      text-shadow: 0 0 10px gold;
+      margin-bottom: 1rem;
+    }
+
+    .highlight {
+      color: gold;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+      color: #ddd;
+    }
+
+    .footer-image {
+      display: block;
+      margin: 2rem auto 0;
+      max-width: 200px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gold;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+        <a href="../index.html">Home</a>
+    <a href="mission.html">Mission</a>
+    <a href="sports.html">Sports</a>
+    <a href="spotlight.html">Spotlight</a>
+    <a href="dining.html">Dining</a>
+    <a href="stories.html">Stories</a>
+    <a href="talent.html">Talent</a>
+  </nav>
+
+  <!-- Glowing Line -->
+  <div class="glow-line"></div>
+
+  <!-- Music (autoplay on user interaction) -->
   <audio id="bg-music" loop>
-    <source src="../audio/PhantomoftheOpera.mp3" type="audio/mpeg" />
-    Your browser does not support the audio element.
+    <source src="audio/PhantomoftheOpera.mp3" type="audio/mpeg" />
   </audio>
-  <button class="audio-toggle" onclick="toggleMusic()">⏸️</button>
 
   <!-- Page Content -->
-  <div class="content-container" style="background-color: rgba(0, 0, 0, 0.6); padding: 2rem; border-radius: 15px;">
+  <div class="content-container">
     <h1 class="section-title"><span class="highlight">Our</span> Mission</h1>
 
     <p>
@@ -35,32 +119,31 @@
       and turning everyday stories into legendary ones. By connecting people to the passion behind local brands, we help small businesses get seen, heard, and remembered.
     </p>
 
-    <!-- Navigation Buttons -->
-    <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
-      <a href="../index.html" class="next-button">← Previous</a>
-      <a href="spotlight.html" class="next-button">→ Next</a>
-    </div>
+    <img src="../images/image4.jpg" alt="HBLE" class="footer-image" />
   </div>
 
   <!-- Music Script -->
   <script>
     const music = document.getElementById("bg-music");
-    const toggleBtn = document.querySelector(".audio-toggle");
+    let hasPlayed = false;
 
-    function toggleMusic() {
-      if (music.paused) {
-        music.play();
-        toggleBtn.textContent = "⏸️";
-      } else {
-        music.pause();
-        toggleBtn.textContent = "🎵";
+    function fadeInMusic() {
+      if (!hasPlayed) {
+        music.volume = 0;
+        music.play().then(() => {
+          hasPlayed = true;
+          const fade = setInterval(() => {
+            if (music.volume < 1) {
+              music.volume = Math.min(music.volume + 0.05, 1);
+            } else {
+              clearInterval(fade);
+            }
+          }, 200);
+        }).catch(() => {});
       }
     }
 
-    document.body.addEventListener("click", function initAudio() {
-      music.play();
-      document.body.removeEventListener("click", initAudio);
-    });
+    window.addEventListener("click", fadeInMusic);
   </script>
 
 </body>
