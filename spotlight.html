@@ -100,12 +100,12 @@
 <div style="text-align: center; margin-top: 1rem;">
   <div style="display: inline-block; background: #111; padding: 12px 18px; border-radius: 10px; box-shadow: 0 0 12px limegreen; border: 2px solid orange;">
     <div style="color: gold; font-weight: bold; font-size: 1rem; margin-bottom: 4px;">🎵 “NewHard”</div>
-    <div style="font-size: 0.85rem; color: #ccc; font-style: italic; margin-bottom: 8px;">Produced by HBLE</div>
-    <audio id="newhard-audio" preload="auto">
+    <div style="font-size: 0.85rem; color: #ccc; font-style: italic; margin-bottom: 8px;">Produced by Mr Doe for Doe Beats Productions</div>
+    <audio id="NewHard-audio" preload="auto">
       <source src="audio/NewHard.mp3" type="audio/mpeg" />
       Your browser does not support the audio element.
     </audio>
-    <button id="play-newhard" style="background: black; color: gold; border: 1px solid limegreen; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">▶️ Play</button>
+    <button id="play-NewHard" style="background: black; color: gold; border: 1px solid limegreen; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">▶️ Play</button>
   </div>
 </div>
     <p>
@@ -147,6 +147,19 @@
   <p style="font-weight: bold; color: #00eaff;">985-360-1269</p>
 </div>
   </div>
+<script>
+  const newHardAudio = document.getElementById('NewHard-audio');
+  const playBtn = document.getElementById('play-NewHard');
 
+  playBtn.addEventListener('click', () => {
+    if (newHardAudio.paused) {
+      newHardAudio.play();
+      playBtn.textContent = '⏸️ Pause';
+    } else {
+      newHardAudio.pause();
+      playBtn.textContent = '▶️ Play';
+    }
+  });
+</script>
 </body>
 </html>

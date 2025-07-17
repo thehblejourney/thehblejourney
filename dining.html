@@ -79,27 +79,27 @@
 
   <!-- Nav Bar -->
   <nav>
-  <a href="index.html">Home</a>
-  <a href="mission.html">Mission</a>
-  <a href="spotlight.html">Spotlight</a>
-  <a href="talent.html">Talent Spotlight</a>
-  <a href="sports.html">Sports</a>
-  <a href="dining.html">Dining</a>
-  <a href="stories.html">Stories</a>
+    <a href="index.html">Home</a>
+    <a href="mission.html">Mission</a>
+    <a href="spotlight.html">Spotlight</a>
+    <a href="talent.html">Talent Spotlight</a>
+    <a href="sports.html">Sports</a>
+    <a href="dining.html">Dining</a>
+    <a href="stories.html">Stories</a>
+  </nav>
 
-  <!-- Music -->
-<!-- 🎵 Mini Audio Player for Jru Starz -->
-<div style="text-align: center; margin-top: 1rem;">
-  <div style="display: inline-block; background: #111; padding: 12px 18px; border-radius: 10px; box-shadow: 0 0 12px limegreen; border: 2px solid orange;">
-    <div style="color: gold; font-weight: bold; font-size: 1rem; margin-bottom: 4px;">🎵 Jru Starz – Love Her All The Time</div>
-    <div style="font-size: 0.85rem; color: #ccc; font-style: italic; margin-bottom: 8px;">Produced by HBLE</div>
-    <audio id="jrustarz-audio" preload="auto">
-      <source src="audio/JruStarz.mp3" type="audio/mpeg" />
-      Your browser does not support the audio element.
-    </audio>
-    <button id="play-jrustarz" style="background: black; color: gold; border: 1px solid limegreen; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">▶️ Play</button>
+  <!-- 🎵 Mini Audio Player for Jru Starz -->
+  <div style="text-align: center; margin-top: 1rem;">
+    <div style="display: inline-block; background: #111; padding: 12px 18px; border-radius: 10px; box-shadow: 0 0 12px limegreen; border: 2px solid orange;">
+      <div style="color: gold; font-weight: bold; font-size: 1rem; margin-bottom: 4px;">🎵 Jru Starz – Love Her All The Time</div>
+      <div style="font-size: 0.85rem; color: #ccc; font-style: italic; margin-bottom: 8px;">Performed by Jru Starz</div>
+      <audio id="jrustarz-audio" preload="auto">
+        <source src="audio/JruStarz.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <button id="play-jrustarz" style="background: black; color: gold; border: 1px solid limegreen; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">▶️ Play</button>
+    </div>
   </div>
-</div>
 
   <!-- Main Content -->
   <div class="content-container">
@@ -140,5 +140,22 @@
       <a href="https://www.facebook.com/profile.php?id=100064022326134&mibextid=ZbWKwL" class="business-link" target="_blank">Visit Facebook Page</a>
     </div>
   </div>
+
+  <!-- Music Script -->
+  <script>
+    const jruAudio = document.getElementById("jrustarz-audio");
+    const playBtn = document.getElementById("play-jrustarz");
+
+    playBtn.addEventListener("click", () => {
+      if (jruAudio.paused) {
+        jruAudio.play();
+        playBtn.textContent = "⏸️ Pause";
+      } else {
+        jruAudio.pause();
+        playBtn.textContent = "▶️ Play";
+      }
+    });
+  </script>
+
 </body>
 </html>
