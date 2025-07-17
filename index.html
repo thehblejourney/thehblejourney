@@ -161,5 +161,19 @@
       }, 1500);
     }
   </script>
+  <script>
+  const newhardAudio = document.getElementById('newhard-audio');
+  const newhardBtn = document.getElementById('play-newhard');
+
+  newhardBtn.addEventListener('click', () => {
+    if (newhardAudio.paused) {
+      newhardAudio.play();
+      newhardBtn.textContent = '⏸️ Pause';
+    } else {
+      newhardAudio.pause();
+      newhardBtn.textContent = '▶️ Play';
+    }
+  });
+</script>
 </body>
 </html>

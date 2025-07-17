@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HBLE Sports Legends</title>
   <style>
     body {
@@ -33,7 +33,7 @@
       text-align: center;
       font-size: 2.5rem;
       color: gold;
-      margin-top: 2rem;
+      margin-top: 1rem;
       text-shadow: 0 0 15px orange;
       animation: glow 2s infinite alternate;
     }
@@ -85,10 +85,11 @@
   </style>
 </head>
 <body>
+
+  <!-- Navigation Bar -->
   <nav>
-    <a href="../index.html">Home</a>
+    <a href="index.html">Home</a>
     <a href="mission.html">Mission</a>
-    <a href="sports.html">Sports</a>
     <a href="spotlight.html">Spotlight</a>
     <a href="dining.html">Dining</a>
     <a href="stories.html">Stories</a>
@@ -97,26 +98,40 @@
 
   <h1 class="section-title">NEIGHBORHOOD SUPERSTARS</h1>
 
+  <!-- 🎵 Mini Music Player -->
+  <div style="text-align: center; margin-top: 1rem;">
+    <div style="display: inline-block; background: #111; padding: 12px 18px; border-radius: 10px; box-shadow: 0 0 12px limegreen; border: 2px solid orange;">
+      <div style="color: gold; font-weight: bold; font-size: 1rem; margin-bottom: 4px;">🎵 “Champions”</div>
+      <div style="font-size: 0.85rem; color: #ccc; font-style: italic; margin-bottom: 8px;">Produced by J Soul Musiq</div>
+      <audio id="champions-audio" preload="auto">
+        <source src="audio/Champions.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <button id="play-champions" style="background: black; color: gold; border: 1px solid limegreen; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.9rem;">▶️ Play</button>
+    </div>
+  </div>
+
+  <!-- Featured Player -->
   <div class="highlight-box">
     <h2>Steven Howard</h2>
     <p>Basketball Personal Trainer @ The Lab<br>237 Capital Blvd. Houma, LA<br>985-790-4376</p>
     <img src="../images/steviecoach.jpg" alt="Steven Howard" style="max-width:200px; border-radius:10px;">
   </div>
 
+  <!-- Athlete of the Week -->
   <div class="athlete-box">
     <h2>Athlete of the Week</h2>
-    <p>Jenna Bandy shooting backwards from half court during The NBA Summer League</p>
-    <iframe 
-  width="100%" 
-  height="315" 
-  src="https://www.youtube.com/embed/N7QDEjBVl44" 
-  title="Athlete of the Week – HBLE" 
-  frameborder="0" 
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-  allowfullscreen>
-</iframe>
+    <p>Congratulations to Londyn White (2029) on her first official offer from Nicholls State University!<br>Go Tigers and Go Colonels!! 💛♥️🩶</p>
+    <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/J3ZqF8OsaSk"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
   </div>
 
+  <!-- Play of the Week -->
   <div class="play-box">
     <h2>Play of the Week</h2>
     <p>Top 1-minute highlight from this week’s local matchups. Submit yours below!</p>
@@ -132,5 +147,22 @@
       <button type="submit">Submit Highlight</button>
     </form>
   </div>
+
+  <!-- Mini Player Script -->
+  <script>
+    const championsAudio = document.getElementById('champions-audio');
+    const playBtn = document.getElementById('play-champions');
+
+    playBtn.addEventListener('click', () => {
+      if (championsAudio.paused) {
+        championsAudio.play();
+        playBtn.textContent = '⏸️ Pause';
+      } else {
+        championsAudio.pause();
+        playBtn.textContent = '▶️ Play';
+      }
+    });
+  </script>
+
 </body>
 </html>
