@@ -180,4 +180,40 @@
     <button type="submit">Submit Nomination</button>
   </form>
 </body>
+<div style="text-align: center; margin-top: 3rem;">
+  <h2 style="color: gold; text-shadow: 0 0 10px orange;">Scan to Visit Our Website</h2>
+  <img src="../images/hbleqrcode.jpg" alt="HBLE QR Code" style="width: 180px; border: 4px solid limegreen; border-radius: 12px; box-shadow: 0 0 12px #00ffcc;" />
+  <p style="color: white; font-style: italic; margin-top: 0.5rem;">Humble Beginnings Legendary Endings 
+  <p style="color: white; font-style: italic; margin-top: 0.5rem;">"WHERE SMALL BUSINESSES COME TO SHINE"</p><div style="text-align: center; margin-top: 1.5rem;">
+  <input type="text" id="shareInput" placeholder="Enter email or phone" 
+         style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 70%; max-width: 300px;" />
+
+  <br><br>
+
+  <button onclick="shareQRCode()" 
+          style="background: hotpink; color: black; padding: 10px 20px; border-radius: 8px; font-weight: bold;
+                 border: none; box-shadow: 0 0 10px limegreen; cursor: pointer;">
+    📤 Share QR Code
+  </button>
+</div>
+
+<script>
+  function shareQRCode() {
+    const input = document.getElementById('shareInput').value.trim();
+    const qrLink = 'https://hble.org/images/hbleqrcode.jpg'; // Adjust if needed
+
+    if (!input) {
+      alert("Please enter an email or phone number.");
+      return;
+    }
+
+    if (input.includes('@')) {
+      // It's an email
+      window.location.href = `mailto:${input}?subject=Check%20Out%20HBLE&body=Scan%20or%20download%20our%20QR%20Code:%20${qrLink}`;
+    } else {
+      // It's a phone number
+      window.location.href = `sms:${input}?body=Check%20out%20HBLE!%20Scan%20this%20QR%20Code:%20${qrLink}`;
+    }
+  }
+</script>
 </html>

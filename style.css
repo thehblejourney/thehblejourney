@@ -79,7 +79,33 @@ h2 {
   z-index: 1000;
   box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
 }
+..crown-anim {
+  position: absolute;
+  left: 62%;        /* Move to the right for an offset look */
+  top: 10px;        /* Sits just above the logo */
+  width: 88px;
+  height: auto;
+  transform: translateX(-50%) rotate(-22deg); /* Tilt the crown */
+  opacity: 1;
+  z-index: 4;
+  filter: drop-shadow(0 0 15px gold);
+  animation: dropCrown 2.2s 2.2s cubic-bezier(0.37, 1.6, 0.43, 0.99) forwards, crownGlow 4s infinite alternate;
+}
+@@keyframes dropCrown {
+  0% { top: -90px; opacity: 0; }
+  70% { top: 10px; opacity: 1; }
+  80% { top: 0px; }
+  90% { top: 18px; }
+  100% { top: 10px; }
+}
 
+@keyframes crownGlow {
+  0% { filter: drop-shadow(0 0 18px gold) drop-shadow(0 0 10px #fff); }
+  25% { filter: drop-shadow(0 0 28px #ff00cc) drop-shadow(0 0 12px #fff); }
+  50% { filter: drop-shadow(0 0 30px #0fffcf) drop-shadow(0 0 15px #ff0); }
+  75% { filter: drop-shadow(0 0 25px #ffd700) drop-shadow(0 0 8px #fff); }
+  100% { filter: drop-shadow(0 0 20px gold) drop-shadow(0 0 10px #fff); }
+}
 /* Logo Image (if used on homepage) */
 .logo {
   max-width: 100%;
