@@ -108,7 +108,7 @@
     .tagline {
       font-family: 'Stencol Std', fantasy;
       font-size: 2.8rem;
-      margin-top: 25px;
+      margin-top: 110px;      /* <-- Moves it much lower */
       margin-bottom: 10px;
       color: #ffef00;
       text-shadow: 0 0 12px #1a6f30, 0 0 5px #800080;
@@ -133,10 +133,10 @@
     }
     .images-row {
       display: flex;
-      gap: 16px;
+      gap: 30px;      /* More space between for bigger images */
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      padding: 8px 8px 10px 8px;
+      padding: 8px 16px 14px 16px;
       width: 100vw;
       justify-content: flex-start;
       scroll-behavior: smooth;
@@ -147,17 +147,20 @@
     .images-row img {
       scroll-snap-align: center;
       flex: 0 0 auto;
-      width: 100px;
-      height: 140px;
-      border-radius: 12px;
-      box-shadow: 0 0 16px #ffee58, 0 0 2px #fff;
-      margin: 0 5px;
+      width: 210px;     /* MUCH bigger images */
+      height: 285px;
+      border-radius: 14px;
+      box-shadow: 0 0 22px #ffee58, 0 0 3px #fff;
+      margin: 0 8px;
       background: #232;
       object-fit: cover;
       transition: transform 0.25s;
     }
     .images-row img:active {
       transform: scale(1.1) rotate(-2deg);
+    }
+    @media (max-width: 900px) {
+      .images-row img { width: 132px; height: 178px; }
     }
     @media (max-width: 500px) {
       .logo-text { font-size: 32vw; }
