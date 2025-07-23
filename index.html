@@ -28,6 +28,13 @@
       pointer-events: none;
       filter: brightness(2.16);
     }
+    .magazine-wrapper {
+      max-width: 1150px;
+      margin: 0 auto;
+      width: 100vw;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
     .logo-screen {
       display: flex;
       flex-direction: column;
@@ -38,6 +45,9 @@
       position: relative;
       padding-top: 32px;
       z-index: 3;
+      width: 100vw;
+      max-width: 100vw;
+      box-sizing: border-box;
     }
     .crown-anim {
       position: absolute;
@@ -135,6 +145,7 @@
       position: fixed;
       left: 0; right: 0; bottom: 0;
       width: 100vw;
+      max-width: 100vw;
       z-index: 8;
       background: linear-gradient(to top, #000 50%, transparent 100%);
       padding: 8px 0 0 0;
@@ -147,11 +158,13 @@
       scroll-snap-type: x mandatory;
       padding: 8px 8px 10px 8px;
       width: 100vw;
+      max-width: 100vw;
       justify-content: flex-start;
       scroll-behavior: smooth;
       opacity: 0;
       transform: scale(0.9);
       transition: all 2s cubic-bezier(.23,.76,.6,1.01);
+      box-sizing: border-box;
     }
     .images-row img {
       scroll-snap-align: center;
@@ -169,6 +182,7 @@
       transform: scale(1.1) rotate(-2deg);
     }
     @media (max-width: 500px) {
+      .magazine-wrapper { max-width: 100vw; }
       .logo-text { font-size: 32vw; }
       .tagline, .enter-text { font-size: 1.2rem; }
       .images-row img { width: 76px; height: 104px; }
@@ -177,22 +191,24 @@
 </head>
 <body>
   <div class="background-fade"></div>
-  <div class="logo-screen" onclick="enterSite()">
-    <img src="images/crown.png" alt="Crown" class="crown-anim" />
-    <div class="logo-text">HBLE</div>
-    <div class="enter-text" id="typed-text"></div>
-    <div class="tagline">Humble Beginnings Legendary Endings</div>
-  </div>
-  <div class="carousel-container">
-    <div class="images-row" id="imageRow">
-      <img src="images/image1.jpg" alt="Model1" />
-      <img src="images/image2.jpg" alt="Design" />
-      <img src="images/image3.jpg" alt="Logo" />
-      <img src="images/image4.jpg" alt="mislogo" />
-      <img src="images/image5.jpg" alt="origDesign" />
-      <img src="images/image6.jpg" alt="crawfishmud" />
-      <img src="images/logoimage9.jpg" alt="model2" />
-      <img src="images/hbleanime.jpg" alt="animeLogo" />
+  <div class="magazine-wrapper">
+    <div class="logo-screen" onclick="enterSite()">
+      <img src="images/crown.png" alt="Crown" class="crown-anim" />
+      <div class="logo-text">HBLE</div>
+      <div class="enter-text" id="typed-text"></div>
+      <div class="tagline">Humble Beginnings Legendary Endings</div>
+    </div>
+    <div class="carousel-container">
+      <div class="images-row" id="imageRow">
+        <img src="images/image1.jpg" alt="Model1" />
+        <img src="images/image2.jpg" alt="Design" />
+        <img src="images/image3.jpg" alt="Logo" />
+        <img src="images/image4.jpg" alt="mislogo" />
+        <img src="images/image5.jpg" alt="origDesign" />
+        <img src="images/image6.jpg" alt="crawfishmud" />
+        <img src="images/logoimage9.jpg" alt="model2" />
+        <img src="images/hbleanime.jpg" alt="animeLogo" />
+      </div>
     </div>
   </div>
   <!-- Audio -->
@@ -264,6 +280,7 @@
         window.location.href = "mission.html";
       }, 1400);
     }
+    window.enterSite = enterSite;
   </script>
 </body>
 </html>
