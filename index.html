@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HBLE – Enter</title>
-  <!-- Use Anton (Impact-style) web font for consistency -->
+  <!-- Anton web font for HBLE logo -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
   <style>
     body {
@@ -19,17 +19,40 @@
     }
     .background-fade {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       background: url('images/terrebonnestorm1.jpg') no-repeat center center;
       background-size: contain !important;
-      background-repeat: no-repeat !important;
       opacity: 0.38;
       z-index: -1;
       pointer-events: none;
       filter: brightness(2.16);
+    }
+    .corner-box {
+      position: fixed;
+      top: 20px; right: 24px;
+      z-index: 999;
+      padding: 6px 15px;
+      border-radius: 8px;
+      font-size: 0.93rem;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      border: 2.5px solid #fff;
+      background: #111;
+      box-shadow: 0 0 14px #fff8, 0 0 8px #3338;
+      animation: boxColorChange 2.8s infinite alternate;
+      user-select: none;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .corner-box:active { transform: scale(0.97); }
+    @keyframes boxColorChange {
+      0%   { background: #ce2029; color: #fff;}
+      25%  { background: #39ff14; color: #111;}
+      50%  { background: #ffef00; color: #800080;}
+      75%  { background: #ff00c8; color: #fff;}
+      100% { background: #0050ff; color: #fff;}
     }
     .logo-screen {
       display: flex;
@@ -44,10 +67,8 @@
     }
     .crown-anim {
       position: absolute;
-      left: 50%;
-      top: -55px;
-      width: 90px;
-      height: auto;
+      left: 50%; top: -55px;
+      width: 90px; height: auto;
       transform: translateX(-50%) rotate(-17deg) scale(1.07);
       filter: drop-shadow(0 0 30px gold) drop-shadow(0 0 25px #fff8) brightness(1.08);
       opacity: 0;
@@ -79,7 +100,6 @@
       margin-bottom: 5px;
       animation: growLogo 2.5s cubic-bezier(.19,1,.41,1.01) forwards, shimmerGlow 6s infinite alternate;
       opacity: 0;
-      /* text-shadow removed for clean logo */
     }
     @keyframes growLogo {
       0% { transform: scale(0); opacity: 0; }
@@ -110,21 +130,8 @@
       from { width: 0; }
       to { width: 100%; }
     }
-    .enter-text {
-      margin-top: 38px;
-      font-size: 4.5vw;
-      font-family: 'Courier New', monospace;
-      letter-spacing: 0.1em;
-      padding: 6px 20px;
-      opacity: 0;
-      animation: fadeIn 1.8s 2.8s forwards, shimmerGlow 8s infinite alternate;
-      user-select: none;
-      color: #ffee4a;
-      text-shadow: 0 0 9px #333, 0 0 8px #fff;
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
+    .enter-text { display: none; } /* Hide if not using typewriter */
+
     .carousel-container {
       position: fixed;
       left: 0; right: 0; bottom: 0;
@@ -160,22 +167,25 @@
       transition: transform 0.25s;
       image-rendering: auto;
     }
-    .images-row img:active {
-      transform: scale(1.1) rotate(-2deg);
-    }
+    .images-row img:active { transform: scale(1.1) rotate(-2deg); }
     @media (max-width: 900px) {
       .images-row img { width: 132px; height: 178px; }
+      .corner-box { font-size: 0.88rem; padding: 6px 12px; top: 10px; right: 12px;}
     }
     @media (max-width: 500px) {
       .logo-text { font-size: 32vw; }
-      .tagline, .enter-text { font-size: 1.2rem; }
+      .tagline { font-size: 1.2rem; }
       .images-row img { width: 76px; height: 104px; }
+      .corner-box { font-size: 0.82rem; padding: 5px 8px; }
     }
   </style>
 </head>
 <body>
   <div class="background-fade"></div>
-  <div class="logo-screen" onclick="enterSite()">
+  <!-- Animated "YOU MAY ENTER" box, clickable -->
+  <div class="corner-box" onclick="enterSite()">YOU MAY ENTER</div>
+
+  <div class="logo-screen">
     <img src="images/crown.png" alt="Crown" class="crown-anim" />
     <div class="logo-text">HBLE</div>
     <div class="tagline">Humble Beginnings Legendary Endings</div>
@@ -220,40 +230,30 @@
       const row = document.getElementById("imageRow");
       let interaction = false;
       let scrollInterval;
-      row.addEventListener("touchstart", () => { clearInterval(scrollInterval); interaction = true; }, { passive: true });
-      row.addEventListener("mousedown", () => { clearInterval(scrollInterval); interaction = true; });
-      setTimeout(() => {
-        if (!interaction) {
-          scrollInterval = setInterval(() => {
-            if (!row) return;
-            row.scrollLeft += row.clientWidth * 0.8;
-            if (row.scrollLeft >= row.scrollWidth - row.clientWidth) {
-              row.scrollLeft = 0;
-            }
-          }, 3400);
-        }
-      }, 9000);
-    });
-
-    // Typewriter effect for YOU MAY ENTER
-    const message = "YOU MAY ENTER";
-    const typedText = document.getElementById("typed-text");
-    let i = 0;
-    function typeWriter() {
-      if (i < message.length) {
-        typedText.textContent += message.charAt(i);
-        i++;
-        setTimeout(typeWriter, 95);
+      if (row) {
+        row.addEventListener("touchstart", () => { clearInterval(scrollInterval); interaction = true; }, { passive: true });
+        row.addEventListener("mousedown", () => { clearInterval(scrollInterval); interaction = true; });
+        setTimeout(() => {
+          if (!interaction) {
+            scrollInterval = setInterval(() => {
+              if (!row) return;
+              row.scrollLeft += row.clientWidth * 0.8;
+              if (row.scrollLeft >= row.scrollWidth - row.clientWidth) {
+                row.scrollLeft = 0;
+              }
+            }, 3400);
+          }
+        }, 9000);
       }
-    }
-    setTimeout(typeWriter, 2500);
 
-    // Delay and show images row after 8s
-    setTimeout(() => {
-      const row = document.getElementById("imageRow");
-      row.style.opacity = 1;
-      row.style.transform = "scale(1)";
-    }, 8000);
+      // Delay and show images row after 8s
+      setTimeout(() => {
+        if(row) {
+          row.style.opacity = 1;
+          row.style.transform = "scale(1)";
+        }
+      }, 8000);
+    });
 
     // Fade out and redirect on enter
     function enterSite() {
