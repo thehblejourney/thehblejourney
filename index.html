@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HBLE – Enter</title>
+  <!-- Use Anton (Impact-style) web font for consistency -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -70,13 +72,14 @@
       100% { filter: drop-shadow(0 0 16px #39ff14) drop-shadow(0 0 12px #fff8) brightness(1.06);}
     }
     .logo-text {
+      font-family: 'Anton', Impact, fantasy;
       font-size: 8vw;
       font-weight: bold;
       margin-top: 58px;
       margin-bottom: 5px;
       animation: growLogo 2.5s cubic-bezier(.19,1,.41,1.01) forwards, shimmerGlow 6s infinite alternate;
       opacity: 0;
-      text-shadow: 0 0 40px #39ff14, 0 0 18px gold;
+      /* text-shadow removed for clean logo */
     }
     @keyframes growLogo {
       0% { transform: scale(0); opacity: 0; }
@@ -84,17 +87,17 @@
       100% { transform: scale(1); opacity: 1; }
     }
     @keyframes shimmerGlow {
-      0%   { color: #ce2029; text-shadow: 0 0 25px #ce2029; }
-      30%  { color: #39ff14; text-shadow: 0 0 23px #39ff14; }
-      50%  { color: #ff00c8; text-shadow: 0 0 33px #ff00c8; }
-      70%  { color: #ffef00; text-shadow: 0 0 30px #ffef00; }
-      100% { color: #800080; text-shadow: 0 0 36px #800080; }
+      0%   { color: #ce2029; }
+      30%  { color: #39ff14; }
+      50%  { color: #ff00c8; }
+      70%  { color: #ffef00; }
+      100% { color: #800080; }
     }
     .tagline {
       font-family: 'Stencil Std', fantasy;
       font-size: 2.8rem;
       margin-top: 8px;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
       color: #ffef00;
       text-shadow: 0 0 12px #1a6f30, 0 0 5px #800080;
       overflow: hidden;
@@ -107,27 +110,20 @@
       from { width: 0; }
       to { width: 100%; }
     }
-    .enter-box {
-      display: inline-block;
-      padding: 5px 20px;
-      margin-bottom: 26px;
-      background: rgba(25,25,25,0.92);
-      border: 2px solid #ffee4a;
-      border-radius: 11px;
-      color: #ffee4a;
+    .enter-text {
+      margin-top: 38px;
+      font-size: 4.5vw;
       font-family: 'Courier New', monospace;
-      font-size: 1.07rem;
-      letter-spacing: 0.16em;
-      box-shadow: 0 0 12px #ffee4a88, 0 0 6px #222;
-      margin-top: 10px;
+      letter-spacing: 0.1em;
+      padding: 6px 20px;
       opacity: 0;
-      transition: opacity 0.9s;
+      animation: fadeIn 1.8s 2.8s forwards, shimmerGlow 8s infinite alternate;
       user-select: none;
-      min-width: 180px;
+      color: #ffee4a;
+      text-shadow: 0 0 9px #333, 0 0 8px #fff;
     }
-    .enter-box.visible {
-      opacity: 1;
-      transition-delay: 0.3s;
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
     .carousel-container {
       position: fixed;
@@ -172,7 +168,7 @@
     }
     @media (max-width: 500px) {
       .logo-text { font-size: 32vw; }
-      .tagline, .enter-box { font-size: 1.2rem; }
+      .tagline, .enter-text { font-size: 1.2rem; }
       .images-row img { width: 76px; height: 104px; }
     }
   </style>
@@ -183,7 +179,7 @@
     <img src="images/crown.png" alt="Crown" class="crown-anim" />
     <div class="logo-text">HBLE</div>
     <div class="tagline">Humble Beginnings Legendary Endings</div>
-    <div class="enter-box" id="typed-text"></div>
+    <div class="enter-text" id="typed-text"></div>
   </div>
   <div class="carousel-container">
     <div class="images-row" id="imageRow">
@@ -239,7 +235,7 @@
       }, 9000);
     });
 
-    // Typewriter effect for YOU MAY ENTER in box
+    // Typewriter effect for YOU MAY ENTER
     const message = "YOU MAY ENTER";
     const typedText = document.getElementById("typed-text");
     let i = 0;
@@ -248,9 +244,6 @@
         typedText.textContent += message.charAt(i);
         i++;
         setTimeout(typeWriter, 95);
-      } else {
-        // Show box after typing
-        typedText.classList.add("visible");
       }
     }
     setTimeout(typeWriter, 2500);
