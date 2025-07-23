@@ -94,7 +94,7 @@
       font-family: 'Stencil Std', fantasy;
       font-size: 2.8rem;
       margin-top: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
       color: #ffef00;
       text-shadow: 0 0 12px #1a6f30, 0 0 5px #800080;
       overflow: hidden;
@@ -107,20 +107,27 @@
       from { width: 0; }
       to { width: 100%; }
     }
-    .enter-text {
-      margin-top: 38px;
-      font-size: 4.5vw;
-      font-family: 'Courier New', monospace;
-      letter-spacing: 0.1em;
-      padding: 6px 20px;
-      opacity: 0;
-      animation: fadeIn 1.8s 2.8s forwards, shimmerGlow 8s infinite alternate;
-      user-select: none;
+    .enter-box {
+      display: inline-block;
+      padding: 5px 20px;
+      margin-bottom: 26px;
+      background: rgba(25,25,25,0.92);
+      border: 2px solid #ffee4a;
+      border-radius: 11px;
       color: #ffee4a;
-      text-shadow: 0 0 9px #333, 0 0 8px #fff;
+      font-family: 'Courier New', monospace;
+      font-size: 1.07rem;
+      letter-spacing: 0.16em;
+      box-shadow: 0 0 12px #ffee4a88, 0 0 6px #222;
+      margin-top: 10px;
+      opacity: 0;
+      transition: opacity 0.9s;
+      user-select: none;
+      min-width: 180px;
     }
-    @keyframes fadeIn {
-      to { opacity: 1; }
+    .enter-box.visible {
+      opacity: 1;
+      transition-delay: 0.3s;
     }
     .carousel-container {
       position: fixed;
@@ -155,7 +162,6 @@
       background: #232;
       object-fit: cover;
       transition: transform 0.25s;
-      /* No downscaling for highest quality */
       image-rendering: auto;
     }
     .images-row img:active {
@@ -166,7 +172,7 @@
     }
     @media (max-width: 500px) {
       .logo-text { font-size: 32vw; }
-      .tagline, .enter-text { font-size: 1.2rem; }
+      .tagline, .enter-box { font-size: 1.2rem; }
       .images-row img { width: 76px; height: 104px; }
     }
   </style>
@@ -177,7 +183,7 @@
     <img src="images/crown.png" alt="Crown" class="crown-anim" />
     <div class="logo-text">HBLE</div>
     <div class="tagline">Humble Beginnings Legendary Endings</div>
-    <div class="enter-text" id="typed-text"></div>
+    <div class="enter-box" id="typed-text"></div>
   </div>
   <div class="carousel-container">
     <div class="images-row" id="imageRow">
@@ -233,7 +239,7 @@
       }, 9000);
     });
 
-    // Typewriter effect for YOU MAY ENTER
+    // Typewriter effect for YOU MAY ENTER in box
     const message = "YOU MAY ENTER";
     const typedText = document.getElementById("typed-text");
     let i = 0;
@@ -242,6 +248,9 @@
         typedText.textContent += message.charAt(i);
         i++;
         setTimeout(typeWriter, 95);
+      } else {
+        // Show box after typing
+        typedText.classList.add("visible");
       }
     }
     setTimeout(typeWriter, 2500);
