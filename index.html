@@ -22,7 +22,7 @@
       width: 100vw;
       height: 100vh;
       background: url('images/terrebonnestorm1.jpg') no-repeat center center;
-      background-size: contain !important;   /* Show full image */
+      background-size: contain !important;
       background-repeat: no-repeat !important;
       opacity: 0.38;
       z-index: -1;
@@ -90,6 +90,23 @@
       70%  { color: #ffef00; text-shadow: 0 0 30px #ffef00; }
       100% { color: #800080; text-shadow: 0 0 36px #800080; }
     }
+    .tagline {
+      font-family: 'Stencol Std', fantasy;
+      font-size: 2.8rem;
+      margin-top: 8px;
+      margin-bottom: 10px;
+      color: #ffef00;
+      text-shadow: 0 0 12px #1a6f30, 0 0 5px #800080;
+      overflow: hidden;
+      border-right: 2px solid white;
+      white-space: nowrap;
+      width: 0;
+      animation: taglineTyping 3.7s steps(40, end) 1.15s forwards;
+    }
+    @keyframes taglineTyping {
+      from { width: 0; }
+      to { width: 100%; }
+    }
     .enter-text {
       margin-top: 38px;
       font-size: 4.5vw;
@@ -105,23 +122,6 @@
     @keyframes fadeIn {
       to { opacity: 1; }
     }
-    .tagline {
-      font-family: 'Stencol Std', fantasy;
-      font-size: 2.8rem;
-      margin-top: 110px;      /* <-- Moves it much lower */
-      margin-bottom: 10px;
-      color: #ffef00;
-      text-shadow: 0 0 12px #1a6f30, 0 0 5px #800080;
-      overflow: hidden;
-      border-right: 2px solid white;
-      white-space: nowrap;
-      width: 0;
-      animation: taglineTyping 3.7s steps(40, end) 1.15s forwards;
-    }
-    @keyframes taglineTyping {
-      from { width: 0; }
-      to { width: 100%; }
-    }
     .carousel-container {
       position: fixed;
       left: 0; right: 0; bottom: 0;
@@ -133,7 +133,7 @@
     }
     .images-row {
       display: flex;
-      gap: 30px;      /* More space between for bigger images */
+      gap: 30px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       padding: 8px 16px 14px 16px;
@@ -147,7 +147,7 @@
     .images-row img {
       scroll-snap-align: center;
       flex: 0 0 auto;
-      width: 210px;     /* MUCH bigger images */
+      width: 210px;
       height: 285px;
       border-radius: 14px;
       box-shadow: 0 0 22px #ffee58, 0 0 3px #fff;
@@ -155,6 +155,8 @@
       background: #232;
       object-fit: cover;
       transition: transform 0.25s;
+      /* No downscaling for highest quality */
+      image-rendering: auto;
     }
     .images-row img:active {
       transform: scale(1.1) rotate(-2deg);
@@ -174,8 +176,8 @@
   <div class="logo-screen" onclick="enterSite()">
     <img src="images/crown.png" alt="Crown" class="crown-anim" />
     <div class="logo-text">HBLE</div>
-    <div class="enter-text" id="typed-text"></div>
     <div class="tagline">Humble Beginnings Legendary Endings</div>
+    <div class="enter-text" id="typed-text"></div>
   </div>
   <div class="carousel-container">
     <div class="images-row" id="imageRow">
