@@ -10,25 +10,23 @@
       background: black;
       color: white;
       font-family: Arial, sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       transition: opacity 1.5s ease;
+      min-height: 100vh;
     }
 
     .background-fade {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('images/terrebonnestorm1.jpg') no-repeat center top;
+      width: 100vw;
+      height: 100vh;
+      background: url('images/terrebonnestorm1.jpg') no-repeat center center;
       background-size: cover;
-      opacity: 0;
+      opacity: 0.29;
       z-index: -1;
-      animation: fadeInBG 4s ease-in-out forwards;
-      animation-delay: 2s;
-    }
-    @keyframes fadeInBG {
-      to { opacity: 0.5; }
+      pointer-events: none;
     }
 
     .logo-screen {
@@ -36,130 +34,137 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      height: 100vh;
+      min-height: 70vh;
       text-align: center;
-      cursor: pointer;
-      padding-top: 30px;
-      padding-bottom: 60px;
       position: relative;
+      padding-top: 32px;
       z-index: 3;
     }
 
+    /* Crown Animation */
     .crown-anim {
       position: absolute;
       left: 50%;
-      top: -120px; /* Start way above */
-      width: 88px;
+      top: -55px;
+      width: 90px;
       height: auto;
-      opacity: 0;   /* Start hidden */
-      transform: translateX(-50%) rotate(-24deg);
-      z-index: 4;
-      filter: drop-shadow(0 0 15px gold);
-      animation: dropCrown 1.7s 1.3s cubic-bezier(0.37, 1.6, 0.43, 0.99) forwards, crownGlow 4s infinite alternate;
+      transform: translateX(-50%) rotate(-17deg) scale(1.07);
+      filter: drop-shadow(0 0 30px gold) drop-shadow(0 0 25px #fff8) brightness(1.08);
+      opacity: 0;
+      animation:
+        dropCrown 2s cubic-bezier(.16,1.01,.72,1.03) 0.4s forwards,
+        crownGlow 4s infinite alternate;
+      z-index: 5;
       pointer-events: none;
     }
     @keyframes dropCrown {
-      0%   { top: -120px; opacity: 0; }
-      50%  { top: 0px;   opacity: 1; }
-      65%  { top: 18px;  opacity: 1; }
-      80%  { top: 6px;   opacity: 1; }
-      87%  { top: 34px;  opacity: 1; }
-      100% { top: 30px;  opacity: 1; }
+      0% { top: -150px; opacity: 0; }
+      60% { top: 10px; opacity: 1; }
+      75% { top: -6px; }
+      85% { top: 5px; }
+      100% { top: 7px; opacity: 1; }
     }
     @keyframes crownGlow {
-      0% { filter: drop-shadow(0 0 18px gold) drop-shadow(0 0 10px #fff);}
-      25%{ filter: drop-shadow(0 0 28px #ff00cc) drop-shadow(0 0 12px #fff);}
-      50%{ filter: drop-shadow(0 0 30px #0fffcf) drop-shadow(0 0 15px #ff0);}
-      75%{ filter: drop-shadow(0 0 25px #ffd700) drop-shadow(0 0 8px #fff);}
-      100%{ filter: drop-shadow(0 0 20px gold) drop-shadow(0 0 10px #fff);}
+      0%   { filter: drop-shadow(0 0 16px gold) drop-shadow(0 0 12px #fff8) brightness(1.04); }
+      50%  { filter: drop-shadow(0 0 32px orange) drop-shadow(0 0 20px #f3f3aa) brightness(1.19);}
+      100% { filter: drop-shadow(0 0 24px lime) drop-shadow(0 0 16px #f8ffdb) brightness(1.14);}
     }
 
     .logo-text {
-      font-size: 5.5rem;
+      font-size: 8vw;
       font-weight: bold;
-      animation: growLogo 3s ease-out forwards, shimmerGlow 4s infinite alternate;
+      margin-top: 58px;
+      margin-bottom: 5px;
+      animation: growLogo 2.5s cubic-bezier(.19,1,.41,1.01) forwards, shimmerGlow 6s infinite alternate;
       opacity: 0;
-      text-shadow: 0 0 30px gold;
-      margin-top: 48px; /* push down for crown */
-      margin-bottom: 10px;
+      text-shadow: 0 0 40px #00ff88, 0 0 18px gold;
     }
+
     @keyframes growLogo {
       0% { transform: scale(0); opacity: 0; }
-      50% { transform: scale(1.3); opacity: 1; }
+      55% { transform: scale(1.23); opacity: 1; }
       100% { transform: scale(1); opacity: 1; }
     }
     @keyframes shimmerGlow {
-      0%   { color: gold;      text-shadow: 0 0 20px gold; }
-      20%  { color: red;       text-shadow: 0 0 20px red; }
-      40%  { color: white;     text-shadow: 0 0 25px white; }
-      60%  { color: limegreen; text-shadow: 0 0 25px limegreen; }
-      80%  { color: orange;    text-shadow: 0 0 20px orange; }
-      100% { color: gold;      text-shadow: 0 0 30px gold; }
+      0%   { color: gold;      text-shadow: 0 0 25px gold; }
+      30%  { color: #24ff4c;   text-shadow: 0 0 23px #24ff4c; }
+      50%  { color: #00ffea;   text-shadow: 0 0 33px #00ffea; }
+      70%  { color: #fff400;   text-shadow: 0 0 30px #fff400; }
+      100% { color: #ff9100;   text-shadow: 0 0 36px #ff9100; }
     }
 
     .tagline {
       font-family: 'Brush Script MT', cursive;
-      font-size: 1.6rem;
-      margin-top: 8px;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid white;
-      width: 0;
-      animation: typing 5s steps(40, end) forwards;
-    }
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
+      font-size: 4vw;
+      margin-top: 7px;
+      margin-bottom: 12px;
+      color: #fff;
+      text-shadow: 0 0 9px #1a6f30, 0 0 2px #fff;
     }
 
+    .enter-text {
+      margin-top: 12px;
+      font-size: 4.5vw;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.1em;
+      padding: 6px 20px;
+      opacity: 0;
+      animation: fadeIn 1.8s 2.8s forwards, shimmerGlow 8s infinite alternate;
+      user-select: none;
+      color: #ffee4a;
+      text-shadow: 0 0 9px #333, 0 0 8px #fff;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Carousel */
+    .carousel-container {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      width: 100vw;
+      z-index: 8;
+      background: linear-gradient(to top, #000 50%, transparent 100%);
+      padding: 8px 0 0 0;
+      box-sizing: border-box;
+    }
     .images-row {
       display: flex;
       gap: 16px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      padding: 10px 0;
-      width: 100%;
+      padding: 8px 8px 10px 8px;
+      width: 100vw;
       justify-content: flex-start;
       scroll-behavior: smooth;
       opacity: 0;
-      transform: scale(0.8);
-      transition: all 2s ease;
+      transform: scale(0.9);
+      transition: all 2s cubic-bezier(.23,.76,.6,1.01);
     }
     .images-row img {
       scroll-snap-align: center;
       flex: 0 0 auto;
       width: 100px;
       height: 140px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px yellow;
-      margin: 0 10px;
+      border-radius: 12px;
+      box-shadow: 0 0 16px #ffee58, 0 0 2px #fff;
+      margin: 0 5px;
+      background: #232;
+      object-fit: cover;
+      transition: transform 0.25s;
     }
-    .enter-text {
-      margin-top: 20px;
-      font-size: 1.2rem;
-      font-family: 'Courier New', monospace;
-      padding: 10px 30px;
-      opacity: 0;
-      animation: fadeIn 2s 4s forwards, shimmerGlow 8s infinite alternate;
-      user-select: none;
+    .images-row img:active {
+      transform: scale(1.1) rotate(-2deg);
     }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    ::-webkit-scrollbar {
-      display: none;
-    }
-    @media (max-width: 600px) {
-      .logo-text { font-size: 3.1rem; margin-top: 44px; }
-      .crown-anim { width: 54px; }
+    @media (max-width: 500px) {
+      .logo-text { font-size: 2.8rem; }
+      .tagline, .enter-text { font-size: 1.2rem; }
+      .images-row img { width: 76px; height: 104px; }
     }
   </style>
 </head>
 <body>
-  <!-- Background -->
   <div class="background-fade"></div>
-
-  <!-- Main content with animated crown -->
   <div class="logo-screen" onclick="enterSite()">
     <img src="images/crown.png" alt="Crown" class="crown-anim" />
     <div class="logo-text">HBLE</div>
@@ -167,8 +172,7 @@
     <div class="enter-text" id="typed-text"></div>
   </div>
 
-  <!-- Carousel pinned bottom -->
-  <div style="position: absolute; bottom: 15px; width: 100%; display: flex; justify-content: center; z-index: 3;">
+  <div class="carousel-container">
     <div class="images-row" id="imageRow">
       <img src="images/image1.jpg" alt="Model 1" />
       <img src="images/image2.jpg" alt="Design" />
@@ -181,76 +185,60 @@
   <!-- Audio -->
   <audio id="rain-sound" src="audio/rain.mp3" loop preload="auto" muted playsinline></audio>
 
-  <!-- JavaScript -->
   <script>
+    // Typewriter effect for YOU MAY ENTER
     const message = "YOU MAY ENTER";
     const typedText = document.getElementById("typed-text");
     let i = 0;
-
     function typeWriter() {
       if (i < message.length) {
         typedText.textContent += message.charAt(i);
         i++;
-        setTimeout(typeWriter, 150);
+        setTimeout(typeWriter, 95);
       }
     }
-    setTimeout(typeWriter, 4000);
+    setTimeout(typeWriter, 2500);
 
+    // Delay and show images row after 8s
     setTimeout(() => {
       const row = document.getElementById("imageRow");
       row.style.opacity = 1;
       row.style.transform = "scale(1)";
     }, 8000);
 
+    // Auto-scroll carousel
     let scrollInterval;
-
     window.onload = function () {
+      const row = document.getElementById("imageRow");
+      row.addEventListener("touchstart", () => clearInterval(scrollInterval), { passive: true });
+      row.addEventListener("mousedown", () => clearInterval(scrollInterval));
+      setTimeout(() => {
+        scrollInterval = setInterval(() => {
+          if (!row) return;
+          row.scrollLeft += 120;
+          if (row.scrollLeft >= row.scrollWidth - row.clientWidth) {
+            row.scrollLeft = 0;
+          }
+        }, 3400);
+      }, 9000);
+
+      // Try playing audio on user interaction
       const rainAudio = document.getElementById("rain-sound");
       rainAudio.muted = false;
-
-      // Try autoplay as soon as page is interacted with
       document.body.addEventListener('click', () => {
-        rainAudio.play().catch(e => console.warn("Blocked:", e));
-      }, { once: true });
-
-      // Try triggering when images load
-      const images = document.querySelectorAll(".images-row img");
-      let loaded = 0;
-      images.forEach(img => {
-        img.addEventListener("load", () => {
-          loaded++;
-          if (loaded === images.length) {
-            rainAudio.play().then(() => {
-              rainAudio.muted = false;
-              fadeInRain(rainAudio);
-            }).catch(e => console.warn("Still blocked:", e));
-          }
-        });
-      });
-
-      // Fade in sound
-      function fadeInRain(audio) {
+        rainAudio.play().catch(e => {});
+        // fade-in
         let vol = 0;
-        const fade = setInterval(() => {
+        rainAudio.volume = 0;
+        let fade = setInterval(() => {
           if (vol < 0.2) {
             vol += 0.02;
-            audio.volume = vol;
+            rainAudio.volume = vol;
           } else {
             clearInterval(fade);
           }
         }, 200);
-      }
-
-      // Auto-scroll images
-      const row = document.getElementById("imageRow");
-      let scrollPosition = 0;
-      scrollInterval = setInterval(() => {
-        scrollPosition += 120;
-        if (scrollPosition >= row.scrollWidth - row.clientWidth) {
-          scrollPosition = 0;
-        }
-        row.scrollTo({ left: scrollPosition, behavior: 'smooth' });
-      }, 3500);
+      }, { once: true });
     };
 
     function enterSite() {
@@ -258,7 +246,7 @@
       clearInterval(scrollInterval);
       setTimeout(() => {
         window.location.href = "mission.html";
-      }, 1500);
+      }, 1400);
     }
   </script>
 </body>
