@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mission Statement – HBLE</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      background: #111;
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 2px solid gold;
+      box-shadow: 0 0 2px purple, 0 0 30px purple;
+    }
+
+    nav a {
+      color: gold;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .glow-line {
+      height: 4px;
+      background-color: #00ff88;
+      box-shadow: 0 0 10px #00ff88, 0 0 20px white;
+      margin-bottom: 2rem;
+    }
+
+    .content-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background-color: rgba(0, 0, 0, 0.65);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(128, 0, 128, 0.65);
+    }
+
+    h1.section-title {
+      font-size: 2.5rem;
+      text-align: center;
+      color: gold;
+      text-shadow: 0 0 10px gold;
+      margin-bottom: 1rem;
+    }
+
+    .highlight {
+      color: gold;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+      color: #ddd;
+    }
+
+    .footer-image {
+      display: block;
+      margin: 2rem auto 0;
+      max-width: 200px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gold;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+  <a href="index.html">Home</a>
+  <a href="mission.html">Mission</a>
+  <a href="spotlight.html">Spotlight</a>
+  <a href="sports.html">Sports</a>
+  <a href="dining.html">Dining</a>
+  <a href="stories.html">Stories</a>
+  <a href="talent.html">Talent</a>
+  <a href="podcast.html">Podcast</a>
+  <a href="merch.html">Merchandise</a>
+</nav>
+
+  <!-- Glowing Line -->
+  <div class="glow-line"></div>
+
+  <!-- Music (autoplay on user interaction) -->
+  <audio id="bg-music" loop>
+    <source src="audio/PhantomoftheOpera.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Page Content -->
+  <div class="content-container">
+    <h1 class="section-title"><span class="highlight">Our</span> Mission</h1>
+
+    <p>
+      At Humble Beginnings Legendary Endings, our mission is to shine a spotlight on local businesses and the passionate individuals behind them.
+      We are dedicated to elevating community voices, celebrating entrepreneurial journeys, and fostering regional growth by bringing awareness to the
+      hard work, talent, and impact of local business owners. From modest starts to remarkable legacies, we believe every business has a story worth sharing.
+    </p>
+
+    <p>
+      HBLE exists to amplify the voices of local businesses and the trailblazers behind them.
+      We spotlight the passion and purpose that fuel our communities turning everyday hustle into legendary impact. By championing local small businesses, we drive awareness, spark pride, and help local legacies rise. HBLE's goal is to spotlight the businesses that shape our communities by celebrating entrepreneurial grit, and turning everyday stories into legendary ones. By connecting people to the passion behind local brands, we help small businesses get seen, heard, and remembered.
+    </p>
+      
+    </p>
+
+    <img src="../images/image4.jpg" alt="HBLE" class="footer-image" />
+  </div>
+
+  <!-- Music Script -->
+  <script>
+    const music = document.getElementById("bg-music");
+    let hasPlayed = false;
+
+    function fadeInMusic() {
+      if (!hasPlayed) {
+        music.volume = 0;
+        music.play().then(() => {
+          hasPlayed = true;
+          const fade = setInterval(() => {
+            if (music.volume < 1) {
+              music.volume = Math.min(music.volume + 0.05, 1);
+            } else {
+              clearInterval(fade);
+            }
+          }, 200);
+        }).catch(() => {});
+      }
+    }
+
+    window.addEventListener("click", fadeInMusic);
+  </script>
+
+</div>
+</body>
+</html>

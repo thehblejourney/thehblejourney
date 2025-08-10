@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HBLE Podcast</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding-top: 5rem;
+    }
+
+    .menu-bar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1rem 0;
+      box-shadow: 0 0 15px #00ffe1;
+      z-index: 999;
+    }
+
+    .menu-bar a {
+      color: #00ffe1;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .menu-bar a:hover {
+      color: white;
+    }
+
+    .glow-title {
+      font-size: 2.8rem;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 0 8px #00ffe1, 0 0 20px #00ffe1;
+      margin-bottom: 1rem;
+      animation: pulse 2.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        text-shadow: 0 0 8px #00ffe1, 0 0 20px #00ffe1;
+      }
+      50% {
+        text-shadow: 0 0 12px #00ffe1, 0 0 35px #00ffe1;
+      }
+    }
+
+    .podcast-container {
+      margin: 1rem auto;
+      max-width: 800px;
+      box-shadow: 0 0 20px rgba(0,255,225,0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 450px;
+      border: none;
+    }
+
+    .episode-description {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #ccc;
+      padding: 0 1rem;
+    }
+
+    nav {
+      margin-top: 2rem;
+    }
+
+    nav a {
+      color: #00ffe1;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Regular Top Menu -->
+  <div class="menu-bar">
+  <a href="index.html">Home</a>
+  <a href="mission.html">Mission</a>
+  <a href="spotlight.html">Spotlight</a>
+  <a href="sports.html">Sports</a>
+  <a href="dining.html">Dining</a>
+  <a href="stories.html">Stories</a>
+  <a href="talent.html">Talent</a>
+  <a href="podcast.html">Podcast</a>
+  <a href="merch.html">Merchandise</a>
+  </div>
+
+  <!-- Page Content -->
+  <h1 class="glow-title">🎙️ HBLE Podcast</h1>
+
+  <div class="podcast-player">
+  <iframe
+    src="https://www.youtube.com/embed/APFDZXjLvuA"
+    title="HBLE Podcast"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+
+  <div class="episode-description">
+    <p>Welcome to the official HBLE Podcast — where voices from our community share their journeys, hustle, and heart. Tune in for real stories with legendary endings.</p>
+  </div>
+
+  <!-- Navigation Arrows -->
+
+
+</body>
+</html>
