@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -138,22 +139,25 @@
 </head>
 <body>
   <nav>
- <a href="index.html">Home</a>
-  <a href="mission.html">Mission</a>
-  <a href="spotlight.html">Spotlight</a>
-  <a href="sports.html">Sports</a>
-  <a href="dining.html">Dining</a>
-  <a href="stories.html">Stories</a>
-  <a href="talent.html">Talent</a>
-  <a href="podcast.html">Podcast</a>
-  <a href="merch.html">Merchandise</a>
-</nav>
-<header>
+    <a href="index.html">Home</a>
+    <a href="mission.html">Mission</a>
+    <a href="spotlight.html">Spotlight</a>
+    <a href="sports.html">Sports</a>
+    <a href="dining.html">Dining</a>
+    <a href="stories.html">Stories</a>
+    <a href="talent.html">Talent</a>
+    <a href="podcast.html">Podcast</a>
+    <a href="merch.html">Merchandise</a>
+  </nav>
+
+  <header>
     <h1>HBLE Talent Spotlight</h1>
     <div class="intro">
       <p>At HBLE, we believe in giving flowers to the legends of tomorrow. Each spotlight features homegrown talent making waves in their field — from poetry and painting to music and mentorship. Let’s celebrate them while they’re rising.</p>
     </div>
-  </header>  <section class="talent">
+  </header>  
+
+  <section class="talent">
     <div class="card">
       <img src="path-to-your-image.jpg" alt="Tasha Ray" />
       <h2>Tasha Ray</h2>
@@ -161,61 +165,71 @@
       <p>"My words are a mirror for my people." – Tasha Ray</p>
       <a class="cta" href="#">Watch Performance</a>
     </div>
-<section class="youtube-showcase">
-  <h2>YouTube Showcase</h2>
-  <iframe width="560" height="315" 
-    src="https://www.youtube.com/embed/gqgVyuEncEk" 
-    title="Miss Communication ft. T Blizzy" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    allowfullscreen>
-  </iframe>
-</section>  <form action="https://formsubmit.co/el/dafego" method="POST">
+  </section>
+
+  <section class="youtube-showcase">
+    <h2>YouTube Showcase</h2>
+    <iframe width="560" height="315" 
+      src="https://www.youtube.com/embed/gqgVyuEncEk" 
+      title="Miss Communication ft. T Blizzy" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      allowfullscreen>
+    </iframe>
+  </section>  
+
+  <!-- ✅ Fixed Formspree form -->
+  <form action="https://formspree.io/f/xqabjqrr" method="POST">
     <input type="hidden" name="_next" value="https://yourdomain.com/thankyou.html">
-    <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_captcha" value="false">
+
     <h3>Nominate a Talent</h3>
+
     <input type="text" name="name" placeholder="Talent's Name" required>
     <input type="text" name="category" placeholder="Talent Category (e.g., Singer, Poet)" required>
     <input type="text" name="social" placeholder="Social Media or Video Link">
+    <input type="email" name="email" placeholder="Your Email" required>
     <textarea name="bio" placeholder="Short bio or why they should be featured..." rows="4" required></textarea>
+
     <button type="submit">Submit Nomination</button>
   </form>
+
+  <div style="text-align: center; margin-top: 3rem;">
+    <h2 style="color: gold; text-shadow: 0 0 10px orange;">Scan to Visit Our Website</h2>
+    <img src="../images/hbleqrcode.jpg" alt="HBLE QR Code" style="width: 180px; border: 4px solid limegreen; border-radius: 12px; box-shadow: 0 0 12px #00ffcc;" />
+    <p style="color: white; font-style: italic; margin-top: 0.5rem;">Humble Beginnings Legendary Endings</p>
+    <p style="color: white; font-style: italic; margin-top: 0.5rem;">"WHERE SMALL BUSINESSES COME TO SHINE"</p>
+    
+    <div style="text-align: center; margin-top: 1.5rem;">
+      <input type="text" id="shareInput" placeholder="Enter email or phone" 
+        style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 70%; max-width: 300px;" />
+      <br><br>
+      <button onclick="shareQRCode()" 
+        style="background: hotpink; color: black; padding: 10px 20px; border-radius: 8px; font-weight: bold;
+               border: none; box-shadow: 0 0 10px limegreen; cursor: pointer;">
+        📤 Share QR Code
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function shareQRCode() {
+      const input = document.getElementById('shareInput').value.trim();
+      const qrLink = 'https://hble.org/images/hbleqrcode.jpg'; // Adjust if needed
+
+      if (!input) {
+        alert("Please enter an email or phone number.");
+        return;
+      }
+
+      if (input.includes('@')) {
+        // It's an email
+        window.location.href = `mailto:${input}?subject=Check%20Out%20HBLE&body=Scan%20or%20download%20our%20QR%20Code:%20${qrLink}`;
+      } else {
+        // It's a phone number
+        window.location.href = `sms:${input}?body=Check%20out%20HBLE!%20Scan%20this%20QR%20Code:%20${qrLink}`;
+      }
+    }
+  </script>
 </body>
-<div style="text-align: center; margin-top: 3rem;">
-  <h2 style="color: gold; text-shadow: 0 0 10px orange;">Scan to Visit Our Website</h2>
-  <img src="../images/hbleqrcode.jpg" alt="HBLE QR Code" style="width: 180px; border: 4px solid limegreen; border-radius: 12px; box-shadow: 0 0 12px #00ffcc;" />
-  <p style="color: white; font-style: italic; margin-top: 0.5rem;">Humble Beginnings Legendary Endings 
-  <p style="color: white; font-style: italic; margin-top: 0.5rem;">"WHERE SMALL BUSINESSES COME TO SHINE"</p><div style="text-align: center; margin-top: 1.5rem;">
-  <input type="text" id="shareInput" placeholder="Enter email or phone" 
-         style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 70%; max-width: 300px;" />
-
-  <br><br>
-
-  <button onclick="shareQRCode()" 
-          style="background: hotpink; color: black; padding: 10px 20px; border-radius: 8px; font-weight: bold;
-                 border: none; box-shadow: 0 0 10px limegreen; cursor: pointer;">
-    📤 Share QR Code
-  </button>
-</div>
-
-<script>
-  function shareQRCode() {
-    const input = document.getElementById('shareInput').value.trim();
-    const qrLink = 'https://hble.org/images/hbleqrcode.jpg'; // Adjust if needed
-
-    if (!input) {
-      alert("Please enter an email or phone number.");
-      return;
-    }
-
-    if (input.includes('@')) {
-      // It's an email
-      window.location.href = `mailto:${input}?subject=Check%20Out%20HBLE&body=Scan%20or%20download%20our%20QR%20Code:%20${qrLink}`;
-    } else {
-      // It's a phone number
-      window.location.href = `sms:${input}?body=Check%20out%20HBLE!%20Scan%20this%20QR%20Code:%20${qrLink}`;
-    }
-  }
-</script>
 </html>
