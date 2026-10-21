@@ -1,3 +1,3 @@
-Force deploy for refined HBLE text-only layout.
-Commit: 1385551c56f891072692b006e41605a46aa91f78
+Force deploy for source-level HBLE media cleanup.
+Commit: 9512fc81aafb9ea3f62fa0538bc88e67d1434300
 Date: 2026-10-21
