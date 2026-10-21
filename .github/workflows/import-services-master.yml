@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write
 
+# Second commit intentionally triggers this one-time importer after workflow registration.
 jobs:
   import-master:
     runs-on: ubuntu-latest
