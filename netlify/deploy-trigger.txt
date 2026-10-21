@@ -1,3 +1,6 @@
-Force deploy for HBLE logo-first build.
-Commit: ab28834c2763ac2acf84dfe817f5768c870eb30c
+Force deploy for verified full-screen HBLE Services master.
+Build source commit: 8d0e7cbff1dd3dfa9829eea69cb1ec4e79e2ea32
+Cleanup head: 9c3f0f1425c2121fc3e4a2da85cee24d3d199f01
+Video bytes: 3233732
+Video SHA256: cf1a75704dc2e992d4d424d591370f12a178ac6aaee7d398aee4d6a086ada6fe
 Date: 2026-10-21
