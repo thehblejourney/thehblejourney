@@ -1,3 +1,3 @@
-Force deploy for source-level HBLE media cleanup.
-Commit: 9512fc81aafb9ea3f62fa0538bc88e67d1434300
+Force deploy for HBLE logo-first build.
+Commit: ab28834c2763ac2acf84dfe817f5768c870eb30c
 Date: 2026-10-21
