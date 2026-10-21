@@ -13,7 +13,7 @@ const MEDIA_RESET_MARKER = 'id="hble-media-reset"';
 const MEDIA_RESET = `<style id="hble-media-reset">\n/* HBLE visual reset: approved master-quality media only */\nimg, picture, svg, canvas { display:none !important; }\nvideo:not(.hble-master-video) { display:none !important; }\n*, *::before, *::after { background-image:none !important; }\n.hero-media, .hero-reel, .portfolio, .project, .about-art, .motion-break, #hble-artwork-folder { display:none !important; }\n.hero { min-height:auto !important; }\n.hero-grid, .about-grid { grid-template-columns:1fr !important; max-width:900px !important; }\n.hero-grid { padding:100px 0 !important; }\n.btn-primary { background:#d5ad61 !important; color:#111 !important; }\n</style>`;
 
 const SERVICES_PREVIEW_MARKER = 'id="hble-services-preview"';
-const SERVICES_MASTER_URL = "https://at.adobe.com/au51qVXwazABKI5z";
+const SERVICES_MASTER_URL = "https://at.adobe.com/z5fYy0pRuS8aXAlZ";
 const SERVICES_PREVIEW = `
 <style id="hble-services-preview">
   .nav-services-trigger{appearance:none;border:0;background:transparent;color:#d3cec4;font:inherit;cursor:pointer;padding:0}
@@ -36,7 +36,7 @@ const SERVICES_MODAL_MARKUP = `
 <div class="services-video-modal" id="servicesVideoModal" hidden role="dialog" aria-modal="true" aria-labelledby="servicesVideoTitle">
   <div class="services-video-shell">
     <div class="services-video-head"><strong id="servicesVideoTitle">HBLE SERVICES</strong><button class="services-video-close" id="servicesVideoClose" type="button" aria-label="Close services video">×</button></div>
-    <div class="services-video-stage"><video class="hble-master-video" id="servicesMasterVideo" src="${SERVICES_MASTER_URL}" muted loop playsinline preload="metadata" aria-label="HBLE services HD preview"></video></div>
+    <div class="services-video-stage"><video class="hble-master-video" id="servicesMasterVideo" src="${SERVICES_MASTER_URL}" muted loop playsinline preload="auto" aria-label="HBLE services HD preview"></video></div>
     <div class="services-video-actions"><button class="btn btn-ghost" id="servicesSoundToggle" type="button">Turn Sound On</button><a class="btn btn-primary" id="servicesDetailsLink" href="#services">View Services</a></div>
   </div>
 </div>
@@ -51,13 +51,12 @@ const SERVICES_MODAL_MARKUP = `
   if(!openBtn||!modal||!video)return;
   const enterFullscreen=()=>{if(modal.requestFullscreen){const f=modal.requestFullscreen();if(f&&f.catch)f.catch(()=>{});}else if(video.webkitEnterFullscreen){try{video.webkitEnterFullscreen();}catch(e){}}};
   const exitFullscreen=()=>{if(document.fullscreenElement===modal&&document.exitFullscreen){const f=document.exitFullscreen();if(f&&f.catch)f.catch(()=>{});}};
-  const play=()=>{video.muted=true;video.currentTime=0;const p=video.play();if(p&&p.catch)p.catch(()=>{});};
+  const play=()=>{video.muted=true;video.loop=true;video.currentTime=0;const p=video.play();if(p&&p.catch)p.catch(()=>{});};
   const open=()=>{modal.hidden=false;document.body.style.overflow='hidden';play();enterFullscreen();closeBtn&&closeBtn.focus();};
   const close=()=>{video.pause();exitFullscreen();modal.hidden=true;document.body.style.overflow='';openBtn.focus();};
   openBtn.addEventListener('click',open);
   closeBtn&&closeBtn.addEventListener('click',close);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)close();});
-  document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&!modal.hidden&&video.paused){const p=video.play();if(p&&p.catch)p.catch(()=>{});}});
   soundBtn&&soundBtn.addEventListener('click',()=>{video.muted=!video.muted;soundBtn.textContent=video.muted?'Turn Sound On':'Mute Sound';if(video.paused){const p=video.play();if(p&&p.catch)p.catch(()=>{});}});
   details&&details.addEventListener('click',()=>{video.pause();exitFullscreen();modal.hidden=true;document.body.style.overflow='';});
 })();
