@@ -12,6 +12,9 @@ const GALLERY_LINK = `<div class="wrap" id="hble-artwork-folder" style="margin-t
 const BRAND_SERVICES = "images/brand-current/hble-services.webp";
 const BRAND_STANDING = "images/brand-current/hble-standing.webp";
 
+const PHOTO_FIX_MARKER = 'id="hble-photo-visibility-fix"';
+const PHOTO_FIX = `<style id="hble-photo-visibility-fix">\n#work .portfolio > .project:first-child img{filter:saturate(1) brightness(1)!important;opacity:1!important;object-fit:cover!important}\n#work .portfolio > .project:first-child:after{background:linear-gradient(180deg,rgba(0,0,0,.02) 10%,rgba(0,0,0,.62) 100%)!important}\n#about .about-art{background-image:linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.38)),url('images/brand-current/hble-standing.webp')!important;background-position:center 18%!important}\n</style>`;
+
 const UNIVERSE_OLD = `<article class="project small"><img src="images/Keoka.jpg" alt="HBLE character and portrait visual"><div class="project-copy"><div class="project-tag">Character Worlds</div><h3>Universe Building</h3><p>Characters, environments and visual systems designed to belong to the same world.</p></div></article>`;
 const UNIVERSE_NEW = `<article class="project small"><img src="https://raw.githubusercontent.com/thehblejourney/thehblejourney/783a99819ae6182a838db66409f0b91c415ce623/images/visual-universe/tough-girls-universe-x.jpg" alt="T.O.U.G.H. G.I.R.L.S. Universe X artwork"><div class="project-copy"><div class="project-tag">Character Worlds</div><h3>Universe Building</h3><p>T.O.U.G.H. G.I.R.L.S. — Universe X: original characters, environments and visual systems built to belong to one world.</p></div></article>`;
 
@@ -61,6 +64,11 @@ for (const file of htmlFiles) {
 
     if (!html.includes(GALLERY_MARKER) && html.includes('<section class="motion-break">')) {
       html = html.replace('<section class="motion-break">', `${GALLERY_LINK}\n    <section class="motion-break">`);
+      changed = true;
+    }
+
+    if (!html.includes(PHOTO_FIX_MARKER) && /<\/head>/i.test(html)) {
+      html = html.replace(/<\/head>/i, `${PHOTO_FIX}\n</head>`);
       changed = true;
     }
   }
