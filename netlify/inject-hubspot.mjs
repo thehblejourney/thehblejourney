@@ -9,14 +9,17 @@ const SNIPPET = `<!-- Start of HubSpot Embed Code -->\n<script type="text/javasc
 const GALLERY_MARKER = 'id="hble-artwork-folder"';
 const GALLERY_LINK = `<div class="wrap" id="hble-artwork-folder" style="margin-top:-52px;padding-bottom:64px"><a class="btn btn-ghost" href="gallery.html" aria-label="Open HBLE Artwork and Designs gallery" style="font-size:1rem;padding:16px 22px">📁 Artwork &amp; Designs</a></div>`;
 
+const BRAND_SERVICES = "images/brand-current/hble-services.webp";
+const BRAND_STANDING = "images/brand-current/hble-standing.webp";
+
 const UNIVERSE_OLD = `<article class="project small"><img src="images/Keoka.jpg" alt="HBLE character and portrait visual"><div class="project-copy"><div class="project-tag">Character Worlds</div><h3>Universe Building</h3><p>Characters, environments and visual systems designed to belong to the same world.</p></div></article>`;
 const UNIVERSE_NEW = `<article class="project small"><img src="https://raw.githubusercontent.com/thehblejourney/thehblejourney/783a99819ae6182a838db66409f0b91c415ce623/images/visual-universe/tough-girls-universe-x.jpg" alt="T.O.U.G.H. G.I.R.L.S. Universe X artwork"><div class="project-copy"><div class="project-tag">Character Worlds</div><h3>Universe Building</h3><p>T.O.U.G.H. G.I.R.L.S. — Universe X: original characters, environments and visual systems built to belong to one world.</p></div></article>`;
 
 const PERFORMANCE_OLD = `<article class="project small"><img src="images/image3.jpg" alt="HBLE creative production visual"><div class="project-copy"><div class="project-tag">Music & Performance</div><h3>Performance Visuals</h3><p>Edits and visual concepts shaped around personality, rhythm and presence.</p></div></article>`;
-const PERFORMANCE_NEW = `<article class="project small" aria-label="HBLE performance visual previews"><div style="position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#050505;overflow:hidden"><div style="position:relative;overflow:hidden"><video src="videos/every-way-preview.mp4" autoplay muted loop playsinline preload="auto" aria-label="Every Way performance preview" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.92) brightness(.78)"></video><span style="position:absolute;z-index:2;top:10px;left:10px;padding:5px 7px;border-radius:999px;background:rgba(0,0,0,.68);border:1px solid rgba(213,173,97,.38);font-size:.53rem;letter-spacing:.1em;color:#f2d998">EVERY WAY</span></div><div style="position:relative;overflow:hidden"><video src="videos/who-is-andie-howard-preview.mp4" autoplay muted loop playsinline preload="auto" aria-label="Who Is Andie Howard performance preview" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.92) brightness(.78)"></video><span style="position:absolute;z-index:2;top:10px;right:10px;padding:5px 7px;border-radius:999px;background:rgba(0,0,0,.68);border:1px solid rgba(213,173,97,.38);font-size:.53rem;letter-spacing:.08em;color:#f2d998">ANDIE HOWARD</span></div></div><div class="project-copy"><div class="project-tag">Music &amp; Performance</div><h3>Performance Visuals</h3><p>Real HBLE motion work from Every Way and Who Is Andie Howard.</p></div></article>`;
+const PERFORMANCE_NEW = `<article class="project small" aria-label="HBLE performance visual previews"><div style="position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#050505;overflow:hidden"><div style="position:relative;overflow:hidden"><video src="videos/every-way-preview.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Every Way performance preview" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.92) brightness(.78)"></video><span style="position:absolute;z-index:2;top:10px;left:10px;padding:5px 7px;border-radius:999px;background:rgba(0,0,0,.68);border:1px solid rgba(213,173,97,.38);font-size:.53rem;letter-spacing:.1em;color:#f2d998">EVERY WAY</span></div><div style="position:relative;overflow:hidden"><video src="videos/who-is-andie-howard-preview.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Who Is Andie Howard performance preview" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.92) brightness(.78)"></video><span style="position:absolute;z-index:2;top:10px;right:10px;padding:5px 7px;border-radius:999px;background:rgba(0,0,0,.68);border:1px solid rgba(213,173,97,.38);font-size:.53rem;letter-spacing:.08em;color:#f2d998">ANDIE HOWARD</span></div></div><div class="project-copy"><div class="project-tag">Music &amp; Performance</div><h3>Performance Visuals</h3><p>Real HBLE motion work from Every Way and Who Is Andie Howard.</p></div></article>`;
 
-const PERFORMANCE_SCRIPT_MARKER = 'id="hble-performance-autoplay"';
-const PERFORMANCE_SCRIPT = `<script id="hble-performance-autoplay">\n(()=>{\n  const start=()=>{\n    const videos=[...document.querySelectorAll('#work video')];\n    if(!videos.length)return;\n    const play=v=>{v.muted=true;v.loop=true;v.playsInline=true;const p=v.play();if(p&&p.catch)p.catch(()=>{});};\n    const io='IntersectionObserver' in window?new IntersectionObserver(entries=>entries.forEach(({target,isIntersecting})=>isIntersecting?play(target):target.pause()),{threshold:.12}):null;\n    videos.forEach(v=>{if(io)io.observe(v);v.addEventListener('canplay',()=>play(v));play(v);});\n    ['touchstart','pointerdown','scroll'].forEach(evt=>window.addEventListener(evt,()=>videos.forEach(play),{passive:true,once:true}));\n  };\n  document.readyState==='loading'?document.addEventListener('DOMContentLoaded',start,{once:true}):start();\n})();\n</script>`;
+const PERFORMANCE_PLAY_MARKER = 'id="hble-performance-autoplay"';
+const PERFORMANCE_PLAY_SCRIPT = `<script id="hble-performance-autoplay">\n  (() => {\n    const playPreviews = () => document.querySelectorAll('video[aria-label$="performance preview"]').forEach(v => { v.muted = true; v.loop = true; v.playsInline = true; const p = v.play(); if (p && typeof p.catch === 'function') p.catch(() => {}); });\n    if ('IntersectionObserver' in window) {\n      const io = new IntersectionObserver(entries => { if (entries.some(e => e.isIntersecting)) playPreviews(); }, { threshold: 0.15 });\n      const card = document.querySelector('[aria-label="HBLE performance visual previews"]');\n      if (card) io.observe(card);\n    }\n    ['touchstart','scroll','click'].forEach(evt => window.addEventListener(evt, playPreviews, { once: true, passive: true }));\n    document.addEventListener('visibilitychange', () => { if (!document.hidden) playPreviews(); });\n    playPreviews();\n  })();\n</script>`;
 
 const entries = await readdir(".", { withFileTypes: true });
 const htmlFiles = entries
@@ -31,6 +34,21 @@ for (const file of htmlFiles) {
   let changed = false;
 
   if (file === "index.html") {
+    const beforeBrand = html;
+    html = html.replace(
+      "background:url('images/hbleanime.jpg') center/cover no-repeat",
+      `background:url('${BRAND_STANDING}') center/cover no-repeat`
+    );
+    html = html.replace(
+      '<article class="project"><img src="images/hbleanime.jpg" alt="HBLE illustrated creative visual">',
+      `<article class="project"><img src="${BRAND_SERVICES}" alt="HBLE black and gold services and brand visual">`
+    );
+    html = html.replace(
+      "url('images/hblelogoimageworld.jpg') center/cover no-repeat",
+      `url('${BRAND_STANDING}') center/cover no-repeat`
+    );
+    if (html !== beforeBrand) changed = true;
+
     if (html.includes(UNIVERSE_OLD)) {
       html = html.replace(UNIVERSE_OLD, UNIVERSE_NEW);
       changed = true;
@@ -45,11 +63,11 @@ for (const file of htmlFiles) {
       html = html.replace('<section class="motion-break">', `${GALLERY_LINK}\n    <section class="motion-break">`);
       changed = true;
     }
+  }
 
-    if (!html.includes(PERFORMANCE_SCRIPT_MARKER) && /<\/body>/i.test(html)) {
-      html = html.replace(/<\/body>/i, `${PERFORMANCE_SCRIPT}\n</body>`);
-      changed = true;
-    }
+  if (!html.includes(PERFORMANCE_PLAY_MARKER) && html.includes('aria-label="HBLE performance visual previews"') && /<\/body>/i.test(html)) {
+    html = html.replace(/<\/body>/i, `${PERFORMANCE_PLAY_SCRIPT}\n</body>`);
+    changed = true;
   }
 
   if (!html.includes(MARKER) && /<\/body>/i.test(html)) {
