@@ -3,26 +3,15 @@ import path from "node:path";
 
 const HUBSPOT_PORTAL_ID = "247748751";
 const HUBSPOT_REGION = "na2";
-const MARKER = 'id="hs-script-loader"';
-const SNIPPET = `<!-- Start of HubSpot Embed Code -->\n<script type="text/javascript" id="hs-script-loader" async defer src="https://js-${HUBSPOT_REGION}.hs-scripts.com/${HUBSPOT_PORTAL_ID}.js"></script>\n<!-- End of HubSpot Embed Code -->`;
+const HUBSPOT_MARKER = 'id="hs-script-loader"';
+const HUBSPOT_SNIPPET = `<!-- Start of HubSpot Embed Code -->\n<script type="text/javascript" id="hs-script-loader" async defer src="https://js-${HUBSPOT_REGION}.hs-scripts.com/${HUBSPOT_PORTAL_ID}.js"></script>\n<!-- End of HubSpot Embed Code -->`;
 
-const GALLERY_MARKER = 'id="hble-artwork-folder"';
-const GALLERY_LINK = `<div class="wrap" id="hble-artwork-folder" style="margin-top:-52px;padding-bottom:64px"><a class="btn btn-ghost" href="gallery.html" aria-label="Open HBLE Artwork and Designs gallery" style="font-size:1rem;padding:16px 22px">📁 Artwork &amp; Designs</a></div>`;
-
-const BRAND_SERVICES = "images/brand-current/hble-services.webp";
-const BRAND_STANDING = "images/brand-current/hble-standing.webp";
-
-const PHOTO_FIX_MARKER = 'id="hble-photo-visibility-fix"';
-const PHOTO_FIX = `<style id="hble-photo-visibility-fix">\n#work .portfolio > .project:first-child img{filter:saturate(1) brightness(1)!important;opacity:1!important;object-fit:cover!important}\n#work .portfolio > .project:first-child:after{background:linear-gradient(180deg,rgba(0,0,0,.02) 10%,rgba(0,0,0,.62) 100%)!important}\n#about .about-art{background-image:linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.38)),url('images/brand-current/hble-standing.webp')!important;background-position:center 18%!important}\n</style>`;
-
-const UNIVERSE_OLD = `<article class="project small"><img src="images/Keoka.jpg" alt="HBLE character and portrait visual"><div class="project-copy"><div class="project-tag">Character Worlds</div><h3>Universe Building</h3><p>Characters, environments and visual systems designed to belong to the same world.</p></div></article>`;
-const UNIVERSE_NEW = `<article class="project small"><img src="https://raw.githubusercontent.com/thehblejourney/thehblejourney/783a99819ae6182a838db66409f0b91c415ce623/images/visual-universe/tough-girls-universe-x.jpg" alt="T.O.U.G.H. G.I.R.L.S. Universe X artwork"><div class="project-copy"><div class="project-tag">Character Worlds</div><h3>Universe Building</h3><p>T.O.U.G.H. G.I.R.L.S. — Universe X: original characters, environments and visual systems built to belong to one world.</p></div></article>`;
-
-const PERFORMANCE_OLD = `<article class="project small"><img src="images/image3.jpg" alt="HBLE creative production visual"><div class="project-copy"><div class="project-tag">Music & Performance</div><h3>Performance Visuals</h3><p>Edits and visual concepts shaped around personality, rhythm and presence.</p></div></article>`;
-const PERFORMANCE_NEW = `<article class="project small" aria-label="HBLE performance visual previews"><div style="position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#050505;overflow:hidden"><div style="position:relative;overflow:hidden"><video src="videos/every-way-preview.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Every Way performance preview" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.92) brightness(.78)"></video><span style="position:absolute;z-index:2;top:10px;left:10px;padding:5px 7px;border-radius:999px;background:rgba(0,0,0,.68);border:1px solid rgba(213,173,97,.38);font-size:.53rem;letter-spacing:.1em;color:#f2d998">EVERY WAY</span></div><div style="position:relative;overflow:hidden"><video src="videos/who-is-andie-howard-preview.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Who Is Andie Howard performance preview" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.92) brightness(.78)"></video><span style="position:absolute;z-index:2;top:10px;right:10px;padding:5px 7px;border-radius:999px;background:rgba(0,0,0,.68);border:1px solid rgba(213,173,97,.38);font-size:.53rem;letter-spacing:.08em;color:#f2d998">ANDIE HOWARD</span></div></div><div class="project-copy"><div class="project-tag">Music &amp; Performance</div><h3>Performance Visuals</h3><p>Real HBLE motion work from Every Way and Who Is Andie Howard.</p></div></article>`;
-
-const PERFORMANCE_PLAY_MARKER = 'id="hble-performance-autoplay"';
-const PERFORMANCE_PLAY_SCRIPT = `<script id="hble-performance-autoplay">\n  (() => {\n    const playPreviews = () => document.querySelectorAll('video[aria-label$="performance preview"]').forEach(v => { v.muted = true; v.loop = true; v.playsInline = true; const p = v.play(); if (p && typeof p.catch === 'function') p.catch(() => {}); });\n    if ('IntersectionObserver' in window) {\n      const io = new IntersectionObserver(entries => { if (entries.some(e => e.isIntersecting)) playPreviews(); }, { threshold: 0.15 });\n      const card = document.querySelector('[aria-label="HBLE performance visual previews"]');\n      if (card) io.observe(card);\n    }\n    ['touchstart','scroll','click'].forEach(evt => window.addEventListener(evt, playPreviews, { once: true, passive: true }));\n    document.addEventListener('visibilitychange', () => { if (!document.hidden) playPreviews(); });\n    playPreviews();\n  })();\n</script>`;
+// HBLE VISUAL RESET
+// No compressed images, thumbnails, web-size derivatives, or preview videos are rendered.
+// New visual media will be added only from approved full-resolution JPEG masters
+// and original-quality video masters.
+const MEDIA_RESET_MARKER = 'id="hble-media-reset"';
+const MEDIA_RESET = `<style id="hble-media-reset">\n/* HBLE visual reset: master-quality media only */\nimg, picture, video, svg, canvas { display:none !important; }\n*, *::before, *::after { background-image:none !important; }\n.hero-media, .hero-reel, .portfolio, .project, .about-art, .motion-break, #hble-artwork-folder { display:none !important; }\n.hero { min-height:auto !important; }\n.hero-grid, .about-grid { grid-template-columns:1fr !important; max-width:900px !important; }\n.hero-grid { padding:100px 0 !important; }\n.btn-primary { background:#d5ad61 !important; color:#111 !important; }\n</style>`;
 
 const entries = await readdir(".", { withFileTypes: true });
 const htmlFiles = entries
@@ -36,50 +25,13 @@ for (const file of htmlFiles) {
   let html = await readFile(fullPath, "utf8");
   let changed = false;
 
-  if (file === "index.html") {
-    const beforeBrand = html;
-    html = html.replace(
-      "background:url('images/hbleanime.jpg') center/cover no-repeat",
-      `background:url('${BRAND_STANDING}') center/cover no-repeat`
-    );
-    html = html.replace(
-      '<article class="project"><img src="images/hbleanime.jpg" alt="HBLE illustrated creative visual">',
-      `<article class="project"><img src="${BRAND_SERVICES}" alt="HBLE black and gold services and brand visual">`
-    );
-    html = html.replace(
-      "url('images/hblelogoimageworld.jpg') center/cover no-repeat",
-      `url('${BRAND_STANDING}') center/cover no-repeat`
-    );
-    if (html !== beforeBrand) changed = true;
-
-    if (html.includes(UNIVERSE_OLD)) {
-      html = html.replace(UNIVERSE_OLD, UNIVERSE_NEW);
-      changed = true;
-    }
-
-    if (html.includes(PERFORMANCE_OLD)) {
-      html = html.replace(PERFORMANCE_OLD, PERFORMANCE_NEW);
-      changed = true;
-    }
-
-    if (!html.includes(GALLERY_MARKER) && html.includes('<section class="motion-break">')) {
-      html = html.replace('<section class="motion-break">', `${GALLERY_LINK}\n    <section class="motion-break">`);
-      changed = true;
-    }
-
-    if (!html.includes(PHOTO_FIX_MARKER) && /<\/head>/i.test(html)) {
-      html = html.replace(/<\/head>/i, `${PHOTO_FIX}\n</head>`);
-      changed = true;
-    }
-  }
-
-  if (!html.includes(PERFORMANCE_PLAY_MARKER) && html.includes('aria-label="HBLE performance visual previews"') && /<\/body>/i.test(html)) {
-    html = html.replace(/<\/body>/i, `${PERFORMANCE_PLAY_SCRIPT}\n</body>`);
+  if (!html.includes(MEDIA_RESET_MARKER) && /<\/head>/i.test(html)) {
+    html = html.replace(/<\/head>/i, `${MEDIA_RESET}\n</head>`);
     changed = true;
   }
 
-  if (!html.includes(MARKER) && /<\/body>/i.test(html)) {
-    html = html.replace(/<\/body>/i, `${SNIPPET}\n</body>`);
+  if (!html.includes(HUBSPOT_MARKER) && /<\/body>/i.test(html)) {
+    html = html.replace(/<\/body>/i, `${HUBSPOT_SNIPPET}\n</body>`);
     changed = true;
   }
 
@@ -89,4 +41,4 @@ for (const file of htmlFiles) {
   }
 }
 
-console.log(`HBLE build injection complete. Updated ${updated} HTML file(s).`);
+console.log(`HBLE media reset complete. Updated ${updated} HTML file(s).`);
