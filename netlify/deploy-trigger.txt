@@ -1,6 +1,6 @@
-Force deploy for verified full-screen HBLE Services master.
-Build source commit: 8d0e7cbff1dd3dfa9829eea69cb1ec4e79e2ea32
-Cleanup head: 9c3f0f1425c2121fc3e4a2da85cee24d3d199f01
-Video bytes: 3233732
-Video SHA256: cf1a75704dc2e992d4d424d591370f12a178ac6aaee7d398aee4d6a086ada6fe
-Date: 2026-10-21
+Force deploy for HBLE image ticker + verified full-screen Services master.
+Build source commit: 1c0e637e1b447ce393570de768ae9126f20f804d
+Ticker assets: 4 verified originals
+Services video bytes: 3233732
+Services video SHA256: cf1a75704dc2e992d4d424d591370f12a178ac6aaee7d398aee4d6a086ada6fe
+Date: 2026-10-22
