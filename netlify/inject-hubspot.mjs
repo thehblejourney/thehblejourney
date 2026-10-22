@@ -10,40 +10,75 @@ const HUBSPOT_SNIPPET = `<!-- Start of HubSpot Embed Code -->
 <!-- End of HubSpot Embed Code -->`;
 
 // HBLE APPROVED MEDIA MODE
-// Approved visuals: HBLE logo + exact original Services master MP4 only.
-// Everything else remains blocked until deliberately restored and verified.
-const SERVICES_MASTER_URL = "https://at.adobe.com/niDFts1JonKlyIfD";
-const SERVICES_MASTER_PATH = path.join("media", "hble-services-master.mp4");
-const SERVICES_MASTER_BYTES = 3233732;
-const SERVICES_MASTER_SHA256 = "cf1a75704dc2e992d4d424d591370f12a178ac6aaee7d398aee4d6a086ada6fe";
+// Approved visuals: HBLE logo, verified Services master MP4, and four verified ticker images.
+// Every asset is downloaded byte-for-byte and SHA-256 checked before Netlify publishes it.
+const VERIFIED_ASSETS = [
+  {
+    label: "Services master",
+    url: "https://at.adobe.com/TcAn0B2We8tPtWJm",
+    filePath: path.join("media", "hble-services-master.mp4"),
+    bytes: 3233732,
+    sha256: "cf1a75704dc2e992d4d424d591370f12a178ac6aaee7d398aee4d6a086ada6fe"
+  },
+  {
+    label: "HBLE ticker squat",
+    url: "https://at.adobe.com/vZED7feX3fuHhcBA",
+    filePath: path.join("images", "ticker", "hble-squat.png"),
+    bytes: 510508,
+    sha256: "bff03c73b742ca2c72e86857e34c1acf09a625cbfda3c8239a947decab8b09c4"
+  },
+  {
+    label: "HBLE ticker standing",
+    url: "https://at.adobe.com/zWGXI94fLtdJZlRi",
+    filePath: path.join("images", "ticker", "hble-standing.png"),
+    bytes: 372830,
+    sha256: "4feee7b19d60aa9d6ee0fb45d73e5997920defd6ebd2f1037a6ee74012eebc35"
+  },
+  {
+    label: "HBLE ticker crouch",
+    url: "https://at.adobe.com/5RIfu7HdccSbcZSX",
+    filePath: path.join("images", "ticker", "hble-crouch.png"),
+    bytes: 356714,
+    sha256: "bdb9e73733c20abb73aa27978ab5b8f7b6b283947fb8525c7a985eecb8c231d5"
+  },
+  {
+    label: "HBLE ticker services poster",
+    url: "https://at.adobe.com/zeTfIiDQaPlaXJHM",
+    filePath: path.join("images", "ticker", "hble-services.jpg"),
+    bytes: 531705,
+    sha256: "ff10508cfa34dc038afbdc021fb2b69ca52cd056535de408b154528166868684"
+  }
+];
 
-async function installVerifiedServicesMaster() {
-  const response = await fetch(SERVICES_MASTER_URL, { redirect: "follow" });
+async function installVerifiedAsset(asset) {
+  const response = await fetch(asset.url, { redirect: "follow" });
   if (!response.ok) {
-    throw new Error(`Services master download failed: HTTP ${response.status}`);
+    throw new Error(`${asset.label} download failed: HTTP ${response.status}`);
   }
 
-  const bytes = Buffer.from(await response.arrayBuffer());
-  if (bytes.length !== SERVICES_MASTER_BYTES) {
-    throw new Error(`Services master size mismatch: expected ${SERVICES_MASTER_BYTES}, got ${bytes.length}`);
+  const data = Buffer.from(await response.arrayBuffer());
+  if (data.length !== asset.bytes) {
+    throw new Error(`${asset.label} size mismatch: expected ${asset.bytes}, got ${data.length}`);
   }
 
-  const sha256 = createHash("sha256").update(bytes).digest("hex");
-  if (sha256 !== SERVICES_MASTER_SHA256) {
-    throw new Error(`Services master SHA-256 mismatch: ${sha256}`);
+  const sha256 = createHash("sha256").update(data).digest("hex");
+  if (sha256 !== asset.sha256) {
+    throw new Error(`${asset.label} SHA-256 mismatch: ${sha256}`);
   }
 
-  await mkdir(path.dirname(SERVICES_MASTER_PATH), { recursive: true });
-  await writeFile(SERVICES_MASTER_PATH, bytes);
-  console.log(`Verified Services master installed unchanged: ${bytes.length} bytes, ${sha256}`);
+  await mkdir(path.dirname(asset.filePath), { recursive: true });
+  await writeFile(asset.filePath, data);
+  console.log(`Verified unchanged: ${asset.label} — ${data.length} bytes — ${sha256}`);
 }
 
-await installVerifiedServicesMaster();
+for (const asset of VERIFIED_ASSETS) {
+  await installVerifiedAsset(asset);
+}
 
 const TEXT_ONLY_MARKER = 'id="hble-text-only"';
 const TEXT_ONLY_STYLE = `<style id="hble-text-only">
-/* Block every visual asset except the approved HBLE logo and verified Services master */
-img:not(.hble-logo), picture, svg, canvas, video:not(.hble-services-master-video) { display:none !important; }
+/* Only intentionally approved media may display */
+img:not(.hble-logo):not(.hble-ticker-img), picture, svg, canvas, video:not(.hble-services-master-video) { display:none !important; }
 *, *::before, *::after { background-image:none !important; }
 
 /* Approved logo */
@@ -53,10 +88,66 @@ img:not(.hble-logo), picture, svg, canvas, video:not(.hble-services-master-video
 /* Remove old media-only shells */
 .brand-mark, .hero-media, .hero-reel, .about-art, #hble-artwork-folder { display:none !important; }
 
-/* Keep the page clean and readable without other artwork */
+/* Keep the page clean and readable */
 .hero { min-height:auto !important; }
 .hero-grid, .about-grid { grid-template-columns:1fr !important; max-width:900px !important; }
 .hero-grid { padding:100px 0 !important; }
+
+/* HBLE image ticker */
+.hble-image-ticker {
+  position:relative;
+  overflow:hidden;
+  padding:18px 0 20px;
+  background:#050505;
+  border-top:1px solid rgba(213,173,97,.25);
+  border-bottom:1px solid rgba(213,173,97,.25);
+}
+.hble-image-ticker::before,
+.hble-image-ticker::after {
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:min(11vw,120px);
+  z-index:2;
+  pointer-events:none;
+}
+.hble-image-ticker::before { left:0; background:linear-gradient(90deg,#050505,rgba(5,5,5,0)); }
+.hble-image-ticker::after { right:0; background:linear-gradient(270deg,#050505,rgba(5,5,5,0)); }
+.hble-image-ticker-track {
+  display:flex;
+  width:max-content;
+  animation:hbleTickerScroll 38s linear infinite;
+  will-change:transform;
+}
+.hble-image-ticker:hover .hble-image-ticker-track { animation-play-state:paused; }
+.hble-image-ticker-set {
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding-right:18px;
+}
+.hble-ticker-card {
+  height:clamp(230px,31vw,390px);
+  width:auto;
+  flex:0 0 auto;
+  border:1px solid rgba(213,173,97,.42);
+  border-radius:18px;
+  overflow:hidden;
+  background:#080808;
+  box-shadow:0 10px 35px rgba(0,0,0,.32);
+}
+.hble-ticker-img {
+  display:block !important;
+  height:100% !important;
+  width:auto !important;
+  max-width:none !important;
+  object-fit:contain !important;
+}
+@keyframes hbleTickerScroll {
+  from { transform:translateX(0); }
+  to { transform:translateX(-50%); }
+}
 
 /* Preserve portfolio copy as text cards */
 .portfolio { grid-template-columns:repeat(3,minmax(0,1fr)) !important; }
@@ -126,10 +217,20 @@ body.services-video-open { overflow:hidden !important; }
 
 @media(max-width:950px){
   .portfolio { grid-template-columns:1fr !important; }
+  .hble-ticker-card { height:clamp(220px,46vw,330px); }
 }
 @media(max-width:620px){
   .hble-logo { width:46px !important; height:46px !important; flex-basis:46px !important; }
   .services-video-trigger { padding:8px 12px; }
+  .hble-image-ticker { padding:12px 0 14px; }
+  .hble-image-ticker-set { gap:12px; padding-right:12px; }
+  .hble-ticker-card { height:245px; border-radius:14px; }
+  .hble-image-ticker-track { animation-duration:30s; }
+}
+@media(prefers-reduced-motion:reduce){
+  .hble-image-ticker { overflow-x:auto; }
+  .hble-image-ticker-track { animation:none; }
+  .hble-image-ticker-set[aria-hidden="true"] { display:none; }
 }
 </style>`;
 
@@ -138,6 +239,25 @@ const HOME_BRAND = '<a class="brand" href="#top">HBLE STUDIOS<small>HBLE ENTERPR
 const HOME_BRAND_WITH_LOGO = '<a class="brand" href="#top"><img class="hble-logo" src="images/Crown.jpg" alt="HBLE logo"><span>HBLE STUDIOS<small>HBLE ENTERPRISES INC.</small></span></a>';
 const SERVICES_LINK = '<a href="#services">Services</a>';
 const SERVICES_BUTTON = '<button type="button" class="services-video-trigger" aria-haspopup="dialog" aria-controls="services-video-modal">Services</button>';
+
+const IMAGE_TICKER_MARKER = 'id="hble-image-ticker"';
+const IMAGE_TICKER_HTML = `<section id="hble-image-ticker" class="hble-image-ticker" aria-label="HBLE brand showcase">
+  <div class="hble-image-ticker-track">
+    <div class="hble-image-ticker-set">
+      <div class="hble-ticker-card"><img class="hble-ticker-img" src="images/ticker/hble-squat.png" alt="HBLE Enterprises brand portrait"></div>
+      <div class="hble-ticker-card"><img class="hble-ticker-img" src="images/ticker/hble-standing.png" alt="HBLE Enterprises standing brand portrait"></div>
+      <div class="hble-ticker-card"><img class="hble-ticker-img" src="images/ticker/hble-crouch.png" alt="HBLE Enterprises crouching brand portrait"></div>
+      <div class="hble-ticker-card"><img class="hble-ticker-img" src="images/ticker/hble-services.jpg" alt="HBLE Enterprises services showcase"></div>
+    </div>
+    <div class="hble-image-ticker-set" aria-hidden="true">
+      <div class="hble-ticker-card"><img class="hble-ticker-img" src="images/ticker/hble-squat.png" alt=""></div>
+      <div class="hble-ticker-card"><img class="hble-ticker-img" src="images/ticker/hble-standing.png" alt=""></div>
+      <div class="hble-ticker-card"><img class="hble-ticker-img" src="images/ticker/hble-crouch.png" alt=""></div>
+      <div class="hble-ticker-card"><img class="hble-ticker-img" src="images/ticker/hble-services.jpg" alt=""></div>
+    </div>
+  </div>
+</section>`;
+
 const SERVICES_MODAL_MARKER = 'id="services-video-modal"';
 const SERVICES_MODAL = `<div id="services-video-modal" class="services-video-modal" role="dialog" aria-modal="true" aria-label="HBLE Services video" aria-hidden="true">
   <button type="button" class="services-video-close" aria-label="Close Services video">Close</button>
@@ -209,6 +329,11 @@ for (const file of htmlFiles) {
 
   if (file === "index.html" && html.includes(SERVICES_LINK)) {
     html = html.replace(SERVICES_LINK, SERVICES_BUTTON);
+    changed = true;
+  }
+
+  if (file === "index.html" && !html.includes(IMAGE_TICKER_MARKER) && html.includes('<div class="ticker">')) {
+    html = html.replace('<div class="ticker">', `${IMAGE_TICKER_HTML}\n\n    <div class="ticker">`);
     changed = true;
   }
 
