@@ -1,6 +1,7 @@
-Force deploy for HBLE image ticker + verified full-screen Services master.
-Build source commit: 1c0e637e1b447ce393570de768ae9126f20f804d
-Ticker assets: 4 verified originals
-Services video bytes: 3233732
-Services video SHA256: cf1a75704dc2e992d4d424d591370f12a178ac6aaee7d398aee4d6a086ada6fe
-Date: 2026-10-22
+Force deploy for HBLE IN MOTION modular showcase.
+Build head: cc796d79f847d83e6eb9c3dc5733792e46636e39
+Section: HBLE IN MOTION — Where Ideas Become Experiences.
+Manifest: media/hble-motion/manifest.json
+Permanent rebuild media source: hble.org
+Services master remains verified unchanged.
+Date: 2026-10-23
