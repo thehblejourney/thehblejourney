@@ -1,5 +1,5 @@
-Force deploy for HBLE IN MOTION crown fix + replacement Services master.
-Crown: visible black box removed in HBLE In Motion via display blending; source logo unchanged.
+Force deploy for HBLE IN MOTION crown mask + replacement Services master.
+Crown: original JPEG is no longer rendered as an <img> in HBLE In Motion. Its luminance is used only as a CSS mask, so the black rectangle cannot display.
 Replacement Services master bytes: 64433923
 Replacement Services master SHA256: 9c2d2453a33e45dd275b03dd6b492b2210eaa7fbdcf92549e7bd0b24ec1f35eb
 Replacement Services master duration: 53.242993 seconds
