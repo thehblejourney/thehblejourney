@@ -6,7 +6,7 @@
 #hble-in-motion .hble-motion-sub{max-width:780px;color:#aaa49a;font-size:1.05rem}
 #hble-in-motion .hble-motion-stage{margin-top:34px;min-height:330px;border:1px solid rgba(213,173,97,.28);border-radius:28px;background:#0c0c0c;position:relative;display:grid;place-items:center;padding:36px;overflow:hidden}
 #hble-in-motion .hble-motion-stage::before{content:"";position:absolute;left:8%;right:8%;top:50%;height:1px;background:#d5ad61;opacity:.24;transform:scaleX(0);transform-origin:left center;animation:hbleMotionLine 7s ease-in-out infinite}
-#hble-in-motion .hble-motion-emblem{width:92px!important;height:92px!important;object-fit:contain!important;display:block!important;opacity:0;transform:translateY(28px) scale(.92);animation:hbleMotionLogo 7s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(213,173,97,.2))}
+#hble-in-motion .hble-motion-emblem{width:92px!important;height:92px!important;object-fit:contain!important;display:block!important;opacity:0;transform:translateY(28px) scale(.92);animation:hbleMotionLogo 7s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(213,173,97,.2));mix-blend-mode:screen;background:transparent!important}
 #hble-in-motion .hble-motion-story{position:relative;width:100%;min-height:110px;margin-top:22px;text-align:center}
 #hble-in-motion .hble-motion-line{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:translateY(14px);font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,4.3rem);line-height:1;color:#f8f4ec;letter-spacing:-.03em;text-align:center}
 #hble-in-motion .hble-motion-line strong{color:#f2d998;font-weight:700}
