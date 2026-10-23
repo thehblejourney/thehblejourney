@@ -1,7 +1,8 @@
-Force deploy for HBLE IN MOTION modular showcase.
-Build head: cc796d79f847d83e6eb9c3dc5733792e46636e39
-Section: HBLE IN MOTION — Where Ideas Become Experiences.
-Manifest: media/hble-motion/manifest.json
-Permanent rebuild media source: hble.org
-Services master remains verified unchanged.
+Force deploy for HBLE IN MOTION crown fix + replacement Services master.
+Crown: visible black box removed in HBLE In Motion via display blending; source logo unchanged.
+Replacement Services master bytes: 64433923
+Replacement Services master SHA256: 9c2d2453a33e45dd275b03dd6b492b2210eaa7fbdcf92549e7bd0b24ec1f35eb
+Replacement Services master duration: 53.242993 seconds
+Replacement Services master resolution: 1172x1080 at 30 fps
+HBLE In Motion manifest still points to /media/hble-services-master.mp4, so the featured Services piece updates automatically.
 Date: 2026-10-23
