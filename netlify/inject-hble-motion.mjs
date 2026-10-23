@@ -14,7 +14,7 @@ const section = `<section id="hble-in-motion" aria-labelledby="hble-motion-headi
 
     <div class="hble-motion-stage" aria-label="HBLE animated brand sequence">
       <div>
-        <img class="hble-motion-emblem" src="/images/Crown.jpg" alt="HBLE crown logo" style="display:block!important">
+        <span class="hble-motion-emblem" role="img" aria-label="HBLE crown logo"></span>
         <div class="hble-motion-story" aria-live="off">
           <div class="hble-motion-line">HUMBLE <strong>BEGINNINGS</strong></div>
           <div class="hble-motion-line">LEGENDARY <strong>ENDINGS</strong></div>
