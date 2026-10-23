@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "sectionTitle": "HBLE IN MOTION",
+  "sectionSubtitle": "Where Ideas Become Experiences.",
+  "items": [
+    {
+      "id": "services-master",
+      "title": "HBLE Services",
+      "category": "Services",
+      "type": "video",
+      "src": "/media/hble-services-master.mp4",
+      "poster": "/images/ticker/hble-services.jpg",
+      "featured": true
+    },
+    {
+      "id": "brand-squat",
+      "title": "HBLE Brand Presence",
+      "category": "Brand",
+      "type": "image",
+      "src": "/images/ticker/hble-squat.png"
+    },
+    {
+      "id": "brand-standing",
+      "title": "HBLE Standing Identity",
+      "category": "Brand",
+      "type": "image",
+      "src": "/images/ticker/hble-standing.png"
+    },
+    {
+      "id": "brand-crouch",
+      "title": "HBLE Creative Energy",
+      "category": "Brand",
+      "type": "image",
+      "src": "/images/ticker/hble-crouch.png"
+    },
+    {
+      "id": "services-poster",
+      "title": "HBLE Services Showcase",
+      "category": "Services",
+      "type": "image",
+      "src": "/images/ticker/hble-services.jpg"
+    }
+  ]
+}
