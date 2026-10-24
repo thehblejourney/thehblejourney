@@ -1,7 +1,7 @@
-Force deploy for HBLE buffered Services playback.
-Services player now waits for a meaningful buffer before starting instead of immediately stalling.
-HBLE In Motion preload remains permanently disabled.
+Force deploy for HBLE Services buffering fix.
+Services stays preload=none while idle, switches to preload=auto only after the user taps Services, waits for buffer, then plays.
+Closing Services unloads the MP4 and restores preload=none.
+HBLE In Motion background preload remains disabled.
 Approved 64 MB Services master remains unchanged.
-Web-delivery encode is being prepared separately; site master preservation remains intact.
 Tip Jar and Stripe setup remain intact.
 Date: 2026-10-24
