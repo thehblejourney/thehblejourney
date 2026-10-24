@@ -1,8 +1,7 @@
-Force deploy for HBLE IN MOTION crown mask + replacement Services master.
-Crown: original JPEG is no longer rendered as an <img> in HBLE In Motion. Its luminance is used only as a CSS mask, so the black rectangle cannot display.
+Force deploy for HBLE Services playback optimization.
 Replacement Services master bytes: 64433923
 Replacement Services master SHA256: 9c2d2453a33e45dd275b03dd6b492b2210eaa7fbdcf92549e7bd0b24ec1f35eb
-Replacement Services master duration: 53.242993 seconds
-Replacement Services master resolution: 1172x1080 at 30 fps
-HBLE In Motion manifest still points to /media/hble-services-master.mp4, so the featured Services piece updates automatically.
-Date: 2026-10-23
+Services modal: preload disabled; source loads only after visitor presses Services.
+HBLE In Motion: video preload changed from metadata to none so it does not compete for bandwidth in the background.
+Original master remains unchanged.
+Date: 2026-10-24
