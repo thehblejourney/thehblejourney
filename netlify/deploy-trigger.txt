@@ -1,6 +1,8 @@
-Force deploy for HBLE mobile Stripe checkout optimization.
-All buy.stripe.com checkout links now open in a separate browser tab/window with noopener/noreferrer/external protections.
-Existing six live HBLE Stripe URLs remain unchanged.
-Existing Facebook Pixel InitiateCheckout handlers remain intact.
-Future Stripe Payment Links added to HTML will receive the same treatment automatically during Netlify build.
+Force deploy for HBLE Tip Jar.
+Stripe Payment Link: https://buy.stripe.com/9B6eVd9TldAdem9boH8g006
+Stripe product: HBLE Tip Jar
+Supporter chooses amount; $1 minimum; $5 preset.
+Tip Jar is a voluntary support payment and not a charitable donation.
+Homepage section is injected above the footer and uses the mobile-safe external Stripe checkout behavior.
+Facebook Pixel InitiateCheckout tracking is preserved on the Tip Jar button.
 Date: 2026-10-24
