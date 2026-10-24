@@ -1,6 +1,7 @@
-Force deploy for permanent HBLE video buffering fix.
-HBLE In Motion preload is now permanently disabled in source.
-Services player uses on-demand data-src loading with a capture-phase lazy-load guard.
-Approved Services master remains unchanged.
+Force deploy for HBLE buffered Services playback.
+Services player now waits for a meaningful buffer before starting instead of immediately stalling.
+HBLE In Motion preload remains permanently disabled.
+Approved 64 MB Services master remains unchanged.
+Web-delivery encode is being prepared separately; site master preservation remains intact.
 Tip Jar and Stripe setup remain intact.
 Date: 2026-10-24
