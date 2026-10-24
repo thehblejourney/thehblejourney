@@ -1,4 +1,6 @@
-Force deploy for HBLE Start a Project or Get Support heading update.
-Change: START A PROJECT → START A PROJECT OR GET SUPPORT.
-No form fields, pricing, Stripe links, policies, Services video, or HBLE In Motion behavior changed.
+Force deploy for HBLE mobile Stripe checkout optimization.
+All buy.stripe.com checkout links now open in a separate browser tab/window with noopener/noreferrer/external protections.
+Existing six live HBLE Stripe URLs remain unchanged.
+Existing Facebook Pixel InitiateCheckout handlers remain intact.
+Future Stripe Payment Links added to HTML will receive the same treatment automatically during Netlify build.
 Date: 2026-10-24
