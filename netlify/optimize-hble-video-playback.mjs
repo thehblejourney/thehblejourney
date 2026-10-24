@@ -14,27 +14,14 @@ html = html.replace(
   /<video\b([^>]*\bclass="hble-services-master-video"[^>]*)><\/video>/i,
   (match, attrs) => {
     let next = attrs;
-
-    // Move the heavy MP4 out of src so the browser cannot preload it on page load.
     next = next.replace(/\s+src="media\/hble-services-master\.mp4"/i, ' data-src="media/hble-services-master.mp4"');
-
-    if (!/\bdata-src="media\/hble-services-master\.mp4"/i.test(next)) {
-      next += ' data-src="media/hble-services-master.mp4"';
-    }
-
-    if (/\bpreload="[^"]*"/i.test(next)) {
-      next = next.replace(/\bpreload="[^"]*"/i, 'preload="none"');
-    } else {
-      next += ' preload="none"';
-    }
-
+    if (!/\bdata-src="media\/hble-services-master\.mp4"/i.test(next)) next += ' data-src="media/hble-services-master.mp4"';
+    if (/\bpreload="[^"]*"/i.test(next)) next = next.replace(/\bpreload="[^"]*"/i, 'preload="none"');
+    else next += ' preload="none"';
     return `<video${next}></video>`;
   }
 );
 
-// Replace the generated Services controller with a buffered-start controller.
-// The 62 MB master is loaded only after the user taps Services, then playback waits
-// for a meaningful buffer instead of starting immediately and stalling repeatedly.
 const controllerScript = `<script id="hble-services-video-controller">
 (function(){
   const modal = document.getElementById('services-video-modal');
@@ -67,14 +54,8 @@ const controllerScript = `<script id="hble-services-video-controller">
     return 0;
   }
 
-  function showStatus(text){
-    status.textContent = text;
-    status.style.display = 'block';
-  }
-
-  function hideStatus(){
-    status.style.display = 'none';
-  }
+  function showStatus(text){ status.textContent = text; status.style.display = 'block'; }
+  function hideStatus(){ status.style.display = 'none'; }
 
   function playWhenBuffered(mySession){
     const targetBuffer = 12;
@@ -85,10 +66,7 @@ const controllerScript = `<script id="hble-services-video-controller">
       video.removeEventListener('canplaythrough', maybePlay);
       video.removeEventListener('loadedmetadata', maybePlay);
       video.removeEventListener('canplay', maybePlay);
-      if (startTimer) {
-        clearTimeout(startTimer);
-        startTimer = null;
-      }
+      if (startTimer) { clearTimeout(startTimer); startTimer = null; }
     }
 
     function startPlayback(){
@@ -98,9 +76,7 @@ const controllerScript = `<script id="hble-services-video-controller">
       hideStatus();
       if (video.readyState > 0) video.currentTime = 0;
       const playPromise = video.play();
-      if (playPromise && typeof playPromise.catch === 'function') {
-        playPromise.catch(function(){ showStatus('Tap play to continue'); });
-      }
+      if (playPromise && typeof playPromise.catch === 'function') playPromise.catch(function(){ showStatus('Tap play to continue'); });
     }
 
     function maybePlay(){
@@ -115,7 +91,6 @@ const controllerScript = `<script id="hble-services-video-controller">
     video.addEventListener('loadedmetadata', maybePlay);
     video.addEventListener('canplay', maybePlay);
 
-    // Conservative fallback for browsers that report buffering poorly.
     startTimer = setTimeout(function(){
       if (mySession !== session || finished) return;
       if (video.readyState >= 3 && bufferedAhead() >= 6) startPlayback();
@@ -133,11 +108,13 @@ const controllerScript = `<script id="hble-services-video-controller">
     document.body.classList.add('services-video-open');
     showStatus('Preparing video…');
 
+    // Stay idle on page load, but once the user taps Services let the browser
+    // buffer aggressively before playback starts.
+    video.preload = 'auto';
     if (!video.getAttribute('src') && video.dataset.src) {
       video.setAttribute('src', video.dataset.src);
-      video.load();
     }
-
+    video.load();
     playWhenBuffered(mySession);
 
     if (modal.requestFullscreen) {
@@ -148,13 +125,11 @@ const controllerScript = `<script id="hble-services-video-controller">
 
   function closeServices(){
     session += 1;
-    if (startTimer) {
-      clearTimeout(startTimer);
-      startTimer = null;
-    }
+    if (startTimer) { clearTimeout(startTimer); startTimer = null; }
     hideStatus();
     video.pause();
     video.removeAttribute('src');
+    video.preload = 'none';
     video.load();
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden','true');
@@ -168,9 +143,7 @@ const controllerScript = `<script id="hble-services-video-controller">
 
   trigger.addEventListener('click', openServices);
   if (close) close.addEventListener('click', closeServices);
-  document.addEventListener('keydown', function(event){
-    if (event.key === 'Escape' && modal.classList.contains('is-open')) closeServices();
-  });
+  document.addEventListener('keydown', function(event){ if (event.key === 'Escape' && modal.classList.contains('is-open')) closeServices(); });
 })();
 </script>`;
 
@@ -180,14 +153,11 @@ if (/<script\s+id="hble-services-video-controller">[\s\S]*?<\/script>/i.test(htm
   html = html.replace(/<\/body>/i, `${controllerScript}\n</body>`);
 }
 
-// Remove the older capture-phase lazy-load guard if a prior build inserted it.
 html = html.replace(/<script\s+id="hble-services-lazyload-guard">[\s\S]*?<\/script>\s*/gi, '');
-
 await writeFile(indexPath, html, 'utf8');
 
-// HBLE In Motion uses the same master. Never preload it in the background.
 let motionJs = await readFile(motionJsPath, 'utf8');
 motionJs = motionJs.replace(/video\.preload\s*=\s*['"]metadata['"];?/g, "video.preload = 'none';");
 await writeFile(motionJsPath, motionJs, 'utf8');
 
-console.log('HBLE video playback buffered: Services waits for buffer; HBLE In Motion preload disabled.');
+console.log('HBLE video playback buffered: idle preload none; user-triggered preload auto; HBLE In Motion preload disabled.');
