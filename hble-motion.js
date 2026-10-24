@@ -21,7 +21,7 @@
       if (item.poster) video.poster = item.poster;
       video.controls = true;
       video.playsInline = true;
-      video.preload = 'metadata';
+      video.preload = 'none';
       video.loop = true;
       video.setAttribute('style','display:block!important');
       return video;
