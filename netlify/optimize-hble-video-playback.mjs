@@ -32,37 +32,156 @@ html = html.replace(
   }
 );
 
-// Keep the original controller compatible when its exact source is present.
-html = html.replace(
-  "    if (video) {\n      video.currentTime = 0;\n      const playPromise = video.play();",
-  "    if (video) {\n      if (!video.getAttribute('src') && video.dataset.src) {\n        video.setAttribute('src', video.dataset.src);\n        video.load();\n      }\n      if (video.readyState > 0) video.currentTime = 0;\n      const playPromise = video.play();"
-);
-
-html = html.replace(
-  "      video.pause();\n      video.currentTime = 0;",
-  "      video.pause();\n      if (video.readyState > 0) video.currentTime = 0;"
-);
-
-// Independent capture-phase guard: even if the generated controller changes later,
-// load the MP4 only when the visitor actually presses the Services button.
-const guardMarker = 'id="hble-services-lazyload-guard"';
-if (!html.includes(guardMarker) && /<\/body>/i.test(html)) {
-  const guardScript = `<script id="hble-services-lazyload-guard">
+// Replace the generated Services controller with a buffered-start controller.
+// The 62 MB master is loaded only after the user taps Services, then playback waits
+// for a meaningful buffer instead of starting immediately and stalling repeatedly.
+const controllerScript = `<script id="hble-services-video-controller">
 (function(){
-  document.addEventListener('click', function(event){
-    const trigger = event.target && event.target.closest ? event.target.closest('.services-video-trigger') : null;
-    if (!trigger) return;
-    const video = document.querySelector('.hble-services-master-video');
-    if (!video) return;
+  const modal = document.getElementById('services-video-modal');
+  if (!modal) return;
+  const video = modal.querySelector('.hble-services-master-video');
+  const trigger = document.querySelector('.services-video-trigger');
+  const close = modal.querySelector('.services-video-close');
+  if (!video || !trigger) return;
+
+  let session = 0;
+  let startTimer = null;
+
+  const status = document.createElement('div');
+  status.className = 'hble-services-buffer-status';
+  status.setAttribute('role','status');
+  status.setAttribute('aria-live','polite');
+  status.textContent = 'Preparing video…';
+  status.style.cssText = 'position:fixed;left:50%;bottom:max(28px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:10003;background:rgba(0,0,0,.82);color:#f2d998;border:1px solid rgba(213,173,97,.5);border-radius:999px;padding:10px 16px;font:700 13px/1.2 Inter,Arial,sans-serif;letter-spacing:.02em;display:none;pointer-events:none;white-space:nowrap;';
+  modal.appendChild(status);
+
+  function bufferedAhead(){
+    if (!video.buffered || !video.buffered.length) return 0;
+    const now = Number.isFinite(video.currentTime) ? video.currentTime : 0;
+    for (let i = 0; i < video.buffered.length; i++) {
+      const start = video.buffered.start(i);
+      const end = video.buffered.end(i);
+      if (now >= start - 0.25 && now <= end + 0.25) return Math.max(0, end - now);
+      if (now === 0 && start <= 0.5) return Math.max(0, end);
+    }
+    return 0;
+  }
+
+  function showStatus(text){
+    status.textContent = text;
+    status.style.display = 'block';
+  }
+
+  function hideStatus(){
+    status.style.display = 'none';
+  }
+
+  function playWhenBuffered(mySession){
+    const targetBuffer = 12;
+    let finished = false;
+
+    function cleanup(){
+      video.removeEventListener('progress', maybePlay);
+      video.removeEventListener('canplaythrough', maybePlay);
+      video.removeEventListener('loadedmetadata', maybePlay);
+      video.removeEventListener('canplay', maybePlay);
+      if (startTimer) {
+        clearTimeout(startTimer);
+        startTimer = null;
+      }
+    }
+
+    function startPlayback(){
+      if (finished || mySession !== session || !modal.classList.contains('is-open')) return;
+      finished = true;
+      cleanup();
+      hideStatus();
+      if (video.readyState > 0) video.currentTime = 0;
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(function(){ showStatus('Tap play to continue'); });
+      }
+    }
+
+    function maybePlay(){
+      if (finished || mySession !== session || !modal.classList.contains('is-open')) return;
+      const ahead = bufferedAhead();
+      if (video.readyState >= 4 || ahead >= targetBuffer) startPlayback();
+      else showStatus('Preparing video… ' + Math.min(99, Math.round((ahead / targetBuffer) * 100)) + '%');
+    }
+
+    video.addEventListener('progress', maybePlay);
+    video.addEventListener('canplaythrough', maybePlay);
+    video.addEventListener('loadedmetadata', maybePlay);
+    video.addEventListener('canplay', maybePlay);
+
+    // Conservative fallback for browsers that report buffering poorly.
+    startTimer = setTimeout(function(){
+      if (mySession !== session || finished) return;
+      if (video.readyState >= 3 && bufferedAhead() >= 6) startPlayback();
+      else showStatus('Still preparing video…');
+    }, 7000);
+
+    maybePlay();
+  }
+
+  function openServices(){
+    session += 1;
+    const mySession = session;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.classList.add('services-video-open');
+    showStatus('Preparing video…');
+
     if (!video.getAttribute('src') && video.dataset.src) {
       video.setAttribute('src', video.dataset.src);
       video.load();
     }
-  }, true);
+
+    playWhenBuffered(mySession);
+
+    if (modal.requestFullscreen) {
+      const fsPromise = modal.requestFullscreen();
+      if (fsPromise && typeof fsPromise.catch === 'function') fsPromise.catch(function(){});
+    }
+  }
+
+  function closeServices(){
+    session += 1;
+    if (startTimer) {
+      clearTimeout(startTimer);
+      startTimer = null;
+    }
+    hideStatus();
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('services-video-open');
+    if (document.fullscreenElement && document.exitFullscreen) {
+      const exitPromise = document.exitFullscreen();
+      if (exitPromise && typeof exitPromise.catch === 'function') exitPromise.catch(function(){});
+    }
+    trigger.focus();
+  }
+
+  trigger.addEventListener('click', openServices);
+  if (close) close.addEventListener('click', closeServices);
+  document.addEventListener('keydown', function(event){
+    if (event.key === 'Escape' && modal.classList.contains('is-open')) closeServices();
+  });
 })();
 </script>`;
-  html = html.replace(/<\/body>/i, `${guardScript}\n</body>`);
+
+if (/<script\s+id="hble-services-video-controller">[\s\S]*?<\/script>/i.test(html)) {
+  html = html.replace(/<script\s+id="hble-services-video-controller">[\s\S]*?<\/script>/i, controllerScript);
+} else if (/<\/body>/i.test(html)) {
+  html = html.replace(/<\/body>/i, `${controllerScript}\n</body>`);
 }
+
+// Remove the older capture-phase lazy-load guard if a prior build inserted it.
+html = html.replace(/<script\s+id="hble-services-lazyload-guard">[\s\S]*?<\/script>\s*/gi, '');
 
 await writeFile(indexPath, html, 'utf8');
 
@@ -71,4 +190,4 @@ let motionJs = await readFile(motionJsPath, 'utf8');
 motionJs = motionJs.replace(/video\.preload\s*=\s*['"]metadata['"];?/g, "video.preload = 'none';");
 await writeFile(motionJsPath, motionJs, 'utf8');
 
-console.log('HBLE video playback hardened: Services loads only on click; HBLE In Motion preload disabled at source and build time.');
+console.log('HBLE video playback buffered: Services waits for buffer; HBLE In Motion preload disabled.');
