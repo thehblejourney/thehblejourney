@@ -1,8 +1,6 @@
-Force deploy for HBLE Tip Jar image integration.
-Support HBLE section now includes verified transparent HBLE money jar PNG inside the Tip Jar card.
-Asset: images/hble-support-tip-jar.png
-Verified bytes: 2279609
-Verified SHA256: fec87742734ba0dbc325e2f67678a9f8f023e995ae6b56c3d9dc9c8925224d82
-Stripe Payment Link remains: https://buy.stripe.com/9B6eVd9TldAdem9boH8g006
-Mobile-safe Stripe checkout behavior and Facebook Pixel InitiateCheckout tracking remain intact.
+Force deploy for permanent HBLE video buffering fix.
+HBLE In Motion preload is now permanently disabled in source.
+Services player uses on-demand data-src loading with a capture-phase lazy-load guard.
+Approved Services master remains unchanged.
+Tip Jar and Stripe setup remain intact.
 Date: 2026-10-24
