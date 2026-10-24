@@ -1,7 +1,4 @@
-Force deploy for HBLE Services playback optimization.
-Replacement Services master bytes: 64433923
-Replacement Services master SHA256: 9c2d2453a33e45dd275b03dd6b492b2210eaa7fbdcf92549e7bd0b24ec1f35eb
-Services modal: preload disabled; source loads only after visitor presses Services.
-HBLE In Motion: video preload changed from metadata to none so it does not compete for bandwidth in the background.
-Original master remains unchanged.
+Force deploy for HBLE Start a Project or Get Support heading update.
+Change: START A PROJECT → START A PROJECT OR GET SUPPORT.
+No form fields, pricing, Stripe links, policies, Services video, or HBLE In Motion behavior changed.
 Date: 2026-10-24
