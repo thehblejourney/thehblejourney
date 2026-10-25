@@ -1,7 +1,9 @@
-Force clean deploy after removing failing Adobe video bootstrap from Netlify build.
-Build no longer depends on an Adobe temporary URL, so a video transfer failure cannot stop the entire HBLE deployment.
-The verified 53.243-second web-delivery MP4 remains ready for direct repository upload: 19,828,701 bytes, 720x662, H.264 + AAC, about 2.98 Mbps, fast-start.
+Force deploy for verified HBLE Services web playback copy.
+The live site currently returns 404 for /media/hble-services-web.mp4, confirming the optimized file has not previously been published.
+This build installs the exact verified 53.243-second web-delivery MP4: 19,828,701 bytes, 720x662, H.264 + AAC, about 2.98 Mbps, fast-start.
 SHA-256: 67d76cac162411644709c3aea88cff009f2f2d287d45a4833678fe22a68bb945
-Current goal: restore a successful Netlify build first, then add the verified web MP4 directly to media/hble-services-web.mp4 and switch both Services players to that permanent file.
+The bootstrap first checks hble.org, then uses fresh auth-free Adobe rendition URLs only for the initial publish. After that, future builds self-host the file from hble.org.
+The obsolete Services-master asset is removed from the runtime verified-asset list before inject-hubspot runs, so its old URL can no longer break the build or overwrite website playback.
+Both the Services modal and HBLE In Motion are switched to media/hble-services-web.mp4 while the archive/master remains untouched.
 Tip Jar, Stripe checkout, HubSpot, ticker, logo, and HBLE approved visuals remain intact.
 Date: 2026-10-25
