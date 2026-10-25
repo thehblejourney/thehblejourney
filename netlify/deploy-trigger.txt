@@ -1,9 +1,6 @@
-Force deploy for HBLE Services no-stutter playback fallback.
-Services video remains completely unloaded while idle.
-When Services is tapped, the browser downloads the full approved master first, shows preparation progress, then plays from a local blob URL to prevent mid-play buffering stalls.
-Closing Services unloads the player source; the cached local blob remains available until page exit for quick replay.
-HBLE In Motion background preload remains disabled.
-Approved 64 MB Services master remains unchanged.
-Tip Jar and Stripe setup remain intact.
-A separate 960x884 web-delivery encode has also been initiated for the longer-term lightweight playback path.
+Force deploy for HBLE Services lightweight playback fix.
+Root cause corrected: Netlify was restoring the 64.4 MB archived Services master during every build even though the repository already contains the 3.23 MB web-delivery MP4.
+The heavy-source replacement step has been removed from the build command and its helper has been made safe so it cannot swap the 64 MB file back in later.
+Services still stays unloaded while idle, downloads the lightweight playback copy before starting, and HBLE In Motion background preload remains disabled.
+Tip Jar, Stripe checkout, HubSpot, and approved HBLE visuals remain intact.
 Date: 2026-10-24
