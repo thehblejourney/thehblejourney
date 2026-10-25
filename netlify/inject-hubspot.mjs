@@ -10,16 +10,9 @@ const HUBSPOT_SNIPPET = `<!-- Start of HubSpot Embed Code -->
 <!-- End of HubSpot Embed Code -->`;
 
 // HBLE APPROVED MEDIA MODE
-// Approved visuals: HBLE logo, verified Services master MP4, and four verified ticker images.
+// Approved visuals: HBLE logo, committed Services web MP4, and four verified ticker images.
 // Every asset is downloaded byte-for-byte and SHA-256 checked before Netlify publishes it.
 const VERIFIED_ASSETS = [
-  {
-    label: "Services master",
-    url: "https://at.adobe.com/TcAn0B2We8tPtWJm",
-    filePath: path.join("media", "hble-services-master.mp4"),
-    bytes: 3233732,
-    sha256: "cf1a75704dc2e992d4d424d591370f12a178ac6aaee7d398aee4d6a086ada6fe"
-  },
   {
     label: "HBLE ticker squat",
     url: "https://at.adobe.com/vZED7feX3fuHhcBA",
@@ -163,7 +156,7 @@ img:not(.hble-logo):not(.hble-ticker-img), picture, svg, canvas, video:not(.hble
 
 .btn-primary { background:#d5ad61 !important; color:#111 !important; }
 
-/* Full-screen Services master */
+/* Full-screen Services web playback */
 .services-video-trigger {
   appearance:none;
   border:1px solid rgba(213,173,97,.55);
@@ -261,7 +254,7 @@ const IMAGE_TICKER_HTML = `<section id="hble-image-ticker" class="hble-image-tic
 const SERVICES_MODAL_MARKER = 'id="services-video-modal"';
 const SERVICES_MODAL = `<div id="services-video-modal" class="services-video-modal" role="dialog" aria-modal="true" aria-label="HBLE Services video" aria-hidden="true">
   <button type="button" class="services-video-close" aria-label="Close Services video">Close</button>
-  <video class="hble-services-master-video" src="media/hble-services-master.mp4" controls playsinline preload="metadata" loop></video>
+  <video class="hble-services-master-video" src="media/hble-services-web.mp4" controls playsinline preload="metadata" loop></video>
 </div>
 <script id="hble-services-video-controller">
 (function(){

@@ -1,9 +1,10 @@
-Force deploy for verified HBLE Services web playback copy.
-The live site currently returns 404 for /media/hble-services-web.mp4, confirming the optimized file has not previously been published.
-This build installs the exact verified 53.243-second web-delivery MP4: 19,828,701 bytes, 720x662, H.264 + AAC, about 2.98 Mbps, fast-start.
-SHA-256: 67d76cac162411644709c3aea88cff009f2f2d287d45a4833678fe22a68bb945
-The bootstrap first checks hble.org, then uses fresh auth-free Adobe rendition URLs only for the initial publish. After that, future builds self-host the file from hble.org.
-The obsolete Services-master asset is removed from the runtime verified-asset list before inject-hubspot runs, so its old URL can no longer break the build or overwrite website playback.
-Both the Services modal and HBLE In Motion are switched to media/hble-services-web.mp4 while the archive/master remains untouched.
+HBLE Services permanent web playback deployment.
+The optimized Services video is now committed directly in the repository at media/hble-services-web.mp4; Netlify no longer downloads this video from Adobe or hble.org during the build.
+Verified web-delivery MP4: 13,095,533 bytes, 53.242993 seconds, 720x662, H.264 + AAC, 30 fps, about 1.97 Mbps total bitrate.
+SHA-256: bf097f437be7c9a1525152fa19fb00750ed005f317a54b788368fc5ff56201e7
+Fast-start verified: MP4 moov atom precedes mdat, enabling progressive playback.
+The Services modal and HBLE In Motion both target media/hble-services-web.mp4 while the original/master source remains untouched.
+The previous full-file fetch-to-Blob player has been removed; Services now uses direct browser streaming with preload=metadata and playsinline.
+The obsolete build-time Services video installer and old Services-master verified download have been retired.
 Tip Jar, Stripe checkout, HubSpot, ticker, logo, and HBLE approved visuals remain intact.
 Date: 2026-10-25

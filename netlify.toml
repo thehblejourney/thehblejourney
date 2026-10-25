@@ -1,3 +1,3 @@
 [build]
   publish = "."
-  command = "node netlify/update-project-support-heading.mjs && node netlify/install-hble-services-web.mjs && node netlify/inject-hubspot.mjs && node netlify/inject-hble-motion.mjs && node netlify/optimize-hble-video-playback.mjs && node netlify/use-hble-tip-jar-asset.mjs && node netlify/inject-hble-tip-jar.mjs && node netlify/optimize-stripe-checkout-links.mjs && node netlify/force-hble-services-web.mjs"
+  command = "node netlify/update-project-support-heading.mjs && node netlify/inject-hubspot.mjs && node netlify/inject-hble-motion.mjs && node netlify/optimize-hble-video-playback.mjs && node netlify/use-hble-tip-jar-asset.mjs && node netlify/inject-hble-tip-jar.mjs && node netlify/optimize-stripe-checkout-links.mjs && node netlify/force-hble-services-web.mjs"
