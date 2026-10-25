@@ -4,7 +4,11 @@ import path from 'node:path';
 
 const WEB_FILE = path.join('media', 'hble-services-web.mp4');
 const WEB_URL = 'https://hble.org/media/hble-services-web.mp4';
-const BOOTSTRAP_URL = 'https://at.adobe.com/BMmW8JMoWkUHCWoP';
+const BOOTSTRAP_URLS = [
+  'https://at.adobe.com/cdUaJ4PDmScpV2xd',
+  'https://at.adobe.com/RhC2QsSFizplmidf',
+  'https://at.adobe.com/bIrJkLNV6t4d22I8'
+];
 const EXPECTED_BYTES = 19828701;
 const EXPECTED_SHA256 = '67d76cac162411644709c3aea88cff009f2f2d287d45a4833678fe22a68bb945';
 
@@ -19,55 +23,73 @@ function verify(data, label) {
   return sha256;
 }
 
-async function fetchBytes(url, label) {
+async function fetchVerified(url, label) {
   const response = await fetch(url, { redirect: 'follow', cache: 'no-store' });
   if (!response.ok) throw new Error(`${label} download failed: HTTP ${response.status}`);
-  return Buffer.from(await response.arrayBuffer());
+  const data = Buffer.from(await response.arrayBuffer());
+  verify(data, label);
+  return data;
 }
 
 let data = null;
 let source = null;
 
+// Once the file has been published by hble.org, future builds self-host from HBLE.
 try {
-  const live = await fetchBytes(WEB_URL, 'Live HBLE web video');
-  verify(live, 'Live HBLE web video');
-  data = live;
+  data = await fetchVerified(WEB_URL, 'Live HBLE web video');
   source = WEB_URL;
 } catch (error) {
-  console.log(`Live web copy unavailable or not current: ${error.message}`);
+  console.log(`Live web copy not available yet: ${error.message}`);
+}
+
+// First-deploy bootstrap: try fresh auth-free Adobe renditions in order.
+if (!data) {
+  for (const url of BOOTSTRAP_URLS) {
+    try {
+      data = await fetchVerified(url, 'Adobe HBLE web video');
+      source = url;
+      break;
+    } catch (error) {
+      console.log(`Adobe bootstrap candidate failed: ${error.message}`);
+    }
+  }
 }
 
 if (!data) {
-  const bootstrap = await fetchBytes(BOOTSTRAP_URL, 'Adobe HBLE web video');
-  verify(bootstrap, 'Adobe HBLE web video');
-  data = bootstrap;
-  source = BOOTSTRAP_URL;
+  throw new Error('HBLE Services web video could not be installed from HBLE or any verified Adobe bootstrap source.');
 }
 
 await mkdir(path.dirname(WEB_FILE), { recursive: true });
 await writeFile(WEB_FILE, data);
 console.log(`Installed HBLE Services web playback copy from ${source} — ${data.length} bytes — ${EXPECTED_SHA256}`);
 
-// Point only the Services modal at the web copy. Leave the archived/master asset untouched.
+// Remove the obsolete old Services-master download from the build. The archive/master
+// remains untouched in storage; it is simply no longer fetched or used for web playback.
 const hubspotPath = 'netlify/inject-hubspot.mjs';
 let hubspot = await readFile(hubspotPath, 'utf8');
 hubspot = hubspot.replace(
-  '<video class="hble-services-master-video" src="media/hble-services-master.mp4"',
-  '<video class="hble-services-master-video" src="media/hble-services-web.mp4"'
+  /\s*\{\s*label:\s*"Services master",[\s\S]*?sha256:\s*"cf1a75704dc2e992d4d424d591370f12a178ac6aaee7d398aee4d6a086ada6fe"\s*\},?\s*/,
+  '\n  '
 );
+hubspot = hubspot.replace(
+  'Approved visuals: HBLE logo, verified Services master MP4, and four verified ticker images.',
+  'Approved visuals: HBLE logo, verified Services web MP4, and four verified ticker images.'
+);
+hubspot = hubspot.replaceAll('media/hble-services-master.mp4', 'media/hble-services-web.mp4');
+hubspot = hubspot.replaceAll('Full-screen Services master', 'Full-screen Services web playback');
 await writeFile(hubspotPath, hubspot, 'utf8');
 
-// HBLE In Motion should use the same verified web-delivery copy.
+// HBLE In Motion uses the same verified web-delivery copy.
 const manifestPath = 'media/hble-motion/manifest.json';
 let manifest = await readFile(manifestPath, 'utf8');
-manifest = manifest.replace('/media/hble-services-master.mp4', '/media/hble-services-web.mp4');
+manifest = manifest.replaceAll('/media/hble-services-master.mp4', '/media/hble-services-web.mp4');
 await writeFile(manifestPath, manifest, 'utf8');
 
-// Keep the mobile playback hardening, but make its source the web copy rather than the archive/master.
+// Mobile playback hardening must target the web copy, never the archive/master.
 const optimizerPath = 'netlify/optimize-hble-video-playback.mjs';
 let optimizer = await readFile(optimizerPath, 'utf8');
 optimizer = optimizer.replaceAll('media/hble-services-master.mp4', 'media/hble-services-web.mp4');
 optimizer = optimizer.replaceAll('heavy master', 'web playback copy');
 await writeFile(optimizerPath, optimizer, 'utf8');
 
-console.log('HBLE Services players now target media/hble-services-web.mp4; archive/master files remain untouched.');
+console.log('HBLE Services modal and HBLE In Motion now target media/hble-services-web.mp4.');
