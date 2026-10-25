@@ -1,6 +1,7 @@
-Force deploy for HBLE Services lightweight playback fix.
-Root cause corrected: Netlify was restoring the 64.4 MB archived Services master during every build even though the repository already contains the 3.23 MB web-delivery MP4.
-The heavy-source replacement step has been removed from the build command and its helper has been made safe so it cannot swap the 64 MB file back in later.
-Services still stays unloaded while idle, downloads the lightweight playback copy before starting, and HBLE In Motion background preload remains disabled.
-Tip Jar, Stripe checkout, HubSpot, and approved HBLE visuals remain intact.
-Date: 2026-10-24
+Force deploy for verified HBLE Services web playback copy.
+Current 53.243-second Services video has a dedicated web-delivery file: 19,828,701 bytes, 720x662, H.264 + AAC, about 2.98 Mbps, fast-start MP4.
+SHA-256: 67d76cac162411644709c3aea88cff009f2f2d287d45a4833678fe22a68bb945
+Netlify installs and verifies this exact file before injecting the site, then points both the Services modal and HBLE In Motion at media/hble-services-web.mp4.
+The archive/master video remains untouched and is no longer used for website playback.
+Tip Jar, Stripe checkout, HubSpot, ticker, logo, and HBLE approved visuals remain intact.
+Date: 2026-10-25
