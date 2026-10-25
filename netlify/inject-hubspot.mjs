@@ -1,6 +1,6 @@
-import { readdir, readFile, writeFile, mkdir } from "node:fs/promises";
+import { readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { createHash } from "node:crypto";
+
 
 const HUBSPOT_PORTAL_ID = "247748751";
 const HUBSPOT_REGION = "na2";
@@ -10,63 +10,8 @@ const HUBSPOT_SNIPPET = `<!-- Start of HubSpot Embed Code -->
 <!-- End of HubSpot Embed Code -->`;
 
 // HBLE APPROVED MEDIA MODE
-// Approved visuals: HBLE logo, committed Services web MP4, and four verified ticker images.
-// Every asset is downloaded byte-for-byte and SHA-256 checked before Netlify publishes it.
-const VERIFIED_ASSETS = [
-  {
-    label: "HBLE ticker squat",
-    url: "https://at.adobe.com/vZED7feX3fuHhcBA",
-    filePath: path.join("images", "ticker", "hble-squat.png"),
-    bytes: 510508,
-    sha256: "bff03c73b742ca2c72e86857e34c1acf09a625cbfda3c8239a947decab8b09c4"
-  },
-  {
-    label: "HBLE ticker standing",
-    url: "https://at.adobe.com/zWGXI94fLtdJZlRi",
-    filePath: path.join("images", "ticker", "hble-standing.png"),
-    bytes: 372830,
-    sha256: "4feee7b19d60aa9d6ee0fb45d73e5997920defd6ebd2f1037a6ee74012eebc35"
-  },
-  {
-    label: "HBLE ticker crouch",
-    url: "https://at.adobe.com/5RIfu7HdccSbcZSX",
-    filePath: path.join("images", "ticker", "hble-crouch.png"),
-    bytes: 356714,
-    sha256: "bdb9e73733c20abb73aa27978ab5b8f7b6b283947fb8525c7a985eecb8c231d5"
-  },
-  {
-    label: "HBLE ticker services poster",
-    url: "https://at.adobe.com/zeTfIiDQaPlaXJHM",
-    filePath: path.join("images", "ticker", "hble-services.jpg"),
-    bytes: 531705,
-    sha256: "ff10508cfa34dc038afbdc021fb2b69ca52cd056535de408b154528166868684"
-  }
-];
-
-async function installVerifiedAsset(asset) {
-  const response = await fetch(asset.url, { redirect: "follow" });
-  if (!response.ok) {
-    throw new Error(`${asset.label} download failed: HTTP ${response.status}`);
-  }
-
-  const data = Buffer.from(await response.arrayBuffer());
-  if (data.length !== asset.bytes) {
-    throw new Error(`${asset.label} size mismatch: expected ${asset.bytes}, got ${data.length}`);
-  }
-
-  const sha256 = createHash("sha256").update(data).digest("hex");
-  if (sha256 !== asset.sha256) {
-    throw new Error(`${asset.label} SHA-256 mismatch: ${sha256}`);
-  }
-
-  await mkdir(path.dirname(asset.filePath), { recursive: true });
-  await writeFile(asset.filePath, data);
-  console.log(`Verified unchanged: ${asset.label} — ${data.length} bytes — ${sha256}`);
-}
-
-for (const asset of VERIFIED_ASSETS) {
-  await installVerifiedAsset(asset);
-}
+// Approved media files are committed directly in the repository.
+// Netlify must not depend on temporary third-party asset URLs during build.
 
 const TEXT_ONLY_MARKER = 'id="hble-text-only"';
 const TEXT_ONLY_STYLE = `<style id="hble-text-only">
