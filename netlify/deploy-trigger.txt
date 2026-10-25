@@ -1,7 +1,9 @@
-Force deploy for HBLE Services buffering fix.
-Services stays preload=none while idle, switches to preload=auto only after the user taps Services, waits for buffer, then plays.
-Closing Services unloads the MP4 and restores preload=none.
+Force deploy for HBLE Services no-stutter playback fallback.
+Services video remains completely unloaded while idle.
+When Services is tapped, the browser downloads the full approved master first, shows preparation progress, then plays from a local blob URL to prevent mid-play buffering stalls.
+Closing Services unloads the player source; the cached local blob remains available until page exit for quick replay.
 HBLE In Motion background preload remains disabled.
 Approved 64 MB Services master remains unchanged.
 Tip Jar and Stripe setup remain intact.
+A separate 960x884 web-delivery encode has also been initiated for the longer-term lightweight playback path.
 Date: 2026-10-24
