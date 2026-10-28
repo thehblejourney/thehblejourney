@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HBLE Design Studio — choose graphic design services, customize your request, upload references, and request a quote from HBLE Studios.">
+  <meta name="facebook-domain-verification" content="tv5avtf0qrvl658h6pe76m08ukuxkg">
+  <title>HBLE Design Studio | Custom Invitations, Flyers & Graphics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/design-studio/studio.css">
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','730507976364011');fbq('track','PageView');
+  </script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/">HBLE STUDIOS<small>HBLE ENTERPRISES INC.</small></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="#services">Choose Services</a>
+        <a href="#how">How It Works</a>
+        <a class="btn btn-primary" href="#services">Build My Request</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="eyebrow">HBLE Design Studio • Custom Graphics & Invitations</div>
+        <h1>Choose it.<br>Customize it.<br><span>Let HBLE create it.</span></h1>
+        <p>Select one service or build a complete package. HBLE will collect the details that matter for each design, review your request, and contact you with pricing and next steps.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="start-design-request" type="button">Build My Design Request</button>
+          <a class="btn btn-ghost" href="#how">See How It Works</a>
+        </div>
+        <div class="hero-proof">
+          <span>Multiple services in one request</span>
+          <span>Custom design option</span>
+          <span>Digital & print-ready requests</span>
+          <span>Quote before payment</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">Step 1 • Choose What You Need</div>
+          <h2>Build your HBLE design request.</h2>
+          <p>Tap as many services as you need. Your selected services stay together in one request, and each one gets its own custom questions.</p>
+        </div>
+        <div class="filter-row" id="service-filters" aria-label="Filter design services"></div>
+        <div class="service-grid" id="service-grid"></div>
+
+        <div class="selection-dock" aria-label="Selected services summary">
+          <div>
+            <strong id="selection-count">0 services selected</strong>
+            <p id="selection-names">Choose one or more services to build your request.</p>
+          </div>
+          <div class="dock-actions">
+            <button class="btn btn-ghost" type="button" id="clear-selection" disabled>Clear</button>
+            <button class="btn btn-primary" type="button" id="continue-request" disabled>Continue to Customize</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section how" id="how">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">Simple by Design</div>
+          <h2>You choose. We organize the details.</h2>
+        </div>
+        <div class="steps">
+          <article class="step"><b>01 / SELECT</b><h3>Choose services</h3><p>Select one graphic or combine several designs into one project request.</p></article>
+          <article class="step"><b>02 / CUSTOMIZE</b><h3>Tell us the details</h3><p>The form automatically asks the questions that apply to each service you selected.</p></article>
+          <article class="step"><b>03 / REVIEW</b><h3>HBLE reviews it</h3><p>We review scope, deadline, creative direction and any files you provide before pricing.</p></article>
+          <article class="step"><b>04 / CREATE</b><h3>Approve & create</h3><p>After the quote and next steps are approved, HBLE moves your project into production.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="request" hidden>
+      <div class="wrap">
+        <div class="request-shell">
+          <div class="eyebrow">Step 2 • Customize Your Request</div>
+          <h2>Give HBLE what we need to build it right.</h2>
+          <p class="request-note">Answer what you know. If you are unsure about a detail, leave it blank or explain it in the notes. We can finalize direction with you after review.</p>
+
+          <form id="design-request-form" name="hble-design-studio-request" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
+            <input type="hidden" name="form-name" value="hble-design-studio-request">
+            <p hidden><label>Do not fill this out: <input name="bot-field"></label></p>
+            <input type="hidden" name="selected_services" id="selected-services-field">
+            <input type="hidden" name="service_details" id="service-details-field">
+            <input type="hidden" name="add_ons" id="addons-field">
+
+            <div id="service-questions"></div>
+
+            <div class="form-divider"></div>
+            <h3 class="form-subhead">Your contact information</h3>
+            <p class="form-subcopy">This is how HBLE will follow up with your quote and project questions.</p>
+            <div class="form-grid">
+              <div class="field"><label for="name">Name *</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+              <div class="field"><label for="email">Email *</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+              <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+              <div class="field"><label for="preferred-contact">Preferred contact</label><select id="preferred-contact" name="preferred_contact"><option>Email</option><option>Phone call</option><option>Text message</option></select></div>
+              <div class="field full"><label for="company">Business / organization, if applicable</label><input id="company" name="company" type="text"></div>
+            </div>
+
+            <div class="form-divider"></div>
+            <h3 class="form-subhead">Project-wide details</h3>
+            <p class="form-subcopy">These details apply to the overall request, even if you selected more than one service.</p>
+            <div class="form-grid">
+              <div class="field"><label for="due-date">Preferred deadline</label><input id="due-date" name="due_date" type="date"></div>
+              <div class="field"><label for="delivery-format">Primary format</label><select id="delivery-format" name="delivery_format"><option>Not sure — recommend one</option><option>Digital / social</option><option>Print-ready</option><option>Both digital and print</option></select></div>
+              <div class="field"><label for="style-direction">Overall style</label><input id="style-direction" name="style_direction" type="text" placeholder="Luxury, bold, elegant, playful, classic…"></div>
+              <div class="field"><label for="colors">Preferred colors</label><input id="colors" name="colors" type="text" placeholder="Black & gold, school colors, brand colors…"></div>
+              <div class="field full"><label for="project-copy">General wording / copy that applies to the project</label><textarea id="project-copy" name="project_copy" placeholder="Paste exact wording here if it applies across several designs."></textarea></div>
+              <div class="field full"><label for="special-instructions">Special instructions</label><textarea id="special-instructions" name="special_instructions" placeholder="Anything HBLE should know about the vision, audience, restrictions, or creative direction."></textarea></div>
+              <div class="field"><label for="photos">Photos / images</label><input id="photos" name="photos" type="file" accept="image/*" multiple></div>
+              <div class="field"><label for="reference-files">Reference / inspiration files</label><input id="reference-files" name="reference_files" type="file" accept="image/*,.pdf" multiple></div>
+            </div>
+
+            <div class="form-divider"></div>
+            <h3 class="form-subhead">Optional add-ons</h3>
+            <p class="form-subcopy">Choose anything you want HBLE to consider when preparing the quote.</p>
+            <div class="addon-grid" id="addon-grid"></div>
+
+            <label class="consent">
+              <input type="checkbox" name="quote_acknowledgement" value="Yes" required>
+              <span>I understand this is a request for a custom quote and project review, not a final price or completed order.</span>
+            </label>
+
+            <div class="submit-row">
+              <small>HBLE will review your selections, files, requested deadline and creative direction before confirming pricing and next steps.</small>
+              <button class="btn btn-primary" type="submit">Submit for Quote</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <p class="status" id="studio-status" role="status" aria-live="polite"></p>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div><strong>HBLE Design Studio</strong><br>HBLE Enterprises Inc.</div>
+      <div><a href="/">Return to HBLE Studios</a> • <a href="/policies.html">Policies</a></div>
+    </div>
+  </footer>
+
+  <script src="/design-studio/config.js"></script>
+  <script src="/design-studio/services.js"></script>
+  <script src="/design-studio/studio.js"></script>
+  <script type="text/javascript" id="hs-script-loader" async defer src="https://js-na2.hs-scripts.com/247748751.js"></script>
+</body>
+</html>
