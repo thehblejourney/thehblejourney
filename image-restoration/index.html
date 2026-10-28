@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HBLE Image Restoration — upload old, faded or damaged photos for professional cleanup, repair, enhancement and optional colorization.">
+  <title>HBLE Image Restoration | Restore Your Photos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/image-restoration/restoration.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/">HBLE STUDIOS</a>
+      <a class="back" href="/design-studio/">Design Studio</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow">HBLE Image Restoration</div>
+        <h1>Bring the memories back to <span>life.</span></h1>
+        <p class="lead">Upload old, faded, scratched or damaged photographs and tell us what you want restored. HBLE can clean, repair, enhance and, when requested, colorize your images while preserving the character of the original.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#restore">Upload Photos</a>
+          <a class="btn btn-ghost" href="#pricing">View Restoration Levels</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="wrap">
+        <div class="eyebrow">Choose Your Level</div>
+        <h2 class="section-title">Restoration that matches the damage.</h2>
+        <p class="muted">Select the closest match. We review every submission before final work begins, and severe damage may require a custom quote.</p>
+        <div id="tierGrid" class="tier-grid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="restore">
+      <div class="wrap">
+        <div class="eyebrow">Start Your Restoration</div>
+        <h2 class="section-title">Upload. Describe. Restore.</h2>
+        <div class="panel">
+          <form id="restorationForm" name="hble-image-restoration" method="POST" action="/thank-you.html" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="hble-image-restoration">
+            <input type="hidden" name="restoration_level" id="restoration_level">
+            <input type="hidden" name="estimated_price" id="estimated_price">
+            <input type="hidden" name="photo_count" id="photo_count">
+            <input type="hidden" name="selected_addons" id="selected_addons">
+            <p style="display:none"><label>Do not fill this out: <input name="bot-field"></label></p>
+
+            <div class="form-grid">
+              <div class="field"><label for="name">Your Name *</label><input id="name" name="name" required autocomplete="name"></div>
+              <div class="field"><label for="email">Email *</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+              <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+              <div class="field"><label for="deadline">Preferred Deadline</label><input id="deadline" name="deadline" type="date"></div>
+
+              <div class="field full upload-box">
+                <label for="photos"><strong>Upload the photos you want restored *</strong></label>
+                <input id="photos" name="photos" type="file" accept="image/*" multiple required>
+                <div id="fileSummary" class="file-summary"></div>
+              </div>
+
+              <div class="field full">
+                <label>What do you want us to focus on?</label>
+                <div class="addons">
+                  <label class="addon"><input type="checkbox" name="repair_goals[]" value="Remove scratches and dust"><span>Remove scratches & dust</span></label>
+                  <label class="addon"><input type="checkbox" name="repair_goals[]" value="Repair tears and missing edges"><span>Repair tears & missing edges</span></label>
+                  <label class="addon"><input type="checkbox" name="repair_goals[]" value="Improve faces and detail"><span>Improve faces & detail</span></label>
+                  <label class="addon"><input type="checkbox" name="repair_goals[]" value="Restore faded color"><span>Restore faded color</span></label>
+                  <label class="addon"><input type="checkbox" name="repair_goals[]" value="Repair background"><span>Repair background</span></label>
+                  <label class="addon"><input type="checkbox" name="repair_goals[]" value="Preserve original look"><span>Preserve original look</span></label>
+                </div>
+              </div>
+
+              <div class="field full">
+                <label>Optional Add-ons</label>
+                <div id="addOnGrid" class="addons"></div>
+              </div>
+
+              <div class="field full"><label for="notes">Tell us about the photo and what matters most</label><textarea id="notes" name="notes" placeholder="Example: This is my grandmother's only wedding photo. Please keep her face natural and repair the torn corner."></textarea></div>
+              <div class="field full"><label for="reference">Optional reference photo</label><input id="reference" name="reference_photo" type="file" accept="image/*"><div class="file-summary">If you have a clearer photo of the same person, upload it here to help with facial detail.</div></div>
+
+              <div class="field full">
+                <label class="check"><input type="checkbox" name="permission_confirmed" required><span>I confirm that I own these photos or have permission to submit them for restoration. *</span></label>
+              </div>
+              <div class="field full">
+                <label class="check"><input type="checkbox" name="estimate_acknowledged" required><span>I understand the displayed amount is a starting estimate. Severe damage or missing detail may require review and approval of a revised quote before work begins. *</span></label>
+              </div>
+            </div>
+
+            <div class="notice">For the best result, upload the highest-quality scan or original image available. Screenshots and heavily compressed social-media copies can limit how much detail can be recovered.</div>
+            <div class="notice">HBLE may use AI-assisted and manual restoration techniques. We aim to preserve identity and character, but information that is completely missing from the source image cannot always be recovered exactly.</div>
+
+            <div class="estimate">
+              <div><small>Starting estimate</small><strong id="estimateValue">$0</strong><small id="estimateNote">Upload photos to calculate your starting estimate.</small></div>
+              <button class="btn btn-primary" type="submit">Submit Restoration Request</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="eyebrow">How It Works</div>
+        <div class="steps">
+          <div class="step"><b>01</b><h3>Upload</h3><p class="muted">Send the photos you want restored.</p></div>
+          <div class="step"><b>02</b><h3>Review</h3><p class="muted">HBLE reviews damage level, requests and estimate.</p></div>
+          <div class="step"><b>03</b><h3>Restore</h3><p class="muted">We repair and enhance the approved images.</p></div>
+          <div class="step"><b>04</b><h3>Deliver</h3><p class="muted">You receive the finished high-quality digital files.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">© HBLE Enterprises Inc. • HBLE Studios • Image Restoration</div></footer>
+  <script src="/image-restoration/config.js"></script>
+  <script src="/image-restoration/restoration.js"></script>
+</body>
+</html>
