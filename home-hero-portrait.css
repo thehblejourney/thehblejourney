@@ -1,0 +1,7 @@
+/* HBLE homepage portrait overlay. Isolated from core site logic. */
+body .hero{position:relative!important;isolation:isolate;overflow:hidden!important}
+body .hero::after{content:"";position:absolute;top:0;right:0;bottom:0;width:min(52vw,760px);z-index:0;pointer-events:none;opacity:.76;background-image:linear-gradient(90deg,#060606 0%,rgba(6,6,6,.94) 18%,rgba(6,6,6,.58) 46%,rgba(6,6,6,.08) 78%),linear-gradient(0deg,#060606 0%,rgba(6,6,6,.72) 10%,rgba(6,6,6,0) 38%),url('/images/hble-hero-portrait.webp')!important;background-repeat:no-repeat!important;background-size:100% 100%,100% 100%,cover!important;background-position:center,center,56% 18%!important}
+body .hero .hero-grid{position:relative!important;z-index:1!important}
+@media(max-width:950px){body .hero::after{width:58vw;opacity:.52;background-position:center,center,58% 16%!important}}
+@media(max-width:720px){body .hero::after{width:100%;opacity:.18;background-image:linear-gradient(90deg,rgba(6,6,6,.9) 0%,rgba(6,6,6,.64) 55%,rgba(6,6,6,.28) 100%),linear-gradient(0deg,#060606 0%,rgba(6,6,6,.72) 12%,rgba(6,6,6,.1) 55%),url('/images/hble-hero-portrait.webp')!important;background-position:center,center,70% 14%!important}}
+@media(prefers-reduced-data:reduce){body .hero::after{display:none}}
