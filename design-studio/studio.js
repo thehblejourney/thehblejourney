@@ -74,6 +74,12 @@
     else state.selected.add(id);
     renderServices();
     updateSelectionSummary();
+
+    if (!els.formSection.hidden) {
+      els.dynamic.innerHTML = '';
+      els.formSection.hidden = true;
+      announce('Your service selection changed. Tap Continue to Customize to refresh the request form.');
+    }
   }
 
   function updateSelectionSummary() {
