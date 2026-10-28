@@ -8,7 +8,7 @@ await access(asset);
 let html = await readFile(file, 'utf8');
 
 const style = `<style id="hble-hero-portrait-final">
-html body .hero{position:relative!important;isolation:isolate!important;overflow:hidden!important}
+html body .hero{position:relative!important;isolation:isolate!important;overflow:hidden!important;background:#060606!important}
 html body .hero::after{
   content:""!important;
   display:block!important;
@@ -19,17 +19,36 @@ html body .hero::after{
   width:min(58vw,800px)!important;
   z-index:0!important;
   pointer-events:none!important;
-  opacity:.86!important;
+  opacity:.88!important;
   transform:scaleX(-1)!important;
   transform-origin:center!important;
-  background-image:linear-gradient(270deg,#060606 0%,rgba(6,6,6,.96) 14%,rgba(6,6,6,.54) 44%,rgba(6,6,6,.06) 80%),linear-gradient(0deg,#060606 0%,rgba(6,6,6,.76) 10%,rgba(6,6,6,.12) 38%,rgba(6,6,6,0) 64%),url('/images/hble-hero-portrait-bleezy-grayscale-v3.webp')!important;
+  background-image:
+    linear-gradient(to right,#060606 0%,rgba(6,6,6,.96) 10%,rgba(6,6,6,.72) 28%,rgba(6,6,6,.28) 50%,rgba(6,6,6,0) 72%),
+    linear-gradient(to top,#060606 0%,rgba(6,6,6,.82) 8%,rgba(6,6,6,.38) 24%,rgba(6,6,6,0) 48%),
+    url('/images/hble-hero-portrait-bleezy-grayscale-v3.webp')!important;
   background-repeat:no-repeat!important;
   background-size:100% 100%,100% 100%,cover!important;
-  background-position:center,center,44% 15%!important;
+  background-position:center,center,44% 12%!important;
 }
 html body .hero .hero-grid{position:relative!important;z-index:1!important}
-@media(max-width:950px){html body .hero::after{width:64vw!important;opacity:.66!important;background-position:center,center,42% 14%!important}}
-@media(max-width:720px){html body .hero::after{width:100%!important;opacity:.38!important;background-image:linear-gradient(270deg,rgba(6,6,6,.84) 0%,rgba(6,6,6,.54) 48%,rgba(6,6,6,.10) 100%),linear-gradient(0deg,#060606 0%,rgba(6,6,6,.70) 10%,rgba(6,6,6,.08) 56%),url('/images/hble-hero-portrait-bleezy-grayscale-v3.webp')!important;background-position:center,center,30% 11%!important}}
+@media(max-width:950px){
+  html body .hero::after{
+    width:68vw!important;
+    opacity:.72!important;
+    background-position:center,center,42% 10%!important;
+  }
+}
+@media(max-width:720px){
+  html body .hero::after{
+    width:100%!important;
+    opacity:.48!important;
+    background-image:
+      linear-gradient(to right,#060606 0%,rgba(6,6,6,.90) 14%,rgba(6,6,6,.52) 44%,rgba(6,6,6,.08) 78%),
+      linear-gradient(to top,#060606 0%,rgba(6,6,6,.78) 10%,rgba(6,6,6,.34) 30%,rgba(6,6,6,0) 58%),
+      url('/images/hble-hero-portrait-bleezy-grayscale-v3.webp')!important;
+    background-position:center,center,30% 8%!important;
+  }
+}
 </style>`;
 
 // Remove every earlier portrait treatment so this final build step is authoritative.
