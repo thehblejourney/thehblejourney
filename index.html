@@ -29,6 +29,30 @@
     @media(max-width:950px){.nav-links a:not(.btn){display:none}.grid3,.pricing,.portfolio{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr 1fr}.footer{grid-template-columns:1fr 1fr}.custom-quote{align-items:flex-start;flex-direction:column}}
     @media(max-width:620px){.section,.statement{padding:74px 0}.hero-grid{padding:70px 0}.hero h1{font-size:clamp(3.1rem,16vw,5rem)}.process-grid,.form-grid,.policy-row,.footer{grid-template-columns:1fr}.field.full{grid-column:auto}.support{padding:27px}.brand small{display:none}.ticker span{padding:12px 18px}.price-card{padding:24px}}
   </style>
+  <style id="hble-hero-portrait-source">
+    html body main#top section.hero{position:relative!important;isolation:isolate!important;overflow:hidden!important}
+    html body main#top section.hero::after{
+      content:""!important;
+      display:block!important;
+      position:absolute!important;
+      top:0!important;
+      right:0!important;
+      bottom:0!important;
+      width:min(58vw,820px)!important;
+      z-index:0!important;
+      pointer-events:none!important;
+      opacity:.96!important;
+      transform:scaleX(-1)!important;
+      transform-origin:center!important;
+      background-image:linear-gradient(90deg,rgba(6,6,6,0) 0%,rgba(6,6,6,.08) 52%,rgba(6,6,6,.76) 84%,#060606 100%),linear-gradient(0deg,#060606 0%,rgba(6,6,6,.55) 12%,rgba(6,6,6,0) 44%),url('/images/hble-hero-portrait-bleezy-v2.webp')!important;
+      background-repeat:no-repeat!important;
+      background-size:100% 100%,100% 100%,cover!important;
+      background-position:center,center,50% 16%!important;
+    }
+    html body main#top section.hero .hero-grid{position:relative!important;z-index:1!important}
+    @media(max-width:950px){html body main#top section.hero::after{width:64vw!important;opacity:.78!important;background-position:center,center,48% 14%!important}}
+    @media(max-width:720px){html body main#top section.hero::after{width:100%!important;opacity:.56!important;background-image:linear-gradient(90deg,rgba(6,6,6,0) 0%,rgba(6,6,6,.12) 48%,rgba(6,6,6,.74) 86%,#060606 100%),linear-gradient(0deg,#060606 0%,rgba(6,6,6,.62) 14%,rgba(6,6,6,0) 46%),url('/images/hble-hero-portrait-bleezy-v2.webp')!important;background-position:center,center,50% 10%!important}}
+  </style>
 </head>
 <body>
   <nav class="nav"><div class="wrap nav-inner">
