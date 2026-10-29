@@ -18,10 +18,6 @@ window.HBLE_DESIGN_SERVICES = [
     { id:'degree', label:'Degree, program, honor, or achievement', type:'text' },
     { id:'class_year', label:'Class year', type:'text' }
   ]},
-  { id:'birthday-invitation', title:'Birthday Party Invitations', category:'Invitations & Celebrations', description:'Custom birthday invitations from polished adult events to fun themed celebrations.', template:'event', extraFields:[
-    { id:'honoree_name', label:'Birthday honoree', type:'text' },
-    { id:'age', label:'Age / milestone if you want it shown', type:'text' }
-  ]},
   { id:'retirement-invitation', title:'Retirement Party Invitations', category:'Invitations & Celebrations', description:'Professional retirement celebration graphics honoring the person, career and next chapter.', template:'event', extraFields:[
     { id:'honoree_name', label:'Retiree / honoree name', type:'text' },
     { id:'company', label:'Company / organization', type:'text' },
