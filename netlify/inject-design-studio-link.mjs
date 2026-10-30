@@ -19,6 +19,13 @@ let changed = false;
 const navAnchor = '<div class="nav-links">';
 if (!html.includes(navAnchor)) throw new Error('HBLE modular nav injector could not find the main nav-links container.');
 
+// The main Services button should open the Design Studio instead of scrolling the homepage.
+const servicesNavPattern = /<a\s+href=["']#services["']>Services<\/a>/i;
+if (servicesNavPattern.test(html)) {
+  html = html.replace(servicesNavPattern, '<a href="/design-studio/">Services</a>');
+  changed = true;
+}
+
 if (!html.includes(designNavMarker)) {
   html = html.replace(navAnchor, `${navAnchor}${designNavLink}`);
   changed = true;
@@ -53,7 +60,7 @@ if (portraitElement.test(html)) {
 
 if (changed) {
   await writeFile(file, html, 'utf8');
-  console.log('HBLE modular homepage entry points and proven portrait fade stylesheet injected.');
+  console.log('HBLE modular homepage entry points, Services route, and proven portrait fade stylesheet injected.');
 } else {
   console.log('HBLE modular homepage enhancements already present.');
 }
