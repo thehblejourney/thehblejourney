@@ -8,9 +8,9 @@ const restorationHeroMarker = 'data-hble-restoration-hero';
 const portraitStyleMarker = 'data-hble-hero-portrait-style';
 
 const designNavLink = '<a data-hble-design-studio-nav href="/design-studio/">Design Studio</a>';
-const designHeroLink = '<a data-hble-design-studio-hero class="btn btn-ghost" href="/design-studio/">Open Design Studio</a>';
+const designHeroLink = '<a data-hble-design-studio-hero class="btn btn-ghost" href="/design-studio/">Start a Design</a>';
 const restorationNavLink = '<a data-hble-restoration-nav href="/image-restoration/">Image Restoration</a>';
-const restorationHeroLink = '<a data-hble-restoration-hero class="btn btn-ghost" href="/image-restoration/">Restore a Photo</a>';
+const restorationHeroLink = '<a data-hble-restoration-hero class="btn btn-ghost" href="/image-restoration/">Photo Restoration</a>';
 const portraitStyleLink = '<link data-hble-hero-portrait-style rel="stylesheet" href="/home-hero-portrait.css?v=bleezy-v2">';
 
 let html = await readFile(file, 'utf8');
