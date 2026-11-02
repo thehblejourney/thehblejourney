@@ -35,6 +35,28 @@ if (!html.includes(restorationNavMarker)) {
   changed = true;
 }
 
+// Keep the homepage hero language concise, premium, and consistent.
+const heroCopyOld = '<p class="hero-copy">HBLE Studios transforms footage, concepts and ambitious ideas into polished visual experiences for artists, businesses, creators and brands. Story first. Detail always. No generic creative.</p>';
+const heroCopyNew = '<p class="hero-copy">HBLE Studios transforms raw footage, bold concepts, and ambitious ideas into polished visual experiences built to stand out. From artists and creators to businesses and brands, we bring every vision to life with purpose, precision, and originality. <strong>Story first. Details matter. Nothing generic.</strong></p>';
+if (html.includes(heroCopyOld)) {
+  html = html.replace(heroCopyOld, heroCopyNew);
+  changed = true;
+}
+
+const heroLabelReplacements = [
+  ['View Packages & Checkout', 'View Packages'],
+  ['Request a Custom Quote', 'Get a Custom Quote'],
+  ['Explore the Work', 'View Our Work'],
+  ['Commercial & Brand', 'Brand Content'],
+  ['Creative Worlds', 'Creative Direction']
+];
+for (const [from, to] of heroLabelReplacements) {
+  if (html.includes(from)) {
+    html = html.replace(from, to);
+    changed = true;
+  }
+}
+
 const heroAnchor = '<div class="hero-actions">';
 if (!html.includes(heroAnchor)) throw new Error('HBLE modular nav injector could not find the homepage hero-actions container.');
 
@@ -60,7 +82,7 @@ if (portraitElement.test(html)) {
 
 if (changed) {
   await writeFile(file, html, 'utf8');
-  console.log('HBLE modular homepage entry points, Services route, and proven portrait fade stylesheet injected.');
+  console.log('HBLE modular homepage entry points, polished hero language, and portrait fade stylesheet injected.');
 } else {
   console.log('HBLE modular homepage enhancements already present.');
 }
