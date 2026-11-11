@@ -301,6 +301,8 @@
       transform:translateY(-1px);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 8px 24px rgba(183,133,53,.22);
     }
+    /* Podcast is featured in the hamburger menu, not the desktop top bar. */
+    .nav .nav-links>a.podcast-menu-link{display:none!important}
     .nav .nav-toggle{
       display:none;
       align-items:center;
@@ -366,6 +368,19 @@
         line-height:1.4;
         text-align:left;
       }
+      .nav .nav-links>a.podcast-menu-link{
+        display:flex!important;
+        color:#f2d998!important;
+        font-weight:800;
+        letter-spacing:.035em;
+        white-space:normal;
+      }
+      .nav .nav-links>a.podcast-menu-link::before{
+        content:"✦";
+        color:#d9b477;
+        font-size:.82rem;
+        margin-right:10px;
+      }
       .nav .nav-links .btn-primary{
         display:inline-flex!important;
         width:100%;
@@ -424,7 +439,7 @@
       <span class="nav-toggle-label">MENU</span>
       <span class="nav-toggle-icon" aria-hidden="true"><i></i><i></i><i></i></span>
     </button>
-    <div class="nav-links"><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#support">Support</a><a class="btn btn-primary" href="#pricing">Book a Project</a></div>
+    <div class="nav-links"><a href="#services">Services</a><a href="#work">Work</a><a class="podcast-menu-link" href="podcast.html">HBLE COMMON THREAD PODCAST</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#support">Support</a><a class="btn btn-primary" href="#pricing">Book a Project</a></div>
   </div></nav>
   <div class="common-thread-ribbon" aria-label="HBLE presents The Common Thread Podcast">
     <div class="common-thread-ribbon-track">
