@@ -1,135 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HBLE Podcast</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="HBLE Enterprises presents The Thread: conversations about beginnings, breakthroughs, culture, community and the stories that connect us.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Thread | An HBLE Enterprises Podcast">
+  <meta property="og:description" content="Different voices. One conversation. Infinite connections.">
+  <meta property="og:url" content="https://www.hble.org/podcast.html">
+  <title>The Thread | HBLE Enterprises Presents</title>
+  <link rel="canonical" href="https://www.hble.org/podcast.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      background: #000;
-      color: #fff;
-      font-family: 'Segoe UI', sans-serif;
-      text-align: center;
-      padding-top: 5rem;
-    }
-
-    .menu-bar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: #111;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      padding: 1rem 0;
-      box-shadow: 0 0 15px #00ffe1;
-      z-index: 999;
-    }
-
-    .menu-bar a {
-      color: #00ffe1;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
-      font-size: 1rem;
-      transition: color 0.3s;
-    }
-
-    .menu-bar a:hover {
-      color: white;
-    }
-
-    .glow-title {
-      font-size: 2.8rem;
-      font-weight: bold;
-      color: #fff;
-      text-shadow: 0 0 8px #00ffe1, 0 0 20px #00ffe1;
-      margin-bottom: 1rem;
-      animation: pulse 2.5s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        text-shadow: 0 0 8px #00ffe1, 0 0 20px #00ffe1;
-      }
-      50% {
-        text-shadow: 0 0 12px #00ffe1, 0 0 35px #00ffe1;
-      }
-    }
-
-    .podcast-container {
-      margin: 1rem auto;
-      max-width: 800px;
-      box-shadow: 0 0 20px rgba(0,255,225,0.2);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    iframe {
-      width: 100%;
-      height: 450px;
-      border: none;
-    }
-
-    .episode-description {
-      margin-top: 1rem;
-      font-size: 1rem;
-      color: #ccc;
-      padding: 0 1rem;
-    }
-
-    nav {
-      margin-top: 2rem;
-    }
-
-    nav a {
-      color: #00ffe1;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      color: #fff;
-    }
+    :root{--bg:#080808;--panel:#11100f;--cream:#f4eddf;--gold:#d8b574;--gold-light:#f6dfad;--muted:#aba395;--border:rgba(216,181,116,.22)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--cream);font-family:'DM Sans',Arial,sans-serif;line-height:1.6;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    .container{width:min(1180px,92vw);margin:0 auto}
+    .skip{position:absolute;left:12px;top:-80px;background:var(--gold);color:#111;padding:10px 16px;z-index:1000}
+    .skip:focus{top:10px}
+    :focus-visible{outline:2px solid var(--gold-light);outline-offset:4px}
+    .kicker{display:inline-block;color:var(--gold);font-size:.72rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase}
+    h1,h2,h3,p{margin-top:0}
+    h2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.2rem,5vw,4.6rem);line-height:1.07;letter-spacing:-.035em}
+    .muted{color:var(--muted)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:100px;padding:13px 22px;border:1px solid var(--border);font-weight:700;font-size:.88rem;transition:transform .25s,border-color .25s,background .25s}
+    .btn:hover{transform:translateY(-2px);border-color:var(--gold)}
+    .btn-gold{color:#15110c;background:var(--gold);border-color:var(--gold)}
+    .btn-gold:hover{background:var(--gold-light)}
+    .btn-dark{background:rgba(255,255,255,.03);color:var(--cream)}
+    .topbar{position:sticky;z-index:30;top:0;background:rgba(8,8,8,.94);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.075)}
+    .topbar-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:78px}
+    .logo{font-size:.9rem;line-height:1.1;letter-spacing:.11em;font-weight:800;white-space:nowrap}
+    .logo span{display:block;font-size:.59rem;letter-spacing:.18em;color:var(--gold);margin-top:7px;font-weight:600}
+    .toplinks{display:flex;gap:23px;align-items:center;font-size:.86rem;color:#d9d1c3}
+    .toplinks a:hover{color:var(--gold-light)}
+    .toplinks .btn{color:#15110c;font-size:.8rem;padding:10px 17px}
+    .hero{position:relative;isolation:isolate;overflow:hidden;border-bottom:1px solid var(--border);background:radial-gradient(circle at 72% 40%,rgba(148,111,50,.12) 0,transparent 35%),#080808}
+    .hero:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.23;background-image:linear-gradient(rgba(236,206,153,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(236,206,153,.09) 1px,transparent 1px);background-size:66px 66px;mask-image:linear-gradient(90deg,transparent,black 72%)}
+    .hero-grid{min-height:660px;display:grid;grid-template-columns:1.06fr .94fr;align-items:center;gap:18px;padding:100px 0 90px}
+    .presenter{display:flex;align-items:center;gap:13px;color:#d2c9b9;font-size:.76rem;letter-spacing:.16em;font-weight:700}
+    .presenter:before{content:"";width:36px;height:1px;background:var(--gold)}
+    .presenter b{color:var(--gold-light)}
+    h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(5.1rem,10.6vw,10.4rem);line-height:.87;letter-spacing:-.075em;margin:24px 0 27px}
+    h1 span{display:block}
+    h1 span:last-child{color:var(--gold-light);font-style:italic;font-weight:500;letter-spacing:-.065em}
+    .hero-subline{font-family:'Playfair Display',serif;font-size:clamp(1.25rem,2.4vw,1.8rem);line-height:1.25;color:#e6d9c5;margin-bottom:17px}
+    .hero-desc{color:#b5ab9d;max-width:570px;font-size:1.03rem}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .hero-bottom{margin-top:50px;color:var(--gold);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase}
+    .art{position:relative;display:flex;justify-content:center;align-items:center;min-height:570px;isolation:isolate}
+    .art:before{content:"";position:absolute;width:min(95%,540px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(208,158,71,.17),transparent 61%);filter:blur(8px)}
+    .art svg{width:min(100%,580px);height:auto;overflow:visible;filter:drop-shadow(0 12px 38px rgba(0,0,0,.6))}
+    .orbit{transform-origin:300px 285px;animation:orbit 36s linear infinite}
+    .wave{stroke-dasharray:550;stroke-dashoffset:550;animation:draw 6s ease-in-out infinite alternate}
+    .art-caption{position:absolute;bottom:30px;left:5%;font-size:.68rem;letter-spacing:.24em;color:#a7987f;text-transform:uppercase}
+    @keyframes orbit{to{transform:rotate(360deg)}}
+    @keyframes draw{to{stroke-dashoffset:0}}
+    .marquee{border-bottom:1px solid var(--border);background:#100e0b;padding:17px 0;text-align:center;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-light)}
+    .marquee span{opacity:.45;padding:0 16px}
+    .section{padding:100px 0}
+    .section-intro{max-width:760px}
+    .section-intro p{font-size:1.04rem;color:var(--muted)}
+    .story-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:35px}
+    .story{padding:31px 28px 33px;border:1px solid rgba(255,255,255,.085);background:linear-gradient(145deg,#131210,#0c0c0b);border-radius:20px;min-height:245px}
+    .story .number{font-size:.73rem;color:var(--gold);font-weight:700;letter-spacing:.17em}
+    .story h3{font-family:'Playfair Display',serif;font-size:1.7rem;letter-spacing:-.02em;margin:25px 0 10px}
+    .story p{font-size:.92rem;color:var(--muted);margin-bottom:0}
+    .feature{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:#0d0c0a}
+    .watch-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:40px;align-items:center}
+    .video-frame{position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;border:1px solid rgba(216,181,116,.37);background:#000;box-shadow:0 30px 60px rgba(0,0,0,.3)}
+    .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .watch-copy h2{margin:15px 0 20px}
+    .watch-copy p{color:var(--muted)}
+    .notice{margin-top:20px;padding:15px 18px;background:#17130c;border-left:2px solid var(--gold);color:#c7bca9;font-size:.88rem}
+    .pullquote{padding:105px 0 95px;text-align:center}
+    .pullquote blockquote{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.3rem,5.8vw,5.3rem);line-height:1.15;letter-spacing:-.034em;margin:18px auto 24px;max-width:1000px}
+    .pullquote em{font-weight:500;color:var(--gold-light)}
+    .pullquote p{color:var(--muted);font-size:.86rem;letter-spacing:.07em}
+    .participate{background:linear-gradient(145deg,#11100d,#0b0b0a);border-top:1px solid var(--border)}
+    .participate-grid{display:grid;grid-template-columns:.83fr 1.17fr;gap:50px;align-items:start}
+    .participate h2{margin:16px 0 20px}
+    .participate p{color:var(--muted)}
+    .mini-line{height:1px;background:var(--border);width:100%;margin-top:32px}
+    .form-card{border:1px solid var(--border);background:#11100e;border-radius:22px;padding:30px}
+    .form-card h3{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:8px}
+    .form-card p{font-size:.88rem}
+    .fields{display:grid;grid-template-columns:1fr 1fr;gap:17px;margin-top:24px}
+    .field{display:flex;flex-direction:column;gap:7px}
+    .field.full{grid-column:1/-1}
+    .field label{font-size:.8rem;font-weight:600;color:#dfd4c2}
+    .field input,.field select,.field textarea{width:100%;background:#090909;color:var(--cream);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:12px 14px;min-width:0}
+    .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--gold);outline-offset:1px}
+    .field textarea{min-height:132px;resize:vertical}
+    .field select{color-scheme:dark}
+    .form-card .btn{width:100%}
+    .fineprint{font-size:.73rem!important;color:#998d7d!important;margin:14px 0 0}
+    footer{border-top:1px solid var(--border);padding:43px 0;color:#aaa095;font-size:.85rem}
+    .footer-row{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+    .footer-brand strong{color:var(--cream);font-size:1rem;letter-spacing:.07em}
+    .footer-brand span{display:block;color:var(--gold);font-size:.75rem;margin-top:4px}
+    .footer-links{display:flex;gap:20px;flex-wrap:wrap}
+    .footer-links a:hover{color:var(--gold)}
+    .copyright{font-size:.74rem;color:#847b70;border-top:1px solid rgba(255,255,255,.06);padding-top:24px;margin-top:30px}
+    @media(max-width:990px){.hero-grid{grid-template-columns:1fr 1fr;min-height:580px;padding:80px 0}.art{min-height:400px}.art-caption{bottom:0}.watch-grid{gap:24px}.participate-grid{gap:28px}}
+    @media(max-width:740px){.topbar-inner{min-height:72px}.toplinks a:not(.btn){display:none}.hero-grid{display:flex;flex-direction:column;align-items:stretch;padding:75px 0 48px;gap:5px}.hero-copy{position:relative;z-index:2}.art{min-height:310px;max-width:390px;width:100%;margin:0 auto}.art-caption{bottom:0}.hero-bottom{margin-top:28px}h1{font-size:clamp(5rem,19vw,8rem)}.section{padding:73px 0}.story-grid{grid-template-columns:1fr;gap:12px}.story{min-height:0}.watch-grid,.participate-grid{grid-template-columns:1fr}.watch-copy{order:-1}.pullquote{padding:75px 0}.footer-row{flex-direction:column}.marquee{font-size:.58rem;letter-spacing:.12em}}
+    @media(max-width:460px){.logo{font-size:.77rem}.logo span{font-size:.51rem}.toplinks .btn{padding:9px 12px;font-size:.74rem}.form-card{padding:20px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.marquee span{padding:0 6px}.hero-actions .btn{width:100%}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.orbit,.wave{animation:none}.wave{stroke-dashoffset:0}.btn{transition:none}}
   </style>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="logo" href="index.html" aria-label="HBLE Enterprises home">HBLE ENTERPRISES <span>HUMBLE BEGINNINGS · LEGENDARY ENDINGS</span></a>
+      <nav class="toplinks" aria-label="Podcast navigation">
+        <a href="index.html">Home</a>
+        <a href="#about">The Show</a>
+        <a href="#watch">Watch</a>
+        <a class="btn btn-gold" href="#join">Join the Conversation</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="presenter"><b>HBLE ENTERPRISES</b> PRESENTS</div>
+          <h1 id="hero-heading"><span>THE</span><span>THREAD.</span></h1>
+          <p class="hero-subline">Every story connects us.</p>
+          <p class="hero-desc">Real voices. Unfiltered journeys. The conversations that tie together culture, community, ambition and everything in between. Pull up a chair — there's always another side to the story.</p>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="#watch">Explore the Podcast <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-dark" href="#join">Share Your Story</a>
+          </div>
+          <div class="hero-bottom">A HBLE ORIGINAL CONVERSATION SERIES</div>
+        </div>
+        <div class="art" aria-label="Gold microphone surrounded by connecting strands of thread" role="img">
+          <svg viewBox="0 0 600 570" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0c7"/><stop offset=".3" stop-color="#d4aa60"/><stop offset=".65" stop-color="#856037"/><stop offset="1" stop-color="#f4d9a1"/></linearGradient>
+              <linearGradient id="thread" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#5e4023" stop-opacity="0"/><stop offset=".5" stop-color="#eed18f"/><stop offset="1" stop-color="#7c5733" stop-opacity=".05"/></linearGradient>
+              <radialGradient id="disc"><stop stop-color="#322412"/><stop offset=".6" stop-color="#15120d"/><stop offset="1" stop-color="#090909"/></radialGradient>
+            </defs>
+            <circle cx="300" cy="285" r="229" fill="url(#disc)" stroke="#6f5532" stroke-opacity=".7" stroke-width="1"/>
+            <circle cx="300" cy="285" r="195" fill="none" stroke="#d5b270" stroke-opacity=".2"/>
+            <circle cx="300" cy="285" r="163" fill="none" stroke="#d5b270" stroke-opacity=".18"/>
+            <circle cx="300" cy="285" r="128" fill="none" stroke="#d5b270" stroke-opacity=".18"/>
+            <g class="orbit" fill="none" stroke="url(#thread)">
+              <ellipse cx="300" cy="285" rx="266" ry="117" stroke-width="1.5" transform="rotate(-29 300 285)"/>
+              <ellipse cx="300" cy="285" rx="258" ry="149" stroke-width="1" transform="rotate(39 300 285)"/>
+              <ellipse cx="300" cy="285" rx="237" ry="180" stroke-width=".7" transform="rotate(78 300 285)"/>
+            </g>
+            <path class="wave" d="M24 393 C100 372 85 246 175 248 S254 354 300 332 S385 187 440 233 S533 407 582 296" fill="none" stroke="#eecb82" stroke-width="2.4" stroke-linecap="round"/>
+            <g transform="translate(300 278)">
+              <rect x="-53" y="-133" width="106" height="206" rx="53" fill="#090909" stroke="url(#metal)" stroke-width="5"/>
+              <rect x="-41" y="-122" width="82" height="183" rx="40" fill="url(#metal)" opacity=".95"/>
+              <path d="M-35 -68H35 M-39 -44H39 M-40 -20H40 M-40 4H40 M-38 29H38" stroke="#342617" stroke-width="7" opacity=".72"/>
+              <path d="M-77 -8V60C-77 165 77 165 77 60V-8" fill="none" stroke="url(#metal)" stroke-width="11" stroke-linecap="round"/>
+              <path d="M0 147V197 M-61 197H61" stroke="url(#metal)" stroke-width="11" stroke-linecap="round"/>
+              <circle cx="0" cy="145" r="6" fill="#eecb82"/>
+            </g>
+            <g fill="#f0d395"><circle cx="77" cy="374" r="4"/><circle cx="518" cy="207" r="3"/><circle cx="485" cy="431" r="3"/></g>
+            <text x="300" y="531" fill="#b5a080" font-family="Georgia,serif" font-size="15" text-anchor="middle" letter-spacing="5">STORIES CONNECT US</text>
+          </svg>
+          <span class="art-caption">THE THREAD · HBLE ORIGINALS</span>
+        </div>
+      </div>
+    </section>
+    <div class="marquee">A SPACE FOR REAL STORIES <span aria-hidden="true">✦</span> HONEST CONVERSATIONS <span aria-hidden="true">✦</span> CONNECTION WITHOUT THE NOISE</div>
 
-  <!-- Regular Top Menu -->
-  <div class="menu-bar">
-  <a href="index.html">Home</a>
-  <a href="mission.html">Mission</a>
-  <a href="spotlight.html">Spotlight</a>
-  <a href="sports.html">Sports</a>
-  <a href="dining.html">Dining</a>
-  <a href="stories.html">Stories</a>
-  <a href="talent.html">Talent</a>
-  <a href="podcast.html">Podcast</a>
-  <a href="merch.html">Merchandise</a>
-  </div>
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-intro">
+          <span class="kicker">01 / THE IDEA</span>
+          <h2>There's a thread running through every story.</h2>
+          <p>Where we come from shapes us. What we build changes us. And the people we meet along the way connect the dots. <strong style="color:var(--cream)">The Thread</strong> is a home for the perspectives, experiences and unexpected connections that deserve a deeper conversation.</p>
+        </div>
+        <div class="story-grid">
+          <article class="story"><span class="number">01 / BEGINNINGS</span><h3>Where it started</h3><p>The early chapters, hard lessons and defining moments behind the people and stories we know today.</p></article>
+          <article class="story"><span class="number">02 / PERSPECTIVE</span><h3>More than one angle</h3><p>Culture, creativity, everyday life and the conversations that get more interesting when we actually listen.</p></article>
+          <article class="story"><span class="number">03 / CONNECTION</span><h3>What brings us together</h3><p>Community, purpose, resilience and the shared experiences that move us forward.</p></article>
+        </div>
+      </div>
+    </section>
 
-  <!-- Page Content -->
-  <h1 class="glow-title">🎙️ HBLE Podcast</h1>
+    <section class="section feature" id="watch">
+      <div class="container watch-grid">
+        <div class="video-frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/APFDZXjLvuA" title="HBLE Podcast video from the existing archive" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="watch-copy">
+          <span class="kicker">02 / WATCH & LISTEN</span>
+          <h2>The HBLE vault.</h2>
+          <p>The conversation started before this page. Revisit the video previously featured on the HBLE Podcast page while the new <em>The Thread</em> episode collection takes shape.</p>
+          <div class="notice"><strong style="color:var(--gold-light)">The Thread is taking shape.</strong> New episodes and official listening links will be added here as they become available.</div>
+          <div style="margin-top:25px"><a class="btn btn-dark" href="https://www.youtube.com/watch?v=APFDZXjLvuA" target="_blank" rel="noopener noreferrer">Open the HBLE archive video <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </div>
+    </section>
 
-  <div class="podcast-player">
-  <iframe
-    src="https://www.youtube.com/embed/APFDZXjLvuA"
-    title="HBLE Podcast"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
-</div>
+    <section class="pullquote">
+      <div class="container">
+        <span class="kicker">NOT JUST A PODCAST. A CONNECTION.</span>
+        <blockquote>Different voices.<br>One conversation.<br><em>Infinite connections.</em></blockquote>
+        <p>HBLE ENTERPRISES INC. · HUMBLE BEGINNINGS. LEGENDARY ENDINGS.</p>
+      </div>
+    </section>
 
-  <div class="episode-description">
-    <p>Welcome to the official HBLE Podcast — where voices from our community share their journeys, hustle, and heart. Tune in for real stories with legendary endings.</p>
-  </div>
-
-  <!-- Navigation Arrows -->
-
-
+    <section class="section participate" id="join">
+      <div class="container participate-grid">
+        <div>
+          <span class="kicker">03 / JOIN THE CONVERSATION</span>
+          <h2>Got a story worth sharing?</h2>
+          <p>Some of the best conversations start with a simple introduction. Have a journey, a perspective, or a topic you'd like us to explore? Put it on the table.</p>
+          <p>Use the form to suggest a guest, pitch a conversation, or inquire about collaborating with <em>The Thread</em>.</p>
+          <div class="mini-line"></div>
+          <p style="margin-top:21px;color:var(--gold-light);font-family:'Playfair Display',serif;font-size:1.35rem">Your voice matters. Your story connects.</p>
+        </div>
+        <div class="form-card">
+          <h3>Pull up a chair.</h3>
+          <p>Tell HBLE what you want to bring to the conversation.</p>
+          <form name="the-thread-inquiry" action="/thank-you.html" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="the-thread-inquiry">
+            <p hidden><label>Leave this field blank <input name="bot-field"></label></p>
+            <div class="fields">
+              <div class="field"><label for="thread-name">Your name *</label><input id="thread-name" name="name" autocomplete="name" required maxlength="120"></div>
+              <div class="field"><label for="thread-email">Email address *</label><input id="thread-email" name="email" type="email" autocomplete="email" required maxlength="180"></div>
+              <div class="field full"><label for="thread-interest">I'm reaching out about *</label><select id="thread-interest" name="interest" required><option value="" disabled selected>Choose one</option><option>Sharing my story</option><option>Suggesting a guest</option><option>Suggesting a topic</option><option>Collaboration or sponsorship</option><option>Other podcast inquiry</option></select></div>
+              <div class="field full"><label for="thread-message">What's the connection? *</label><textarea id="thread-message" name="message" required maxlength="4000" placeholder="Tell us a little about the story, guest, topic or idea..."></textarea></div>
+              <div class="field full"><button class="btn btn-gold" type="submit">Send Your Story <span aria-hidden="true">↗</span></button></div>
+            </div>
+            <p class="fineprint">Submitting allows HBLE Enterprises to contact you about your inquiry. Submission does not guarantee an appearance or partnership. See our <a style="text-decoration:underline;color:var(--gold-light)" href="policies.html#privacy">privacy policy</a>.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div class="footer-brand"><strong>THE THREAD.</strong><span>AN HBLE ENTERPRISES ORIGINAL</span><div style="margin-top:10px">Humble Beginnings. Legendary Endings.</div></div>
+        <nav class="footer-links" aria-label="Footer links"><a href="index.html">HBLE Home</a><a href="#about">About the Show</a><a href="#watch">Watch</a><a href="#join">Get Involved</a><a href="policies.html#privacy">Privacy</a></nav>
+      </div>
+      <div class="copyright">© <span id="year">2026</span> HBLE ENTERPRISES INC. All rights reserved.</div>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
