@@ -82,9 +82,15 @@
               <div class="field"><label for="deadline">Preferred Deadline</label><input id="deadline" name="deadline" type="date"></div>
 
               <div class="field full upload-box">
-                <label for="photos"><strong>Upload the photos you want restored *</strong></label>
-                <input id="photos" name="photos" type="file" accept="image/*" multiple required>
-                <div id="fileSummary" class="file-summary"></div>
+                <strong>Upload the photos you want restored *</strong>
+                <p class="file-summary">For reliable, secure handling, use one image per field (up to four JPG, PNG, or WebP photos). Total upload size, including any reference photo, must stay below 7 MB. For larger batches, <a href="/#support">contact HBLE for a secure transfer option</a>.</p>
+                <div class="form-grid">
+                  <div class="field"><label for="photo-1">Photo 1 *</label><input id="photo-1" name="photo_1" data-restoration-photo type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" required></div>
+                  <div class="field"><label for="photo-2">Photo 2 (optional)</label><input id="photo-2" name="photo_2" data-restoration-photo type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"></div>
+                  <div class="field"><label for="photo-3">Photo 3 (optional)</label><input id="photo-3" name="photo_3" data-restoration-photo type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"></div>
+                  <div class="field"><label for="photo-4">Photo 4 (optional)</label><input id="photo-4" name="photo_4" data-restoration-photo type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"></div>
+                </div>
+                <div id="fileSummary" class="file-summary" role="status" aria-live="polite"></div>
               </div>
 
               <div class="field full">
@@ -105,7 +111,7 @@
               </div>
 
               <div class="field full"><label for="notes">Tell us about the photo and what matters most</label><textarea id="notes" name="notes" placeholder="Example: This is my grandmother's only wedding photo. Please keep her face natural and repair the torn corner."></textarea></div>
-              <div class="field full"><label for="reference">Optional reference photo</label><input id="reference" name="reference_photo" type="file" accept="image/*"><div class="file-summary">If you have a clearer photo of the same person, upload it here to help with facial detail.</div></div>
+              <div class="field full"><label for="reference">Optional reference photo</label><input id="reference" name="reference_photo" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"><div class="file-summary">If you have a clearer photo of the same person, add it here. It counts toward the 7 MB combined file limit.</div></div>
 
               <div class="field full">
                 <label class="check"><input type="checkbox" name="permission_confirmed" required><span>I confirm that I own these photos or have permission to submit them for restoration. *</span></label>
