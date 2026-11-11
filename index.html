@@ -108,12 +108,13 @@
       font-style:italic;
       font-weight:700;
       letter-spacing:.02em;
-      background:linear-gradient(110deg,#b88942 0%,#f9e8bc 27%,#d8ad68 50%,#fff5d6 68%,#a77939 100%);
-      -webkit-background-clip:text;
-      background-clip:text;
+      /* Solid metallic gold stays visible on browsers that cannot clip gradients to text. */
+      background:none;
+      -webkit-background-clip:initial;
+      background-clip:initial;
       color:#f2d998;
-      -webkit-text-fill-color:transparent;
-      text-shadow:none;
+      -webkit-text-fill-color:#f2d998;
+      text-shadow:0 1px 0 #72501f,0 0 13px rgba(217,174,99,.22);
     }
     .common-thread-ribbon .thread-podcast{
       display:inline-block;
