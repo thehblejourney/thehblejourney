@@ -275,9 +275,9 @@ for (const file of htmlFiles) {
     changed = true;
   }
 
-  // The Thread is a newly designed, approved editorial page with its own original vector artwork.
-  // Keep legacy approved-media restrictions on every other page.
-  if (file !== "podcast.html" && !html.includes(TEXT_ONLY_MARKER) && /<\/head>/i.test(html)) {
+  // Preserve approved original visual designs on The Common Thread and HBLE Radio.
+  // Legacy approved-media restrictions remain on all other pages.
+  if (!["podcast.html", "radio.html"].includes(file) && !html.includes(TEXT_ONLY_MARKER) && /<\/head>/i.test(html)) {
     html = html.replace(/<\/head>/i, `${TEXT_ONLY_STYLE}\n</head>`);
     changed = true;
   }
