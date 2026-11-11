@@ -308,8 +308,9 @@
       padding:11px 14px;
       border-radius:100px;
       color:#ead4a4;
-      background:rgba(218,176,108,.075);
-      border:1px solid rgba(218,176,108,.36);
+      background-color:#16130e!important;
+      background-image:none!important;
+      border:1px solid rgba(218,176,108,.46);
       cursor:pointer;
       font:700 .66rem/1 Inter,Arial,sans-serif;
       letter-spacing:.16em;
@@ -339,7 +340,12 @@
         max-height:calc(100dvh - 92px);
         overflow:auto;
         padding:15px 20px 20px;
-        background:linear-gradient(150deg,#18150f,#080808 58%);
+        /* Solid fill is required because legacy build CSS strips gradient images. */
+        background-color:#0b0b0b!important;
+        background-image:none!important;
+        opacity:1!important;
+        backdrop-filter:none!important;
+        -webkit-backdrop-filter:none!important;
         border:1px solid rgba(218,176,108,.39);
         border-top:2px solid #d9b477;
         border-radius:0 0 18px 18px;
