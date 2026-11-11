@@ -1,0 +1,38 @@
+name: Import HBLE Image Restoration Sample
+on:
+  push:
+    paths:
+      - .github/workflows/import-image-restoration-sample.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import-restoration-sample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout HBLE website
+        uses: actions/checkout@v4
+      - name: Download supplied HBLE sample
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p image-restoration/samples
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/9ced1d36-8b90-46a8-9703-c264fb7c6424.png' \
+            --output image-restoration/samples/hble-family-restoration-sample.png
+          test -s image-restoration/samples/hble-family-restoration-sample.png
+          file image-restoration/samples/hble-family-restoration-sample.png
+          file image-restoration/samples/hble-family-restoration-sample.png | grep -q 'PNG image data'
+      - name: Commit sample image
+        shell: bash
+        run: |
+          git config user.name "HBLE Site Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add image-restoration/samples/hble-family-restoration-sample.png
+          if ! git diff --cached --quiet; then
+            git commit -m "Add HBLE before and after restoration sample [skip ci]"
+            git push origin HEAD:master
+          else
+            echo "HBLE sample image already present."
+          fi
