@@ -29,9 +29,57 @@
     @media(max-width:950px){.nav-links a:not(.btn){display:none}.grid3,.pricing,.portfolio{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr 1fr}.footer{grid-template-columns:1fr 1fr}.custom-quote{align-items:flex-start;flex-direction:column}}
     @media(max-width:620px){.section,.statement{padding:74px 0}.hero-grid{padding:70px 0}.hero h1{font-size:clamp(3.1rem,16vw,5rem)}.process-grid,.form-grid,.policy-row,.footer{grid-template-columns:1fr}.field.full{grid-column:auto}.support{padding:27px}.brand small{display:none}.ticker span{padding:12px 18px}.price-card{padding:24px}}
   </style>
+  <style id="common-thread-ribbon-styles">
+    .common-thread-ribbon{
+      width:100%;
+      overflow:hidden;
+      background:#161108;
+      border-top:1px solid rgba(213,173,97,.28);
+      border-bottom:1px solid rgba(213,173,97,.55);
+      position:relative;
+      z-index:2;
+    }
+    .common-thread-ribbon-track{
+      display:flex;
+      width:max-content;
+      animation:commonThreadScroll 29s linear infinite;
+      will-change:transform;
+    }
+    .common-thread-ribbon-set{
+      display:flex;
+      align-items:center;
+      justify-content:space-around;
+      gap:38px;
+      min-width:100vw;
+      flex:0 0 auto;
+      padding:12px 22px;
+    }
+    .common-thread-ribbon a{
+      display:inline-flex;
+      align-items:center;
+      gap:35px;
+      flex-shrink:0;
+      color:#f2d998;
+      font-size:clamp(.81rem,1.4vw,1rem);
+      letter-spacing:.15em;
+      line-height:1.3;
+      font-weight:800;
+      white-space:nowrap;
+      text-decoration:none;
+      transition:color .2s ease;
+    }
+    .common-thread-ribbon a:hover,.common-thread-ribbon a:focus-visible{color:#fff}
+    .common-thread-ribbon a span{color:#c89843;font-size:.78rem}
+    .common-thread-ribbon:hover .common-thread-ribbon-track,.common-thread-ribbon:focus-within .common-thread-ribbon-track{animation-play-state:paused}
+    @keyframes commonThreadScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @media(max-width:670px){.common-thread-ribbon-set{gap:28px;padding:11px 16px}.common-thread-ribbon a{letter-spacing:.12em;gap:25px}}
+    @media(prefers-reduced-motion:reduce){
+      .common-thread-ribbon{overflow-x:auto}
+      .common-thread-ribbon-track{animation:none}
+      .common-thread-ribbon-set[aria-hidden="true"]{display:none}
+    }
+  </style>
   <style id="hble-thread-preview-styles">
-    .nav-links .nav-thread{color:#f2d998;font-weight:800}
-    .nav-links .nav-thread:hover{color:#fff2ce}
     #thread-preview{position:relative;overflow:hidden;padding:72px 0;background:radial-gradient(circle at 78% 40%,rgba(213,173,97,.11),transparent 40%),#0b0a08;border-bottom:1px solid rgba(213,173,97,.19)}
     #thread-preview .thread-shell{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(240px,.8fr);gap:28px;align-items:center}
     #thread-preview .thread-kicker{display:block;font-size:.69rem;letter-spacing:.22em;color:#f2d998;font-weight:800;text-transform:uppercase}
@@ -42,8 +90,8 @@
     #thread-preview .thread-emblem:before,#thread-preview .thread-emblem:after{content:"";position:absolute;width:210px;aspect-ratio:1;border:1px solid rgba(213,173,97,.5);border-radius:50%;transform:rotate(-24deg) scaleX(1.5)}
     #thread-preview .thread-emblem:after{transform:rotate(45deg) scaleX(1.18);border-color:rgba(213,173,97,.22)}
     #thread-preview .thread-emblem strong{position:relative;z-index:1;font-family:'Playfair Display',serif;color:#f2d998;font-size:clamp(2.25rem,3.35vw,3.75rem);font-style:italic;letter-spacing:-.065em;text-shadow:0 0 30px #0b0a08;max-width:95%;text-align:center;line-height:1.1}
-    @media(max-width:950px){.nav-links a.nav-thread{display:inline-flex!important;white-space:nowrap}}
-    @media(max-width:670px){#thread-preview{padding:58px 0}#thread-preview .thread-shell{grid-template-columns:1fr}#thread-preview .thread-emblem{min-height:155px}#thread-preview .thread-emblem:before,#thread-preview .thread-emblem:after{width:145px}.nav-inner{gap:8px}.nav-links{gap:8px}.nav-links .btn-primary{padding:10px 12px;font-size:.72rem}.nav-links a.nav-thread{font-size:.70rem}.nav-links .btn-primary{display:none}.brand{font-size:.85rem}}
+    
+    @media(max-width:670px){#thread-preview{padding:58px 0}#thread-preview .thread-shell{grid-template-columns:1fr}#thread-preview .thread-emblem{min-height:155px}#thread-preview .thread-emblem:before,#thread-preview .thread-emblem:after{width:145px}.nav-inner{gap:8px}.nav-links{gap:8px}.nav-links .btn-primary{padding:10px 12px;font-size:.72rem}.nav-links .btn-primary{display:none}.brand{font-size:.85rem}}
     @media(max-width:370px){.nav-links .btn-primary{display:none}.brand{font-size:.8rem}}
   </style>
   <style id="hble-hero-portrait-source">
@@ -74,8 +122,24 @@
 <body>
   <nav class="nav"><div class="wrap nav-inner">
     <a class="brand" href="#top">HBLE STUDIOS<small>HBLE ENTERPRISES INC.</small></a>
-    <div class="nav-links"><a href="#services">Services</a><a href="#work">Work</a><a class="nav-thread" href="podcast.html">The Common Thread</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#support">Support</a><a class="btn btn-primary" href="#pricing">Book a Project</a></div>
+    <div class="nav-links"><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#support">Support</a><a class="btn btn-primary" href="#pricing">Book a Project</a></div>
   </div></nav>
+  <div class="common-thread-ribbon" aria-label="The Common Thread podcast">
+    <div class="common-thread-ribbon-track">
+      <div class="common-thread-ribbon-set">
+        <a href="podcast.html" aria-label="Open The Common Thread podcast">THE COMMON THREAD <span aria-hidden="true">✦</span></a>
+        <a href="podcast.html" tabindex="-1" aria-hidden="true">THE COMMON THREAD <span>✦</span></a>
+        <a href="podcast.html" tabindex="-1" aria-hidden="true">THE COMMON THREAD <span>✦</span></a>
+        <a href="podcast.html" tabindex="-1" aria-hidden="true">THE COMMON THREAD <span>✦</span></a>
+      </div>
+      <div class="common-thread-ribbon-set" aria-hidden="true">
+        <a href="podcast.html" tabindex="-1">THE COMMON THREAD <span>✦</span></a>
+        <a href="podcast.html" tabindex="-1">THE COMMON THREAD <span>✦</span></a>
+        <a href="podcast.html" tabindex="-1">THE COMMON THREAD <span>✦</span></a>
+        <a href="podcast.html" tabindex="-1">THE COMMON THREAD <span>✦</span></a>
+      </div>
+    </div>
+  </div>
   <main id="top">
     <section class="hero"><div class="wrap hero-grid"><div>
       <div class="eyebrow">Premium Editing • Post-Production • Creative Direction</div>
