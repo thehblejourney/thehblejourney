@@ -1,0 +1,51 @@
+name: Import HBLE Radio Design Showcase
+on:
+  push:
+    paths:
+      - .github/workflows/import-hble-radio-designs.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  install_showcase_images:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout HBLE website
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Import nine provided HBLE showcase designs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p images/radio-showcase
+          while IFS='|' read -r name source; do
+            [ -n "$name" ] || continue
+            echo "Importing HBLE design $name"
+            curl --fail --location --retry 3 --silent --show-error "$source" -o "images/radio-showcase/${name}.png"
+            test -s "images/radio-showcase/${name}.png"
+            file "images/radio-showcase/${name}.png" | grep -q 'PNG image data'
+          done <<'HBLE_IMAGES'
+          tiara-eboni-mac|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/b639a705-ccd5-4a01-b69f-a0e3063dd022.png
+          tk-equipment-services|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/f69a66a7-6f47-4160-be20-8d9da19404a8.png
+          bad-cook-campaign|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/687d3630-5082-4e76-a65a-fb995e5d5f8d.png
+          bad-cook-apparel|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/28d83f92-2a0a-4eab-b7bf-7e4172f56572.png
+          anime-duo|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/b9b0fffd-2579-4a1a-ae56-ed3492ce23c6.png
+          superpowered-duo|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/708d7c66-0ef5-4f03-9e13-deddea880c14.png
+          futuristic-concept|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/f5393081-352a-47b0-b4d7-7c5369acab28.png
+          mountain-concept|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/ca914cb2-2dcf-4a42-8e4f-a113696bc091.png
+          candii-campaign|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/e796dc58-1f6d-47a7-910e-2f501171e7e4.png
+          HBLE_IMAGES
+      - name: Save designs in HBLE repository
+        shell: bash
+        run: |
+          git config user.name "HBLE Showcase Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add images/radio-showcase/*.png
+          if ! git diff --cached --quiet; then
+            git commit -m "Add nine HBLE Radio showcase images [skip ci]"
+            git push origin HEAD:master
+          else
+            echo "Showcase designs are already installed."
+          fi
