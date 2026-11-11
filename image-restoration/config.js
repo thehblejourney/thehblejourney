@@ -1,6 +1,7 @@
 window.HBLERestorationConfig = {
   currency: 'USD',
-  maxFiles: 20,
+  maxFiles: 4,
+  maxUploadMB: 7,
   tiers: [
     {
       id: 'quick',
