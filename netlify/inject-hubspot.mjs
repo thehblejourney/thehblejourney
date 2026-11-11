@@ -275,7 +275,9 @@ for (const file of htmlFiles) {
     changed = true;
   }
 
-  if (!html.includes(TEXT_ONLY_MARKER) && /<\/head>/i.test(html)) {
+  // The Thread is a newly designed, approved editorial page with its own original vector artwork.
+  // Keep legacy approved-media restrictions on every other page.
+  if (file !== "podcast.html" && !html.includes(TEXT_ONLY_MARKER) && /<\/head>/i.test(html)) {
     html = html.replace(/<\/head>/i, `${TEXT_ONLY_STYLE}\n</head>`);
     changed = true;
   }
