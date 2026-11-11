@@ -32,6 +32,7 @@ jobs:
           git add image-restoration/samples/hble-family-restoration-sample.jpg
           if ! git diff --cached --quiet; then
             git commit -m "Add HBLE before and after restoration sample [skip ci]"
+            git pull --rebase origin master
             git push origin HEAD:master
           else
             echo "HBLE sample image already present."
