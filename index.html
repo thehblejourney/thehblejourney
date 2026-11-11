@@ -163,6 +163,229 @@
     @media(max-width:670px){#thread-preview{padding:58px 0}#thread-preview .thread-shell{grid-template-columns:1fr}#thread-preview .thread-emblem{min-height:155px}#thread-preview .thread-emblem:before,#thread-preview .thread-emblem:after{width:145px}.nav-inner{gap:8px}.nav-links{gap:8px}.nav-links .btn-primary{padding:10px 12px;font-size:.72rem}.nav-links .btn-primary{display:none}.brand{font-size:.85rem}}
     @media(max-width:370px){.nav-links .btn-primary{display:none}.brand{font-size:.8rem}}
   </style>
+  <style id="hble-luxury-navigation">
+    /* HBLE Studios — refined editorial navigation. Scoped to homepage nav. */
+    .nav{
+      background:linear-gradient(115deg,rgba(12,12,12,.985),rgba(5,5,5,.97) 70%);
+      border-bottom:0;
+      box-shadow:0 10px 28px rgba(0,0,0,.28);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      isolation:isolate;
+    }
+    .nav::after{
+      content:"";
+      position:absolute;
+      bottom:0;left:0;right:0;
+      height:1px;
+      background:linear-gradient(90deg,transparent 0%,rgba(229,187,111,.35) 12%,rgba(252,226,169,.79) 50%,rgba(229,187,111,.35) 88%,transparent 100%);
+      pointer-events:none;
+    }
+    .nav .nav-inner{
+      width:min(1480px,94vw);
+      min-height:92px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:clamp(24px,3.1vw,52px);
+      position:relative;
+    }
+    .nav .brand{
+      display:inline-flex;
+      align-items:center;
+      gap:14px;
+      flex:0 0 auto;
+      color:#f5efe4;
+      white-space:nowrap;
+      font-size:clamp(.96rem,1.32vw,1.12rem);
+      font-weight:800;
+      line-height:1.25;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      transition:opacity .2s ease;
+    }
+    .nav .brand:hover{opacity:.84}
+    .nav .brand span{display:block;white-space:nowrap}
+    .nav .brand small{
+      display:block;
+      margin-top:5px;
+      color:#bba985;
+      font-size:.56rem;
+      font-weight:600;
+      line-height:1.5;
+      letter-spacing:.17em;
+      white-space:nowrap;
+    }
+    .nav .brand .hble-logo{
+      width:56px!important;
+      height:56px!important;
+      flex:0 0 56px!important;
+      border:1px solid rgba(216,181,116,.34);
+      border-radius:12px;
+      background:#090807;
+      padding:4px;
+      object-fit:contain;
+      box-shadow:0 0 0 4px rgba(213,173,97,.045),0 7px 22px rgba(0,0,0,.25);
+    }
+    .nav .nav-links{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:clamp(12px,1.65vw,27px);
+      flex:1 1 auto;
+      min-width:0;
+      color:#d6d1c7;
+      font-size:clamp(.78rem,.9vw,.88rem);
+    }
+    .nav .nav-links>a:not(.btn),
+    .nav .nav-links>.services-video-trigger{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      position:relative;
+      padding:10px 0;
+      color:#d4cec2;
+      font:500 inherit;
+      font-size:inherit;
+      line-height:1.25;
+      letter-spacing:.012em;
+      text-decoration:none;
+      white-space:nowrap;
+      border:0;
+      border-radius:0;
+      background:none;
+      box-shadow:none;
+      text-shadow:none;
+      transition:color .2s ease;
+    }
+    .nav .nav-links>a:not(.btn)::after,
+    .nav .nav-links>.services-video-trigger::after{
+      content:"";
+      position:absolute;
+      left:0;right:0;bottom:4px;
+      height:1px;
+      background:linear-gradient(90deg,transparent,#eccb8b,transparent);
+      transform:scaleX(0);
+      transition:transform .24s ease;
+      transform-origin:center;
+    }
+    .nav .nav-links>a:not(.btn):hover,
+    .nav .nav-links>.services-video-trigger:hover,
+    .nav .nav-links>a:not(.btn):focus-visible,
+    .nav .nav-links>.services-video-trigger:focus-visible{color:#fff3d6}
+    .nav .nav-links>a:not(.btn):hover::after,
+    .nav .nav-links>.services-video-trigger:hover::after,
+    .nav .nav-links>a:not(.btn):focus-visible::after,
+    .nav .nav-links>.services-video-trigger:focus-visible::after{transform:scaleX(1)}
+    .nav .nav-links .btn-primary{
+      display:inline-flex!important;
+      flex:0 0 auto;
+      align-items:center;
+      gap:8px;
+      padding:12px 21px;
+      border:1px solid #edce8f!important;
+      border-radius:999px;
+      background:linear-gradient(115deg,#bf9350 0%,#f4db9f 48%,#d6ae68 100%)!important;
+      color:#19130b!important;
+      font-size:.78rem;
+      font-weight:800;
+      line-height:1.2;
+      letter-spacing:.055em;
+      white-space:nowrap;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 5px 18px rgba(0,0,0,.22);
+      transition:transform .2s ease,box-shadow .2s ease;
+    }
+    .nav .nav-links .btn-primary::after{content:"↗";font-size:.97rem;font-weight:600;line-height:1}
+    .nav .nav-links .btn-primary:hover{
+      transform:translateY(-1px);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 8px 24px rgba(183,133,53,.22);
+    }
+    .nav .nav-toggle{
+      display:none;
+      align-items:center;
+      gap:12px;
+      padding:11px 14px;
+      border-radius:100px;
+      color:#ead4a4;
+      background:rgba(218,176,108,.075);
+      border:1px solid rgba(218,176,108,.36);
+      cursor:pointer;
+      font:700 .66rem/1 Inter,Arial,sans-serif;
+      letter-spacing:.16em;
+    }
+    .nav .nav-toggle-icon{display:grid;gap:4px}
+    .nav .nav-toggle-icon i{
+      display:block;
+      width:17px;
+      height:1px;
+      background:#e9cb91;
+      transition:transform .2s ease,opacity .2s ease;
+    }
+    .nav.menu-open .nav-toggle-icon i:nth-child(1){transform:translateY(5px) rotate(45deg)}
+    .nav.menu-open .nav-toggle-icon i:nth-child(2){opacity:0}
+    .nav.menu-open .nav-toggle-icon i:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+    @media(max-width:1260px){
+      .nav .nav-inner{min-height:82px;width:min(1160px,92vw)}
+      .nav .nav-toggle{display:inline-flex;margin-left:auto;flex:0 0 auto}
+      .nav .nav-links{
+        display:none;
+        position:absolute;
+        right:0;
+        left:auto;
+        top:calc(100% - 1px);
+        z-index:30;
+        width:min(450px,92vw);
+        max-height:calc(100dvh - 92px);
+        overflow:auto;
+        padding:15px 20px 20px;
+        background:linear-gradient(150deg,#18150f,#080808 58%);
+        border:1px solid rgba(218,176,108,.39);
+        border-top:2px solid #d9b477;
+        border-radius:0 0 18px 18px;
+        box-shadow:0 22px 45px rgba(0,0,0,.65);
+        flex-direction:column;
+        align-items:stretch;
+        gap:0;
+      }
+      .nav.menu-open .nav-links{display:flex}
+      .nav .nav-links>a:not(.btn),
+      .nav .nav-links>.services-video-trigger{
+        display:flex!important;
+        width:100%;
+        justify-content:flex-start;
+        padding:13px 9px;
+        border-bottom:1px solid rgba(229,202,153,.12);
+        font-size:.92rem;
+        line-height:1.4;
+        text-align:left;
+      }
+      .nav .nav-links .btn-primary{
+        display:inline-flex!important;
+        width:100%;
+        align-self:stretch;
+        justify-content:center;
+        margin-top:16px;
+        font-size:.86rem;
+      }
+    }
+    @media(max-width:620px){
+      .nav .nav-inner{min-height:75px;width:92vw;gap:8px}
+      .nav .brand{gap:10px;font-size:.84rem;letter-spacing:.105em}
+      .nav .brand small{display:block;font-size:.48rem;letter-spacing:.11em}
+      .nav .brand .hble-logo{width:44px!important;height:44px!important;flex:0 0 44px!important;border-radius:10px;padding:3px}
+      .nav .nav-toggle{padding:10px 11px;gap:8px}
+      .nav .nav-toggle-label{font-size:.62rem}
+      .nav .nav-links{width:92vw;max-height:calc(100dvh - 84px)}
+    }
+    @media(max-width:360px){
+      .nav .brand small{font-size:.43rem;letter-spacing:.075em}
+      .nav .nav-toggle-label{display:none}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .nav .brand,.nav .nav-links a,.nav .nav-links button,.nav .nav-toggle-icon i{transition:none}
+    }
+  </style>
   <style id="hble-hero-portrait-source">
     html body main#top section.hero{position:relative!important;isolation:isolate!important;overflow:hidden!important}
     html body main#top section.hero::after{
@@ -189,8 +412,12 @@
   </style>
 </head>
 <body>
-  <nav class="nav"><div class="wrap nav-inner">
+  <nav class="nav" aria-label="Main navigation"><div class="wrap nav-inner">
     <a class="brand" href="#top">HBLE STUDIOS<small>HBLE ENTERPRISES INC.</small></a>
+    <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="hble-primary-links">
+      <span class="nav-toggle-label">MENU</span>
+      <span class="nav-toggle-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
     <div class="nav-links"><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#support">Support</a><a class="btn btn-primary" href="#pricing">Book a Project</a></div>
   </div></nav>
   <div class="common-thread-ribbon" aria-label="HBLE presents The Common Thread Podcast">
@@ -294,6 +521,42 @@
     </div></section>
   </main>
   <footer><div class="wrap"><div class="footer"><div><strong>HBLE STUDIOS</strong><br>HBLE ENTERPRISES INC.<br>Humble Beginnings. Legendary Endings.</div><div><strong>Services</strong><a href="#services">Video Editing & Post</a><a href="#services">Commercial & Brand Content</a><a href="#services">AI-Enhanced Visuals</a><a href="#services">Creative Direction</a></div><div><strong>Customer Information</strong><a href="#support">Customer Support</a><a href="policies.html#fulfillment">Fulfillment</a><a href="policies.html#refunds">Refund & Dispute Policy</a><a href="policies.html#cancellations">Cancellation Policy</a><a href="policies.html#privacy">Privacy Policy</a><a href="policies.html#payments">Payment Terms</a><a href="policies.html#terms">Terms of Service</a></div></div><div class="legal"><div>© <span id="year"></span> HBLE ENTERPRISES INC. • Louisiana, United States</div><div><a href="policies.html">Customer Policies</a><a href="mission.html">HBLE Community Legacy</a><a href="podcast.html">The Common Thread Podcast</a></div></div></div></footer>
+  <script id="hble-luxury-nav-controller">
+  (function(){
+    const nav = document.querySelector('.nav');
+    if(!nav) return;
+    const toggle = nav.querySelector('.nav-toggle');
+    const menu = nav.querySelector('.nav-links');
+    if(!toggle || !menu) return;
+    menu.id = 'hble-primary-links';
+
+    function closeMenu(){
+      nav.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-label','Open navigation menu');
+    }
+    toggle.addEventListener('click', function(){
+      const opening = !nav.classList.contains('menu-open');
+      nav.classList.toggle('menu-open',opening);
+      toggle.setAttribute('aria-expanded',String(opening));
+      toggle.setAttribute('aria-label',opening ? 'Close navigation menu' : 'Open navigation menu');
+    });
+    menu.addEventListener('click',function(event){
+      if(event.target.closest('a')) closeMenu();
+    });
+    document.addEventListener('click',function(event){
+      if(!nav.contains(event.target)) closeMenu();
+    });
+    document.addEventListener('keydown',function(event){
+      if(event.key==='Escape' && nav.classList.contains('menu-open')){
+        closeMenu();toggle.focus();
+      }
+    });
+    window.addEventListener('resize',function(){
+      if(window.innerWidth>1260) closeMenu();
+    });
+  })();
+  </script>
   <script>
     document.getElementById('year').textContent=new Date().getFullYear();
     document.querySelectorAll('[data-checkout]').forEach(function(link){link.addEventListener('click',function(){if(typeof fbq==='function'){fbq('track','InitiateCheckout',{content_name:link.getAttribute('data-checkout')});}});});
