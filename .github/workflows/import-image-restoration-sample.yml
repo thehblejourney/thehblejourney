@@ -20,16 +20,16 @@ jobs:
           mkdir -p image-restoration/samples
           curl --fail --location --retry 3 --silent --show-error \
             'https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/9ced1d36-8b90-46a8-9703-c264fb7c6424.png' \
-            --output image-restoration/samples/hble-family-restoration-sample.png
-          test -s image-restoration/samples/hble-family-restoration-sample.png
-          file image-restoration/samples/hble-family-restoration-sample.png
-          file image-restoration/samples/hble-family-restoration-sample.png | grep -q 'PNG image data'
+            --output image-restoration/samples/hble-family-restoration-sample.jpg
+          test -s image-restoration/samples/hble-family-restoration-sample.jpg
+          file image-restoration/samples/hble-family-restoration-sample.jpg
+          file image-restoration/samples/hble-family-restoration-sample.jpg | grep -q 'JPEG image data'
       - name: Commit sample image
         shell: bash
         run: |
           git config user.name "HBLE Site Automation"
           git config user.email "actions@users.noreply.github.com"
-          git add image-restoration/samples/hble-family-restoration-sample.png
+          git add image-restoration/samples/hble-family-restoration-sample.jpg
           if ! git diff --cached --quiet; then
             git commit -m "Add HBLE before and after restoration sample [skip ci]"
             git push origin HEAD:master
