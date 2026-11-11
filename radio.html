@@ -86,6 +86,39 @@
     .control.primary{width:63px;height:63px;background:var(--gold);color:#1c160c;border:0;font-size:1.5rem}
     .volume{display:flex;gap:12px;align-items:center;max-width:260px;margin:16px auto 0;font-size:.72rem;color:var(--muted)}
     .player-note{font-size:.8rem;color:var(--muted);margin-top:20px}
+    /* Browser-safe audio autostart: visible one-tap fallback only if sound is blocked. */
+    .radio-sound-gate[hidden]{display:none!important}
+    .radio-sound-gate{
+      position:fixed;z-index:150;
+      bottom:max(16px,env(safe-area-inset-bottom));left:50%;
+      transform:translateX(-50%);
+      display:flex;align-items:center;gap:13px;
+      width:min(610px,calc(100vw - 24px));
+      padding:15px 44px 15px 17px;
+      border-radius:17px;
+      border:1px solid rgba(247,208,138,.75);
+      background:#100d09; color:#f9e5bd;
+      box-shadow:0 18px 55px rgba(0,0,0,.72);
+    }
+    .radio-sound-gate-copy{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}
+    .radio-sound-gate-copy strong{font-size:.69rem;letter-spacing:.12em;color:#f1d393}
+    .radio-sound-gate-copy span{font-size:.79rem;color:#c7b89e}
+    .radio-sound-gate-start{
+      flex:0 0 auto;padding:11px 17px;border-radius:100px;
+      border:1px solid #f5d69d;background:#d8b170;
+      color:#161008;font-weight:800;font-size:.82rem;
+    }
+    .radio-sound-gate-start:hover{background:#f6dfab}
+    .radio-sound-gate-close{
+      position:absolute;top:7px;right:7px;
+      border:0;background:transparent;color:#d4c2a3;
+      min-height:30px;min-width:30px;font-size:1rem;
+    }
+    @media(max-width:580px){
+      .radio-sound-gate{flex-wrap:wrap;padding:12px 42px 13px 14px;gap:10px}
+      .radio-sound-gate-copy{flex:1 1 100%}
+      .radio-sound-gate-start{width:100%}
+    }
     .queue h3{font-size:1.1rem;margin:0 0 4px}
     .queue>p{font-size:.83rem;color:var(--muted);margin:0 0 16px}
     .song{appearance:none;display:flex;align-items:center;gap:13px;text-align:left;width:100%;padding:15px 12px;border:1px solid transparent;border-bottom-color:rgba(225,183,111,.15);background:transparent;color:var(--text);cursor:pointer;border-radius:9px}
@@ -267,7 +300,7 @@
           <h1>HBLE<br><em>RADIO.</em></h1>
           <p class="hero-lead">Local sound. Legendary reach.</p>
           <p class="hero-desc">From the music behind HBLE to the voices shaping our neighborhoods, this is a place to listen, discover and celebrate independent talent. Great music can start anywhere — and travel everywhere.</p>
-          <div class="actions"><a class="btn btn-gold" href="#listen">Listen to HBLE Radio ↗</a><a class="btn" href="#submit">Submit Your Music</a></div>
+          <div class="actions"><a class="btn btn-gold" id="start-radio-hero" href="#listen">Listen to HBLE Radio ↗</a><a class="btn" href="#submit">Submit Your Music</a></div>
         </div>
         <div class="record-art" role="img" aria-label="Gold HBLE Radio label at the center of a vinyl record">
           <div class="record-center"><span class="mini">HBLE ORIGINALS</span><strong>RADIO</strong><small>HUMBLE BEGINNINGS<br>LEGENDARY ENDINGS</small></div>
@@ -296,8 +329,8 @@
               <button class="control" id="next-btn" type="button" aria-label="Next track" title="Next track">⏭</button>
             </div>
             <div class="volume"><label for="volume">VOLUME</label><input type="range" id="volume" min="0" max="1" step=".05" value=".8" aria-label="Volume"></div>
-            <p class="player-note" id="player-note" role="status" aria-live="polite">Select a song or press Play to begin. Songs automatically advance while this page stays open.</p>
-            <audio id="radio-audio" preload="none"></audio>
+            <p class="player-note" id="player-note" role="status" aria-live="polite">HBLE Radio starts automatically when your browser permits sound. If prompted, tap to start listening.</p>
+            <audio id="radio-audio" preload="auto" playsinline></audio>
           </section>
 
           
@@ -411,6 +444,14 @@
         </div>
       </div>
     </section>
+    <aside class="radio-sound-gate" id="radio-sound-gate" hidden aria-label="Start HBLE Radio audio">
+      <div class="radio-sound-gate-copy">
+        <strong>HBLE RADIO · READY TO PLAY</strong>
+        <span>Your browser requires a tap to enable sound.</span>
+      </div>
+      <button class="radio-sound-gate-start" id="radio-sound-gate-start" type="button">▶ Start Listening</button>
+      <button class="radio-sound-gate-close" id="radio-sound-gate-close" type="button" aria-label="Dismiss radio start reminder">✕</button>
+    </aside>
   </main>
   <footer><div class="wrap"><div class="foot-inner"><div><strong>HBLE RADIO</strong><div>HBLE Enterprises Inc. · Humble Beginnings. Legendary Endings.</div></div><nav aria-label="Footer"><a href="index.html">HBLE Home</a><a href="podcast.html">The Common Thread</a><a href="policies.html#privacy">Privacy</a></nav></div><p class="fineprint">© <span id="year">2026</span> HBLE Enterprises Inc. All rights reserved.</p></div></footer>
   <script>
@@ -443,6 +484,12 @@
       const elapsed=document.getElementById('current-time');
       const duration=document.getElementById('duration');
       const songs=Array.from(document.querySelectorAll('.song'));
+      const gate=document.getElementById('radio-sound-gate');
+      const gateStart=document.getElementById('radio-sound-gate-start');
+      const gateClose=document.getElementById('radio-sound-gate-close');
+      const heroStart=document.getElementById('start-radio-hero');
+      function showSoundGate(){if(gate)gate.hidden=false;}
+      function hideSoundGate(){if(gate)gate.hidden=true;}
       let index=0;
       let shuffle=false;
       let initialized=false;
@@ -465,11 +512,17 @@
         seek.value=0;elapsed.textContent='0:00';duration.textContent='0:00';
         renderSelection();
       }
-      function playCurrent(){
+      function playCurrent(automatic){
         if(!initialized)loadTrack();
         const promise=audio.play();
-        if(promise&&typeof promise.catch==='function')promise.catch(function(){
-          note.textContent='Playback could not start. Tap Play again or try a different track.';
+        if(promise&&typeof promise.catch==='function')promise.catch(function(error){
+          if(error&&error.name==='NotAllowedError'){
+            status.textContent='TAP TO START · HBLE RADIO';
+            note.textContent='Your browser blocked automatic sound. Tap Start Listening to hear HBLE Radio.';
+            showSoundGate();
+          }else if(error&&error.name!=='AbortError'){
+            note.textContent='Playback could not start. Try Play again or select a different song.';
+          }
         });
       }
       function pauseCurrent(){audio.pause()}
@@ -481,7 +534,10 @@
       }
       function skip(direction){pickNext(direction);loadTrack();playCurrent()}
       function selectTrack(i){if(i===index&&initialized){if(audio.paused)playCurrent();return}index=i;loadTrack();playCurrent()}
-      playBtn.addEventListener('click',function(){if(audio.paused)playCurrent();else pauseCurrent()});
+      playBtn.addEventListener('click',function(){if(audio.paused)playCurrent(false);else pauseCurrent()});
+      gateStart.addEventListener('click',function(){playCurrent(false)});
+      gateClose.addEventListener('click',hideSoundGate);
+      heroStart.addEventListener('click',function(){playCurrent(false)});
       prevBtn.addEventListener('click',function(){if(audio.currentTime>3){audio.currentTime=0;return}skip(-1)});
       nextBtn.addEventListener('click',function(){skip(1)});
       shuffleBtn.addEventListener('click',function(){
@@ -498,6 +554,7 @@
       });
       audio.addEventListener('loadedmetadata',function(){duration.textContent=format(audio.duration)});
       audio.addEventListener('play',function(){
+        hideSoundGate();
         player.classList.add('is-playing');
         status.textContent='NOW PLAYING · HBLE RADIO';
         playBtn.textContent='Ⅱ';
@@ -518,6 +575,9 @@
       });
       document.getElementById('year').textContent=String(new Date().getFullYear());
       renderSelection();
+      // Autostart the first track on page entry when the browser allows audible media.
+      // Browsers that require a user gesture display the one-tap sound gate instead.
+      playCurrent(true);
     })();
   </script>
 
