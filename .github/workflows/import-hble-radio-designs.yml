@@ -15,6 +15,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: true
+      - name: Prepare image conversion
+        shell: bash
+        run: |
+          python3 -m venv /tmp/hble-image-venv
+          /tmp/hble-image-venv/bin/pip -q install pillow
       - name: Import nine provided HBLE showcase designs
         shell: bash
         run: |
@@ -23,7 +28,18 @@ jobs:
           while IFS='|' read -r name source; do
             [ -n "$name" ] || continue
             echo "Importing HBLE design $name"
-            curl --fail --location --retry 3 --silent --show-error "$source" -o "images/radio-showcase/${name}.png"
+            tmp="$(mktemp)"
+            curl --fail --location --retry 3 --silent --show-error "$source" -o "$tmp"
+            echo "  Downloaded format: $(file -b "$tmp")"
+            /tmp/hble-image-venv/bin/python - "$tmp" "images/radio-showcase/${name}.png" <<'PY'
+          from PIL import Image
+          import sys
+          source, destination = sys.argv[1:]
+          with Image.open(source) as image:
+              print('Converting:', image.format, image.size)
+              image.convert('RGB').save(destination, format='PNG', optimize=True)
+          PY
+            rm -f "$tmp"
             test -s "images/radio-showcase/${name}.png"
             file "images/radio-showcase/${name}.png" | grep -q 'PNG image data'
           done <<'HBLE_IMAGES'
