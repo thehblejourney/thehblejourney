@@ -163,6 +163,88 @@
     @media(max-width:670px){#thread-preview{padding:58px 0}#thread-preview .thread-shell{grid-template-columns:1fr}#thread-preview .thread-emblem{min-height:155px}#thread-preview .thread-emblem:before,#thread-preview .thread-emblem:after{width:145px}.nav-inner{gap:8px}.nav-links{gap:8px}.nav-links .btn-primary{padding:10px 12px;font-size:.72rem}.nav-links .btn-primary{display:none}.brand{font-size:.85rem}}
     @media(max-width:370px){.nav-links .btn-primary{display:none}.brand{font-size:.8rem}}
   </style>
+  <style id="hble-radio-promo-styles">
+    /* Radio is prominent inside the hamburger menu, but does not crowd desktop nav */
+    .nav .nav-links>a.radio-menu-link{display:none!important}
+    #radio-preview{
+      border-top:1px solid rgba(230,189,120,.22);
+      border-bottom:1px solid rgba(230,189,120,.3);
+      background:#0d0c0a;
+      padding:73px 0;
+      overflow:hidden;
+    }
+    #radio-preview .radio-preview-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.05fr) minmax(240px,.95fr);
+      gap:36px;
+      align-items:center;
+    }
+    #radio-preview .radio-kicker{
+      display:block;
+      color:#e2bc77;
+      font-size:.7rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.22em;
+    }
+    #radio-preview h2{
+      font-family:'Playfair Display',Georgia,serif;
+      font-size:clamp(2.8rem,5.5vw,5.1rem);
+      line-height:1.02;
+      letter-spacing:-.045em;
+      margin:13px 0 15px;
+    }
+    #radio-preview h2 em{color:#f2d998;font-weight:500}
+    #radio-preview p{color:#b5ab9e;font-size:1rem;max-width:650px;margin:0 0 24px}
+    #radio-preview .radio-bars{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      justify-content:center;
+      min-height:230px;
+      border:1px solid rgba(225,181,104,.22);
+      border-radius:26px;
+      background:#17130e;
+      padding:22px;
+    }
+    #radio-preview .radio-bars span{
+      height:50px;width:9px;border-radius:8px;background:#d8ac69;
+      transform:scaleY(.36);
+      animation:hbleRadioWave 1.3s ease-in-out infinite alternate;
+    }
+    #radio-preview .radio-bars span:nth-child(2){height:105px;animation-delay:.2s}
+    #radio-preview .radio-bars span:nth-child(3){height:135px;animation-delay:.5s}
+    #radio-preview .radio-bars span:nth-child(4){height:80px;animation-delay:.1s}
+    #radio-preview .radio-bars span:nth-child(5){height:160px;animation-delay:.4s}
+    #radio-preview .radio-bars span:nth-child(6){height:95px;animation-delay:.25s}
+    #radio-preview .radio-bars span:nth-child(7){height:125px;animation-delay:.6s}
+    #radio-preview .radio-bars span:nth-child(8){height:70px;animation-delay:.15s}
+    #radio-preview .radio-bars span:nth-child(9){height:110px;animation-delay:.35s}
+    @keyframes hbleRadioWave{to{transform:scaleY(1)}}
+    @media(max-width:1260px){
+      .nav .nav-links>a.radio-menu-link{
+        display:flex!important;
+        color:#f2d998!important;
+        font-weight:800;
+        letter-spacing:.04em;
+        white-space:normal;
+      }
+      .nav .nav-links>a.radio-menu-link::before{
+        content:"♫";
+        margin-right:10px;
+        font-size:1.15rem;
+        color:#d9b477;
+      }
+    }
+    @media(max-width:720px){
+      #radio-preview{padding:62px 0}
+      #radio-preview .radio-preview-grid{grid-template-columns:1fr}
+      #radio-preview .radio-bars{min-height:165px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      #radio-preview .radio-bars span{animation:none;transform:scaleY(.76)}
+    }
+  </style>
   <style id="hble-luxury-navigation">
     /* HBLE Studios — refined editorial navigation. Scoped to homepage nav. */
     .nav{
@@ -439,7 +521,7 @@
       <span class="nav-toggle-label">MENU</span>
       <span class="nav-toggle-icon" aria-hidden="true"><i></i><i></i><i></i></span>
     </button>
-    <div class="nav-links"><a href="#services">Services</a><a href="#work">Work</a><a class="podcast-menu-link" href="podcast.html">HBLE COMMON THREAD PODCAST</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#support">Support</a><a class="btn btn-primary" href="#pricing">Book a Project</a></div>
+    <div class="nav-links"><a href="#services">Services</a><a href="#work">Work</a><a class="podcast-menu-link" href="podcast.html">HBLE COMMON THREAD PODCAST</a><a class="radio-menu-link" href="radio.html">HBLE RADIO</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#support">Support</a><a class="btn btn-primary" href="#pricing">Book a Project</a></div>
   </div></nav>
   <div class="common-thread-ribbon" aria-label="HBLE presents The Common Thread Podcast">
     <div class="common-thread-ribbon-track">
@@ -473,6 +555,15 @@
         <a class="btn btn-primary" href="podcast.html">Discover The Common Thread <span aria-hidden="true">↗</span></a>
       </div>
       <div class="thread-emblem" aria-hidden="true"><strong>The Common Thread.</strong></div>
+    </div></section>
+
+    <section id="radio-preview" aria-labelledby="hble-radio-preview-title"><div class="wrap radio-preview-grid">
+      <div><span class="radio-kicker">HBLE ENTERPRISES PRESENTS · MUSIC & COMMUNITY</span>
+        <h2 id="hble-radio-preview-title">Discover <em>HBLE Radio.</em></h2>
+        <p>Local sound. Legendary reach. Listen to music already featured by HBLE, discover independent voices, and submit your own tracks for future consideration.</p>
+        <a class="btn btn-primary" href="radio.html">Tune In to HBLE Radio <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="radio-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div></section>
 
     <section class="section" id="services"><div class="wrap">
@@ -541,7 +632,7 @@
       <div class="policy-row"><div class="policy-card"><strong>Digital Fulfillment</strong><span>Project-specific timelines and electronic delivery. <a href="policies.html#fulfillment">Read policy →</a></span></div><div class="policy-card"><strong>Refunds & Cancellation</strong><span>Clear terms based on work performed and project commitments. <a href="policies.html#refunds">Read policy →</a></span></div><div class="policy-card"><strong>Privacy & Payments</strong><span>Secure Stripe checkout and clear payment terms. <a href="policies.html#payments">Read policy →</a></span></div></div>
     </div></section>
   </main>
-  <footer><div class="wrap"><div class="footer"><div><strong>HBLE STUDIOS</strong><br>HBLE ENTERPRISES INC.<br>Humble Beginnings. Legendary Endings.</div><div><strong>Services</strong><a href="#services">Video Editing & Post</a><a href="#services">Commercial & Brand Content</a><a href="#services">AI-Enhanced Visuals</a><a href="#services">Creative Direction</a></div><div><strong>Customer Information</strong><a href="#support">Customer Support</a><a href="policies.html#fulfillment">Fulfillment</a><a href="policies.html#refunds">Refund & Dispute Policy</a><a href="policies.html#cancellations">Cancellation Policy</a><a href="policies.html#privacy">Privacy Policy</a><a href="policies.html#payments">Payment Terms</a><a href="policies.html#terms">Terms of Service</a></div></div><div class="legal"><div>© <span id="year"></span> HBLE ENTERPRISES INC. • Louisiana, United States</div><div><a href="policies.html">Customer Policies</a><a href="mission.html">HBLE Community Legacy</a><a href="podcast.html">The Common Thread Podcast</a></div></div></div></footer>
+  <footer><div class="wrap"><div class="footer"><div><strong>HBLE STUDIOS</strong><br>HBLE ENTERPRISES INC.<br>Humble Beginnings. Legendary Endings.</div><div><strong>Services</strong><a href="#services">Video Editing & Post</a><a href="#services">Commercial & Brand Content</a><a href="#services">AI-Enhanced Visuals</a><a href="#services">Creative Direction</a></div><div><strong>Customer Information</strong><a href="#support">Customer Support</a><a href="policies.html#fulfillment">Fulfillment</a><a href="policies.html#refunds">Refund & Dispute Policy</a><a href="policies.html#cancellations">Cancellation Policy</a><a href="policies.html#privacy">Privacy Policy</a><a href="policies.html#payments">Payment Terms</a><a href="policies.html#terms">Terms of Service</a></div></div><div class="legal"><div>© <span id="year"></span> HBLE ENTERPRISES INC. • Louisiana, United States</div><div><a href="policies.html">Customer Policies</a><a href="mission.html">HBLE Community Legacy</a><a href="podcast.html">The Common Thread Podcast</a><a href="radio.html">HBLE Radio</a></div></div></div></footer>
   <script id="hble-luxury-nav-controller">
   (function(){
     const nav = document.querySelector('.nav');
