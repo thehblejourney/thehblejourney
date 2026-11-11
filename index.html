@@ -30,52 +30,120 @@
     @media(max-width:620px){.section,.statement{padding:74px 0}.hero-grid{padding:70px 0}.hero h1{font-size:clamp(3.1rem,16vw,5rem)}.process-grid,.form-grid,.policy-row,.footer{grid-template-columns:1fr}.field.full{grid-column:auto}.support{padding:27px}.brand small{display:none}.ticker span{padding:12px 18px}.price-card{padding:24px}}
   </style>
   <style id="common-thread-ribbon-styles">
+    /* The Common Thread — HBLE's editorial gold marquee */
     .common-thread-ribbon{
+      position:relative;
+      isolation:isolate;
+      z-index:2;
       width:100%;
       overflow:hidden;
-      background:#161108;
-      border-top:1px solid rgba(213,173,97,.28);
-      border-bottom:1px solid rgba(213,173,97,.55);
-      position:relative;
-      z-index:2;
+      background:radial-gradient(ellipse at 50% 0%,#302518 0%,#100d0a 70%),#100d0a;
+      border-top:1px solid rgba(247,218,157,.56);
+      border-bottom:1px solid rgba(247,218,157,.48);
+      box-shadow:inset 0 1px 0 rgba(255,241,209,.13),inset 0 -1px 0 rgba(255,241,209,.09),0 12px 35px rgba(0,0,0,.25);
     }
+    .common-thread-ribbon:before,.common-thread-ribbon:after{
+      content:"";
+      position:absolute;
+      z-index:1;
+      pointer-events:none;
+      top:0;
+      bottom:0;
+      width:min(8vw,100px);
+    }
+    .common-thread-ribbon:before{left:0;background:linear-gradient(90deg,#100d0a,transparent)}
+    .common-thread-ribbon:after{right:0;background:linear-gradient(270deg,#100d0a,transparent)}
     .common-thread-ribbon-track{
       display:flex;
       width:max-content;
-      animation:commonThreadScroll 29s linear infinite;
+      animation:commonThreadScroll 42s linear infinite;
       will-change:transform;
     }
     .common-thread-ribbon-set{
       display:flex;
-      align-items:center;
-      justify-content:space-around;
-      gap:38px;
-      min-width:100vw;
       flex:0 0 auto;
-      padding:12px 22px;
+      align-items:center;
+      min-width:100vw;
+      gap:48px;
+      padding:12px 24px;
     }
     .common-thread-ribbon a{
       display:inline-flex;
       align-items:center;
-      gap:35px;
-      flex-shrink:0;
-      color:#f2d998;
-      font-size:clamp(.81rem,1.4vw,1rem);
-      letter-spacing:.15em;
-      line-height:1.3;
-      font-weight:800;
-      white-space:nowrap;
+      flex:0 0 auto;
+      gap:16px;
       text-decoration:none;
-      transition:color .2s ease;
+      white-space:nowrap;
+      padding:7px 4px;
+      color:#eed39c;
+      border-radius:4px;
+      transition:transform .25s ease,filter .25s ease;
     }
-    .common-thread-ribbon a:hover,.common-thread-ribbon a:focus-visible{color:#fff}
-    .common-thread-ribbon a span{color:#c89843;font-size:.78rem}
-    .common-thread-ribbon:hover .common-thread-ribbon-track,.common-thread-ribbon:focus-within .common-thread-ribbon-track{animation-play-state:paused}
+    .common-thread-ribbon a:hover,.common-thread-ribbon a:focus-visible{
+      filter:brightness(1.22);
+      transform:translateY(-1px);
+    }
+    .common-thread-ribbon .thread-sigil{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:#d8ad68;
+      font-family:Georgia,serif;
+      font-size:1.35rem;
+      opacity:.95;
+    }
+    .common-thread-ribbon .thread-sigil:before,.common-thread-ribbon .thread-sigil:after{
+      content:"";
+      width:25px;
+      height:1px;
+      background:linear-gradient(90deg,transparent,#b78a4b);
+    }
+    .common-thread-ribbon .thread-sigil:after{background:linear-gradient(90deg,#b78a4b,transparent)}
+    .common-thread-ribbon .thread-lockup{display:flex;align-items:center;gap:14px}
+    .common-thread-ribbon .thread-title{
+      display:block;
+      font-family:'Playfair Display',Georgia,serif;
+      font-size:clamp(1.18rem,2.05vw,1.85rem);
+      line-height:1.15;
+      font-style:italic;
+      font-weight:700;
+      letter-spacing:.02em;
+      background:linear-gradient(110deg,#b88942 0%,#f9e8bc 27%,#d8ad68 50%,#fff5d6 68%,#a77939 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:#f2d998;
+      -webkit-text-fill-color:transparent;
+      text-shadow:none;
+    }
+    .common-thread-ribbon .thread-podcast{
+      display:inline-block;
+      font-family:Inter,Arial,sans-serif;
+      font-style:normal;
+      font-size:clamp(.61rem,.85vw,.74rem);
+      font-weight:800;
+      letter-spacing:.24em;
+      color:#f7e4bc;
+      border:1px solid rgba(225,184,111,.55);
+      background:rgba(218,169,84,.1);
+      border-radius:100px;
+      padding:7px 11px 7px 14px;
+    }
+    .common-thread-ribbon .thread-spark{font-size:.8rem;color:#bc8d4a;opacity:.9}
+    .common-thread-ribbon:hover .common-thread-ribbon-track,
+    .common-thread-ribbon:focus-within .common-thread-ribbon-track{animation-play-state:paused}
     @keyframes commonThreadScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-    @media(max-width:670px){.common-thread-ribbon-set{gap:28px;padding:11px 16px}.common-thread-ribbon a{letter-spacing:.12em;gap:25px}}
+    @media(max-width:670px){
+      .common-thread-ribbon-set{gap:18px;padding:10px 16px}
+      .common-thread-ribbon .thread-lockup{gap:9px}
+      .common-thread-ribbon .thread-title{font-size:1.17rem}
+      .common-thread-ribbon .thread-podcast{font-size:.57rem;letter-spacing:.15em;padding:5px 8px 5px 10px}
+      .common-thread-ribbon .thread-sigil{gap:5px;font-size:1rem}
+      .common-thread-ribbon .thread-sigil:before,.common-thread-ribbon .thread-sigil:after{width:13px}
+      .common-thread-ribbon .thread-spark{display:none}
+    }
     @media(prefers-reduced-motion:reduce){
       .common-thread-ribbon{overflow-x:auto}
-      .common-thread-ribbon-track{animation:none}
+      .common-thread-ribbon-track{animation:none;will-change:auto}
       .common-thread-ribbon-set[aria-hidden="true"]{display:none}
     }
   </style>
@@ -124,19 +192,17 @@
     <a class="brand" href="#top">HBLE STUDIOS<small>HBLE ENTERPRISES INC.</small></a>
     <div class="nav-links"><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#support">Support</a><a class="btn btn-primary" href="#pricing">Book a Project</a></div>
   </div></nav>
-  <div class="common-thread-ribbon" aria-label="The Common Thread podcast">
+  <div class="common-thread-ribbon" aria-label="HBLE presents The Common Thread Podcast">
     <div class="common-thread-ribbon-track">
       <div class="common-thread-ribbon-set">
-        <a href="podcast.html" aria-label="Open The Common Thread podcast">THE COMMON THREAD <span aria-hidden="true">✦</span></a>
-        <a href="podcast.html" tabindex="-1" aria-hidden="true">THE COMMON THREAD <span>✦</span></a>
-        <a href="podcast.html" tabindex="-1" aria-hidden="true">THE COMMON THREAD <span>✦</span></a>
-        <a href="podcast.html" tabindex="-1" aria-hidden="true">THE COMMON THREAD <span>✦</span></a>
+        <a href="podcast.html" aria-label="Open The Common Thread Podcast"><span class="thread-sigil" aria-hidden="true">✦</span><span class="thread-lockup"><span class="thread-title">The Common Thread</span><span class="thread-podcast">PODCAST</span></span><span class="thread-spark" aria-hidden="true">✧</span></a>
+        <a href="podcast.html" tabindex="-1" aria-hidden="true"><span class="thread-sigil">✦</span><span class="thread-lockup"><span class="thread-title">The Common Thread</span><span class="thread-podcast">PODCAST</span></span><span class="thread-spark">✧</span></a>
+        <a href="podcast.html" tabindex="-1" aria-hidden="true"><span class="thread-sigil">✦</span><span class="thread-lockup"><span class="thread-title">The Common Thread</span><span class="thread-podcast">PODCAST</span></span><span class="thread-spark">✧</span></a>
       </div>
       <div class="common-thread-ribbon-set" aria-hidden="true">
-        <a href="podcast.html" tabindex="-1">THE COMMON THREAD <span>✦</span></a>
-        <a href="podcast.html" tabindex="-1">THE COMMON THREAD <span>✦</span></a>
-        <a href="podcast.html" tabindex="-1">THE COMMON THREAD <span>✦</span></a>
-        <a href="podcast.html" tabindex="-1">THE COMMON THREAD <span>✦</span></a>
+        <a href="podcast.html" tabindex="-1" aria-hidden="true"><span class="thread-sigil">✦</span><span class="thread-lockup"><span class="thread-title">The Common Thread</span><span class="thread-podcast">PODCAST</span></span><span class="thread-spark">✧</span></a>
+        <a href="podcast.html" tabindex="-1" aria-hidden="true"><span class="thread-sigil">✦</span><span class="thread-lockup"><span class="thread-title">The Common Thread</span><span class="thread-podcast">PODCAST</span></span><span class="thread-spark">✧</span></a>
+        <a href="podcast.html" tabindex="-1" aria-hidden="true"><span class="thread-sigil">✦</span><span class="thread-lockup"><span class="thread-title">The Common Thread</span><span class="thread-podcast">PODCAST</span></span><span class="thread-spark">✧</span></a>
       </div>
     </div>
   </div>
