@@ -29,6 +29,23 @@
     @media(max-width:950px){.nav-links a:not(.btn){display:none}.grid3,.pricing,.portfolio{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr 1fr}.footer{grid-template-columns:1fr 1fr}.custom-quote{align-items:flex-start;flex-direction:column}}
     @media(max-width:620px){.section,.statement{padding:74px 0}.hero-grid{padding:70px 0}.hero h1{font-size:clamp(3.1rem,16vw,5rem)}.process-grid,.form-grid,.policy-row,.footer{grid-template-columns:1fr}.field.full{grid-column:auto}.support{padding:27px}.brand small{display:none}.ticker span{padding:12px 18px}.price-card{padding:24px}}
   </style>
+  <style id="hble-thread-preview-styles">
+    .nav-links .nav-thread{color:#f2d998;font-weight:800}
+    .nav-links .nav-thread:hover{color:#fff2ce}
+    #thread-preview{position:relative;overflow:hidden;padding:72px 0;background:radial-gradient(circle at 78% 40%,rgba(213,173,97,.11),transparent 40%),#0b0a08;border-bottom:1px solid rgba(213,173,97,.19)}
+    #thread-preview .thread-shell{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(240px,.8fr);gap:28px;align-items:center}
+    #thread-preview .thread-kicker{display:block;font-size:.69rem;letter-spacing:.22em;color:#f2d998;font-weight:800;text-transform:uppercase}
+    #thread-preview h2{font-family:'Playfair Display',serif;letter-spacing:-.045em;line-height:1.05;font-size:clamp(2.7rem,5vw,4.5rem);margin:13px 0 15px}
+    #thread-preview h2 em{color:#f2d998;font-weight:500}
+    #thread-preview p{max-width:670px;color:#b7ac9a;font-size:1rem;margin:0 0 23px}
+    #thread-preview .thread-emblem{position:relative;min-height:235px;display:grid;place-items:center}
+    #thread-preview .thread-emblem:before,#thread-preview .thread-emblem:after{content:"";position:absolute;width:210px;aspect-ratio:1;border:1px solid rgba(213,173,97,.5);border-radius:50%;transform:rotate(-24deg) scaleX(1.5)}
+    #thread-preview .thread-emblem:after{transform:rotate(45deg) scaleX(1.18);border-color:rgba(213,173,97,.22)}
+    #thread-preview .thread-emblem strong{position:relative;z-index:1;font-family:'Playfair Display',serif;color:#f2d998;font-size:clamp(2.5rem,4vw,4.3rem);font-style:italic;letter-spacing:-.09em;text-shadow:0 0 30px #0b0a08}
+    @media(max-width:950px){.nav-links a.nav-thread{display:inline-flex!important;white-space:nowrap}}
+    @media(max-width:670px){#thread-preview{padding:58px 0}#thread-preview .thread-shell{grid-template-columns:1fr}#thread-preview .thread-emblem{min-height:155px}#thread-preview .thread-emblem:before,#thread-preview .thread-emblem:after{width:145px}.nav-inner{gap:8px}.nav-links{gap:8px}.nav-links .btn-primary{padding:10px 12px;font-size:.72rem}.nav-links a.nav-thread{font-size:.76rem}.brand{font-size:.85rem}}
+    @media(max-width:370px){.nav-links .btn-primary{display:none}.brand{font-size:.8rem}}
+  </style>
   <style id="hble-hero-portrait-source">
     html body main#top section.hero{position:relative!important;isolation:isolate!important;overflow:hidden!important}
     html body main#top section.hero::after{
@@ -57,7 +74,7 @@
 <body>
   <nav class="nav"><div class="wrap nav-inner">
     <a class="brand" href="#top">HBLE STUDIOS<small>HBLE ENTERPRISES INC.</small></a>
-    <div class="nav-links"><a href="#services">Services</a><a href="#work">Work</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#support">Support</a><a class="btn btn-primary" href="#pricing">Book a Project</a></div>
+    <div class="nav-links"><a href="#services">Services</a><a href="#work">Work</a><a class="nav-thread" href="podcast.html">The Thread</a><a href="#process">Process</a><a href="#pricing">Pricing</a><a href="#support">Support</a><a class="btn btn-primary" href="#pricing">Book a Project</a></div>
   </div></nav>
   <main id="top">
     <section class="hero"><div class="wrap hero-grid"><div>
@@ -69,6 +86,15 @@
     </div></div></section>
 
     <div class="ticker"><div class="ticker-track"><span><b>HBLE STUDIOS</b> • VIDEO EDITING • POST-PRODUCTION • CHARACTER WORLDS • BRAND VISUALS • MUSIC CONTENT • AI-ENHANCED PRODUCTION</span></div></div>
+
+    <section id="thread-preview" aria-labelledby="thread-preview-title"><div class="wrap thread-shell">
+      <div><span class="thread-kicker">HBLE ENTERPRISES INC. PRESENTS · NEW PODCAST</span>
+        <h2 id="thread-preview-title">Meet <em>The Thread.</em></h2>
+        <p>Real voices. Deeper conversations. Every story connects us. Discover a new home for the journeys, perspectives and connections that make us who we are.</p>
+        <a class="btn btn-primary" href="podcast.html">Discover The Thread <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="thread-emblem" aria-hidden="true"><strong>The Thread.</strong></div>
+    </div></section>
 
     <section class="section" id="services"><div class="wrap">
       <div class="eyebrow">What We Do</div><h2 class="display">Creative work built to hold attention.</h2><p class="lead">Every project gets a visual point of view. HBLE combines editing, pacing, design, color, sound, motion and next-generation creative tools into one intentional production process.</p>
@@ -136,7 +162,7 @@
       <div class="policy-row"><div class="policy-card"><strong>Digital Fulfillment</strong><span>Project-specific timelines and electronic delivery. <a href="policies.html#fulfillment">Read policy →</a></span></div><div class="policy-card"><strong>Refunds & Cancellation</strong><span>Clear terms based on work performed and project commitments. <a href="policies.html#refunds">Read policy →</a></span></div><div class="policy-card"><strong>Privacy & Payments</strong><span>Secure Stripe checkout and clear payment terms. <a href="policies.html#payments">Read policy →</a></span></div></div>
     </div></section>
   </main>
-  <footer><div class="wrap"><div class="footer"><div><strong>HBLE STUDIOS</strong><br>HBLE ENTERPRISES INC.<br>Humble Beginnings. Legendary Endings.</div><div><strong>Services</strong><a href="#services">Video Editing & Post</a><a href="#services">Commercial & Brand Content</a><a href="#services">AI-Enhanced Visuals</a><a href="#services">Creative Direction</a></div><div><strong>Customer Information</strong><a href="#support">Customer Support</a><a href="policies.html#fulfillment">Fulfillment</a><a href="policies.html#refunds">Refund & Dispute Policy</a><a href="policies.html#cancellations">Cancellation Policy</a><a href="policies.html#privacy">Privacy Policy</a><a href="policies.html#payments">Payment Terms</a><a href="policies.html#terms">Terms of Service</a></div></div><div class="legal"><div>© <span id="year"></span> HBLE ENTERPRISES INC. • Louisiana, United States</div><div><a href="policies.html">Customer Policies</a><a href="mission.html">HBLE Community Legacy</a></div></div></div></footer>
+  <footer><div class="wrap"><div class="footer"><div><strong>HBLE STUDIOS</strong><br>HBLE ENTERPRISES INC.<br>Humble Beginnings. Legendary Endings.</div><div><strong>Services</strong><a href="#services">Video Editing & Post</a><a href="#services">Commercial & Brand Content</a><a href="#services">AI-Enhanced Visuals</a><a href="#services">Creative Direction</a></div><div><strong>Customer Information</strong><a href="#support">Customer Support</a><a href="policies.html#fulfillment">Fulfillment</a><a href="policies.html#refunds">Refund & Dispute Policy</a><a href="policies.html#cancellations">Cancellation Policy</a><a href="policies.html#privacy">Privacy Policy</a><a href="policies.html#payments">Payment Terms</a><a href="policies.html#terms">Terms of Service</a></div></div><div class="legal"><div>© <span id="year"></span> HBLE ENTERPRISES INC. • Louisiana, United States</div><div><a href="policies.html">Customer Policies</a><a href="mission.html">HBLE Community Legacy</a><a href="podcast.html">The Thread Podcast</a></div></div></div></footer>
   <script>
     document.getElementById('year').textContent=new Date().getFullYear();
     document.querySelectorAll('[data-checkout]').forEach(function(link){link.addEventListener('click',function(){if(typeof fbq==='function'){fbq('track','InitiateCheckout',{content_name:link.getAttribute('data-checkout')});}});});
