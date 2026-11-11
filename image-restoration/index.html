@@ -40,12 +40,12 @@
           <p class="muted">A glimpse of how an aged, faded family photograph can be reimagined through photo restoration, color improvement and careful enhancement.</p>
         </div>
         <figure class="sample-artwork">
-          <a class="sample-image-link" href="/image-restoration/samples/hble-family-restoration-sample.jpg" target="_blank" rel="noopener noreferrer" aria-label="View HBLE photo restoration before and after sample at full size">
-            <img src="/image-restoration/samples/hble-family-restoration-sample.jpg" alt="HBLE Photo Restoration and Enhancement before-and-after family portrait example, showing a faded vintage family photograph next to a color-enhanced illustrative restoration" width="1536" height="1024" decoding="async" loading="lazy">
+          <a class="sample-image-link" href="https://www.hble.org/image-restoration/samples/hble-family-restoration-sample.jpg" target="_blank" rel="noopener noreferrer" aria-label="View HBLE photo restoration before and after sample at full size">
+            <img src="https://www.hble.org/image-restoration/samples/hble-family-restoration-sample.jpg" data-restoration-sample data-backup-src="https://raw.githubusercontent.com/thehblejourney/thehblejourney/master/image-restoration/samples/hble-family-restoration-sample.jpg" data-final-src="https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/9ced1d36-8b90-46a8-9703-c264fb7c6424.png" alt="HBLE Photo Restoration and Enhancement before-and-after family portrait example, showing a faded vintage family photograph next to a color-enhanced illustrative restoration" width="1536" height="1024" decoding="async" loading="lazy">
           </a>
           <figcaption class="sample-caption">
             <span><strong>BEFORE &amp; AFTER</strong> · Featured demonstration sample</span>
-            <a href="/image-restoration/samples/hble-family-restoration-sample.jpg" target="_blank" rel="noopener noreferrer">View full-size image <span aria-hidden="true">↗</span></a>
+            <a href="https://www.hble.org/image-restoration/samples/hble-family-restoration-sample.jpg" target="_blank" rel="noopener noreferrer">View full-size image <span aria-hidden="true">↗</span></a>
           </figcaption>
         </figure>
         <p class="sample-disclaimer">Illustrative sample. Results vary with the condition of the original. Severely lost details may need reconstruction and cannot always be recovered exactly.</p>
@@ -141,6 +141,22 @@
   </main>
 
   <footer><div class="wrap">© HBLE Enterprises Inc. • HBLE Studios • Image Restoration</div></footer>
+  <script id="hble-restoration-sample-fallback">
+    (function(){
+      var sample=document.querySelector('[data-restoration-sample]');
+      if(!sample)return;
+      var attempt=0;
+      sample.addEventListener('error',function(){
+        attempt++;
+        if(attempt===1){sample.src=sample.getAttribute('data-backup-src');}
+        else if(attempt===2){sample.src=sample.getAttribute('data-final-src');}
+        else {
+          var caption=document.querySelector('.sample-disclaimer');
+          if(caption)caption.textContent='Sample temporarily unavailable. Please contact HBLE Studios to view this restoration example.';
+        }
+      });
+    })();
+  </script>
   <script src="/image-restoration/config.js"></script>
   <script src="/image-restoration/restoration.js"></script>
 </body>
