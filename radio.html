@@ -162,6 +162,8 @@
     .field textarea{min-height:110px;resize:vertical}
     .field input:focus,.field textarea:focus,.field select:focus{outline:2px solid var(--gold);outline-offset:1px}
     .field select{color-scheme:dark}
+    .radio-submission-policy{margin:22px 0 0;padding:18px 19px;background:#21190f;border:1px solid rgba(233,188,103,.65);border-left:4px solid var(--gold);border-radius:12px;color:#fae1a6;font-size:.97rem;line-height:1.45;font-weight:800}
+    .radio-submission-policy:before{content:"♫";margin-right:11px;color:var(--gold)}
     .agreement{display:flex;align-items:flex-start;gap:12px;color:#bfb3a1;font-size:.81rem;line-height:1.5}
     .agreement input{margin:4px 0 0;accent-color:var(--gold)}
     .fineprint{color:#9c9385;font-size:.75rem;margin-top:16px}
@@ -373,10 +375,12 @@
           <h2 class="section-title">Your music deserves a chance to be heard.</h2>
           <p class="section-lead">Independent artists, producers and creators: introduce yourself and send a private listening link. HBLE will review submissions for future radio features. No artist is added automatically.</p>
           <p class="section-lead">Please submit only original music that you own or have permission to share. Any broadcast or on-demand use requires appropriate authorization from all rights holders.</p>
+          <p class="radio-submission-policy">Only clean and edited song uploads submissions are permitted.</p>
         </div>
         <div class="form-card">
           <h3>Get into the rotation.</h3>
           <p style="color:var(--muted);font-size:.9rem">Share your music with the HBLE team.</p>
+          <p style="font-size:.84rem;font-weight:800;color:var(--bright)">Clean, edited tracks only. Explicit versions will not be accepted.</p>
           <form name="hble-radio-artist-submission" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="form-name" value="hble-radio-artist-submission">
             <p hidden><label>Do not fill this out <input name="bot-field"></label></p>
@@ -387,6 +391,12 @@
               <div class="field"><label for="hometown">City / hometown</label><input id="hometown" name="hometown" maxlength="120"></div>
               <div class="field full"><label for="music-link">Private listening link *</label><input id="music-link" name="music-link" type="url" required placeholder="https://..." maxlength="500"></div>
               <div class="field full"><label for="artist-story">Tell us about your music</label><textarea id="artist-story" name="artist-story" maxlength="2200" placeholder="Your sound, your story, and what you want listeners to know..."></textarea></div>
+              <div class="field full">
+                <label class="agreement" for="clean-track-check">
+                  <input id="clean-track-check" name="clean-edited-confirmation" type="checkbox" value="confirmed" required>
+                  <span>I confirm this is a clean, edited version of my song, suitable for HBLE Radio, without explicit lyrics.</span>
+                </label>
+              </div>
               <div class="field full">
                 <label class="agreement" for="rights-check">
                   <input id="rights-check" name="rights-confirmation" type="checkbox" value="confirmed" required>
