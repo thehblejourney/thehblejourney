@@ -4,7 +4,10 @@
 
   const tierGrid = document.getElementById('tierGrid');
   const addOnGrid = document.getElementById('addOnGrid');
-  const files = document.getElementById('photos');
+  const photoInputs = Array.from(document.querySelectorAll('[data-restoration-photo]'));
+  const referenceInput = document.getElementById('reference');
+  const allowedTypes = ['image/jpeg','image/png','image/webp'];
+  const maxUploadBytes = cfg.maxUploadMB * 1024 * 1024;
   const fileSummary = document.getElementById('fileSummary');
   const estimateValue = document.getElementById('estimateValue');
   const estimateNote = document.getElementById('estimateNote');
@@ -52,21 +55,41 @@
     return [...addOnGrid.querySelectorAll('[data-addon]:checked')].map(box=>cfg.addOns.find(a=>a.id===box.value)).filter(Boolean);
   }
 
+  function selectedPhotos(){
+    return photoInputs.reduce((all,input)=>all.concat(Array.from(input.files||[])),[]);
+  }
+
+  function checkUploads(){
+    const photos=selectedPhotos();
+    const reference=referenceInput && referenceInput.files.length?referenceInput.files[0]:null;
+    const all=reference?photos.concat(reference):photos;
+    const invalid=all.find(file=>!(/\.(jpe?g|png|webp)$/i.test(file.name)) || (file.type && !allowedTypes.includes(file.type)));
+    const totalBytes=all.reduce((sum,file)=>sum+file.size,0);
+    const totalMB=(totalBytes/(1024*1024)).toFixed(1);
+    let error='';
+    if(photos.length>cfg.maxFiles) error='Please select at most '+cfg.maxFiles+' restoration photos.';
+    else if(invalid) error='Only JPG, PNG, and WebP images are permitted. Check: '+invalid.name;
+    else if(totalBytes>maxUploadBytes) error='Your files total '+totalMB+' MB. The combined upload limit is '+cfg.maxUploadMB+' MB, including the optional reference photo.';
+    return {photos,reference,error,totalMB};
+  }
+
   function updateFileSummary(){
-    const list=[...files.files];
-    if(!list.length){
-      fileSummary.textContent=`Upload up to ${cfg.maxFiles} photos. JPG, PNG and other common image formats are accepted.`;
-      updateEstimate();
-      return;
+    const result=checkUploads();
+    if(result.error){
+      fileSummary.textContent=result.error;
+      fileSummary.style.color='#ffb7a5';
+    }else{
+      fileSummary.style.color='';
+      const count=result.photos.length;
+      fileSummary.textContent=count
+        ?count+' photo'+(count===1?'':'s')+' selected ('+result.totalMB+' MB total including any reference). You can submit up to '+cfg.maxFiles+' images per request.'
+        :'Select 1–'+cfg.maxFiles+' JPG, PNG or WebP photos. Maximum '+cfg.maxUploadMB+' MB combined, including any reference image.';
     }
-    const names=list.slice(0,5).map(f=>f.name).join(', ');
-    const more=list.length>5?` + ${list.length-5} more`:'';
-    fileSummary.textContent=`${list.length} photo${list.length===1?'':'s'} selected: ${names}${more}`;
     updateEstimate();
   }
 
   function updateEstimate(){
-    const count=files.files.length;
+    const count=selectedPhotos().length;
     const tier=cfg.tiers.find(t=>t.id===selectedTier)||cfg.tiers[0];
     let unit=tier.price;
     let promoApplied=false;
@@ -90,24 +113,16 @@
     addOnField.value=addons.map(a=>a.name).join(', ');
   }
 
-  files.addEventListener('change',()=>{
-    if(files.files.length>cfg.maxFiles){
-      files.value='';
-      fileSummary.textContent=`Please upload no more than ${cfg.maxFiles} photos in one request.`;
-    }
-    updateFileSummary();
-  });
+  photoInputs.forEach(input=>input.addEventListener('change',updateFileSummary));
+  if(referenceInput)referenceInput.addEventListener('change',updateFileSummary);
 
   form.addEventListener('submit',event=>{
-    if(!files.files.length){
+    const result=checkUploads();
+    if(!result.photos.length || result.error){
       event.preventDefault();
-      files.focus();
-      fileSummary.textContent='Please upload at least one photo before submitting.';
-      return;
-    }
-    if(files.files.length>cfg.maxFiles){
-      event.preventDefault();
-      fileSummary.textContent=`Please upload no more than ${cfg.maxFiles} photos in one request.`;
+      fileSummary.textContent=result.error||'Please choose at least one photo before submitting.';
+      fileSummary.style.color='#ffb7a5';
+      fileSummary.scrollIntoView({behavior:'smooth',block:'center'});
       return;
     }
     updateEstimate();
