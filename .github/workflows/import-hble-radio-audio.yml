@@ -1,0 +1,60 @@
+name: Import HBLE Radio audio library
+on:
+  push:
+    paths:
+      - .github/workflows/import-hble-radio-audio.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish_audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout HBLE website
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install audio converter
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y ffmpeg
+          fi
+      - name: Import and transcode the 10 user-supplied HBLE recordings to MP3
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audio/hble-radio
+          while IFS='|' read -r name source; do
+            [ -n "$name" ] || continue
+            input="$(mktemp)"
+            echo "Processing HBLE Radio track: $name"
+            curl --fail --location --retry 3 --silent --show-error "$source" -o "$input"
+            ffmpeg -nostdin -hide_banner -loglevel error -y -i "$input" -map 0:a:0 -vn -c:a libmp3lame -q:a 2 "audio/hble-radio/${name}.mp3"
+            rm -f "$input"
+            test -s "audio/hble-radio/${name}.mp3"
+          done <<'HBLE_TRACKS'
+          every-way|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/dbc634fe-02a5-47db-b6e0-a6ddd7b2af3b.mp3
+          every-way-slow-roll|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/728c720e-c751-4c4e-95cd-f463bcda89d0.mp3
+          believe|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/200d2a9a-b440-407c-9aaf-77c939dcc638.mp3
+          20-20-perfect-sight|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/21a4bfee-3d95-4174-9b4a-fffac2787d12.mp3
+          dont-be|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/ae30950d-c853-4caa-8cc7-9a467d7720b3.mp3
+          spittin-image-remix-2|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/32e4fb5b-e71b-4cef-90cb-665bbded976e.mp3
+          crazy-about-you-mr-doe|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/c195d2f7-19da-423b-af6c-b73418591117.mp3
+          lets-stay-together-mr-doe|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/4f234875-5b3c-430b-bb22-c4d29144cd07.mp3
+          da-casso|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/23b302b4-838e-4c33-a0f6-8c4241b4a212.mp3
+          tk-equipment-services|https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/36c4cfed-b318-4fee-a01a-fd1a1d0d7748.mp3
+          HBLE_TRACKS
+      - name: Commit HBLE Radio files to website
+        shell: bash
+        run: |
+          git config user.name "HBLE Radio Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add audio/hble-radio/*.mp3
+          if ! git diff --cached --quiet; then
+            git commit -m "Import 10 user-provided HBLE Radio songs in browser-ready MP3 format [skip ci]"
+            git push origin HEAD:master
+          else
+            echo "All HBLE Radio tracks already installed."
+          fi
