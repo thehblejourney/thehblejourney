@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080705">
+<meta name="description" content="HBLE Studios photo restoration and enhancement — view a before and after restoration demonstration.">
+<title>Before &amp; After Restoration Sample | HBLE Studios</title>
+<link rel="canonical" href="https://www.hble.org/image-restoration/sample/">
+<link rel="stylesheet" href="/image-restoration/restoration.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+main{min-height:75vh}
+.sample-page{padding:clamp(36px,6vw,86px) 0 72px;background:radial-gradient(ellipse at 50% 15%,#221809 0%,#0a0907 65%,#050505 100%)}
+.sample-hero{text-align:center;margin:0 auto 30px;max-width:850px}
+.sample-hero h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.45rem,7vw,5.2rem);line-height:1.05;letter-spacing:-.045em;margin:14px 0}
+.sample-hero h1 em{color:#f2d998}
+.sample-hero p{color:#c4b9a7;margin:0 auto;font-size:1rem;max-width:780px}
+.sample-photo{margin:0;padding:9px;border:1px solid rgba(245,213,149,.65);background:#130f09;border-radius:21px;box-shadow:0 22px 65px rgba(0,0,0,.55)}
+.sample-photo a{display:block}
+.sample-photo img{display:block;width:100%;height:auto;max-height:800px;object-fit:contain;border-radius:13px;background:#090909}
+.sample-photo figcaption{color:#f1d49b;text-align:center;letter-spacing:.10em;font-size:.76rem;font-weight:700;padding:15px 8px 8px}
+.sample-disclaimer{max-width:860px;margin:20px auto 0;font-size:.83rem;color:#b5a99a;text-align:center}
+.sample-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:27px}
+.sample-actions .btn{font-size:.9rem;padding:13px 22px}
+@media(max-width:620px){.sample-photo{padding:5px;border-radius:14px}.sample-photo img{border-radius:10px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="wrap nav-inner">
+  <a class="brand" href="/">HBLE STUDIOS</a>
+  <a class="back" href="/image-restoration/">Image Restoration</a>
+</div></nav>
+<main id="main">
+  <section class="sample-page">
+    <div class="wrap">
+      <header class="sample-hero">
+        <div class="eyebrow">HBLE PHOTO RESTORATION &amp; ENHANCEMENT</div>
+        <h1>Before &amp; <em>After.</em></h1>
+        <p>Bring your memories back to life. Explore an HBLE illustration of faded photograph enhancement, cleanup and color restoration.</p>
+      </header>
+      <figure class="sample-photo">
+        <a href="https://www.hble.org/image-restoration/samples/hble-family-restoration-sample.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size before and after restoration sample">
+          <img id="hble-sample-img" src="https://www.hble.org/image-restoration/samples/hble-family-restoration-sample.jpg" alt="HBLE branded before-and-after demonstration, with an aged family photo shown beside a brightly enhanced color example" width="1536" height="1024" decoding="async">
+        </a>
+        <figcaption>HBLE ENTERPRISES · FEATURED RESTORATION SAMPLE</figcaption>
+      </figure>
+      <p class="sample-disclaimer">Illustrative example. Each restoration depends on the source photograph; details missing from the original may be reconstructed rather than recovered exactly.</p>
+      <div class="sample-actions">
+        <a class="btn btn-primary" href="/image-restoration/#restore">Restore Your Photos ↗</a>
+        <a class="btn btn-ghost" href="/image-restoration/">View Restoration Services</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">© HBLE Enterprises Inc. · HBLE Studios · Image Restoration</div></footer>
+<script>
+(function(){
+  const img=document.getElementById('hble-sample-img');
+  const alternatives=["https://raw.githubusercontent.com/thehblejourney/thehblejourney/master/image-restoration/samples/hble-family-restoration-sample.jpg","https://d2ol7oe51mr4n9.cloudfront.net/user_3KsU0N4wNikJ3sVOGvWOniugO5h/9ced1d36-8b90-46a8-9703-c264fb7c6424.png"];
+  let index=0;
+  img.addEventListener('error',function(){
+    if(index<alternatives.length)img.src=alternatives[index++];
+  });
+})();
+</script>
+</body>
+</html>
