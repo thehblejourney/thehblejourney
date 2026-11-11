@@ -1,3 +1,15 @@
 [build]
   publish = "."
   command = "node netlify/update-project-support-heading.mjs && node netlify/inject-design-studio-link.mjs && node netlify/inject-hubspot.mjs && node netlify/inject-hble-motion.mjs && node netlify/optimize-hble-video-playback.mjs && node netlify/use-hble-tip-jar-asset.mjs && node netlify/inject-hble-tip-jar.mjs && node netlify/optimize-stripe-checkout-links.mjs && node netlify/force-hble-services-web.mjs && node netlify/inject-final-hero-portrait.mjs && node netlify/inject-design-studio-hero-portrait.mjs"
+
+# HBLE Security Hardening - initial low-risk browser protections
+# Keep HSTS short during the first rollout; increase only after confirming all
+# relevant hostnames and services are HTTPS-compatible.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=86400"
