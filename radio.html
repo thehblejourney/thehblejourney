@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090806">
+  <meta name="description" content="HBLE Radio — a curated listening room celebrating HBLE music and independent local artists. Listen to the HBLE archive and submit music for consideration.">
+  <meta property="og:title" content="HBLE Radio | HBLE Enterprises">
+  <meta property="og:description" content="Local sound. Legendary reach. Discover the music, artists and stories moving our community.">
+  <meta property="og:type" content="website">
+  <title>HBLE Radio | HBLE Enterprises</title>
+  <link rel="canonical" href="https://www.hble.org/radio.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#090806;--panel:#14120e;--panel2:#1b1812;--gold:#d8b170;--bright:#fae1a6;--muted:#afa698;--text:#faf3e7;--line:rgba(226,184,109,.26)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',Arial,sans-serif;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    .wrap{width:min(1170px,92vw);margin:auto}
+    :focus-visible{outline:2px solid var(--bright);outline-offset:4px}
+    .skip{position:absolute;top:-90px;left:12px;background:var(--bright);color:#111;padding:9px 15px;z-index:200}
+    .skip:focus{top:12px}
+    .topbar{background:#0d0b09;border-bottom:1px solid var(--line)}
+    .topbar-inner{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.14em;line-height:1.15;font-size:.93rem}
+    .brand img{width:46px;height:46px;object-fit:contain;border:1px solid var(--line);border-radius:9px;padding:4px}
+    .brand small{display:block;color:#bba781;font-size:.56rem;letter-spacing:.17em;font-weight:600;margin-top:6px}
+    .toplinks{display:flex;align-items:center;gap:22px;font-size:.84rem;font-weight:700}
+    .toplinks a:hover{color:var(--bright)}
+    .toplinks .home{border:1px solid var(--line);border-radius:100px;padding:9px 15px}
+    .hero{position:relative;overflow:hidden;isolation:isolate;padding:86px 0 90px;border-bottom:1px solid var(--line);background:#0b0907}
+    .hero:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 75% 40%,rgba(181,125,45,.20),transparent 42%),repeating-linear-gradient(90deg,transparent 0,transparent 69px,rgba(222,188,127,.032) 70px)}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(250px,.8fr);gap:35px;align-items:center}
+    .eyebrow{font-size:.69rem;font-weight:800;letter-spacing:.23em;color:var(--gold);text-transform:uppercase}
+    h1,h2,h3,p{margin-top:0}
+    h1,h2,.serif{font-family:'Playfair Display',Georgia,serif}
+    h1{font-size:clamp(4.6rem,10vw,9rem);line-height:.9;letter-spacing:-.07em;margin:22px 0 25px}
+    h1 em{font-weight:500;color:var(--bright)}
+    .hero-lead{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.35rem,2.3vw,2rem);color:#f0e1c9}
+    .hero-desc{color:#bcb1a1;max-width:570px;font-size:1.03rem}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 23px;border-radius:100px;border:1px solid var(--line);color:var(--text);font-weight:800;font-size:.88rem;background:#1a1610}
+    .btn:hover{border-color:var(--bright)}
+    .btn-gold{background:var(--gold);border-color:var(--gold);color:#1d160b}
+    .btn-gold:hover{background:var(--bright)}
+    .record-art{width:min(100%,385px);aspect-ratio:1;margin:auto;border-radius:50%;display:grid;place-items:center;position:relative;box-shadow:0 28px 55px rgba(0,0,0,.48),0 0 0 1px rgba(219,174,97,.4);background:repeating-radial-gradient(circle at 50% 50%,#11100e 0,#11100e 5px,#29231a 6px,#11100e 7px,#0c0b0a 9px)}
+    .record-art:before{content:"";position:absolute;inset:12%;border-radius:50%;border:1px solid rgba(250,222,164,.24)}
+    .record-center{width:53%;aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:2px solid rgba(255,224,155,.5);background:radial-gradient(circle,#7e562e,#302213 71%,#b68b51);box-shadow:inset 0 0 28px rgba(0,0,0,.55)}
+    .record-center .mini{font-size:.64rem;font-weight:800;letter-spacing:.22em;color:#ffe3ae}
+    .record-center strong{font-family:'Playfair Display',serif;font-size:clamp(2.7rem,5vw,4.7rem);line-height:1.1;color:#fff0cf}
+    .record-center small{font-size:.55rem;letter-spacing:.13em;color:#f6d9a4}
+    .signal{padding:15px 0;text-align:center;background:#18140e;border-bottom:1px solid var(--line);color:var(--bright);font-size:.72rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+    .signal span{color:#ab7d3d;padding:0 14px}
+    .section{padding:89px 0}
+    .section-title{font-size:clamp(2.45rem,5vw,4.7rem);line-height:1.06;letter-spacing:-.04em;margin:12px 0 18px}
+    .section-lead{max-width:760px;color:var(--muted)}
+    .radio-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(285px,.9fr);gap:20px;margin-top:35px}
+    .player,.queue{border:1px solid var(--line);border-radius:23px;background:linear-gradient(145deg,#1b1711,#0e0d0b);padding:30px}
+    .status{display:flex;align-items:center;gap:9px;color:var(--bright);font-size:.73rem;letter-spacing:.16em;font-weight:800}
+    .status i{height:8px;width:8px;border-radius:50%;background:#aa8653}
+    .player.is-playing .status i{background:#76dd9e;box-shadow:0 0 12px #76dd9e}
+    .visual{height:114px;display:flex;align-items:center;justify-content:center;gap:7px;margin:28px 0 16px}
+    .visual i{display:block;width:7px;height:40%;border-radius:10px;background:linear-gradient(#fbe5ac,#a37535);opacity:.82;transform:scaleY(.35);transform-origin:center;animation:bars 1.1s ease-in-out infinite alternate;animation-play-state:paused}
+    .visual i:nth-child(2){height:74%;animation-delay:.16s}
+    .visual i:nth-child(3){height:95%;animation-delay:.3s}
+    .visual i:nth-child(4){height:62%;animation-delay:.13s}
+    .visual i:nth-child(5){height:85%;animation-delay:.28s}
+    .visual i:nth-child(6){height:54%;animation-delay:.07s}
+    .visual i:nth-child(7){height:75%;animation-delay:.24s}
+    .visual i:nth-child(8){height:34%;animation-delay:.11s}
+    .player.is-playing .visual i{animation-play-state:running}
+    @keyframes bars{to{transform:scaleY(1)}}
+    .track-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.15rem,4vw,3.2rem);line-height:1.12;margin:0 0 7px}
+    .track-artist{color:#d4c7b3;font-size:.92rem;min-height:24px}
+    .seek-row{display:flex;gap:12px;align-items:center;margin-top:30px}
+    .seek-row time{font-size:.74rem;min-width:35px;color:#a9a096;font-variant-numeric:tabular-nums}
+    input[type=range]{accent-color:var(--gold);width:100%;cursor:pointer}
+    .controls{display:flex;align-items:center;justify-content:center;gap:16px;margin:22px 0}
+    .control{border:1px solid rgba(225,183,111,.25);border-radius:100px;background:#15120e;color:var(--bright);width:46px;height:46px;display:grid;place-items:center;font-size:1.12rem}
+    .control:hover,.control.active{border-color:var(--bright)}
+    .control.primary{width:63px;height:63px;background:var(--gold);color:#1c160c;border:0;font-size:1.5rem}
+    .volume{display:flex;gap:12px;align-items:center;max-width:260px;margin:16px auto 0;font-size:.72rem;color:var(--muted)}
+    .player-note{font-size:.8rem;color:var(--muted);margin-top:20px}
+    .queue h3{font-size:1.1rem;margin:0 0 4px}
+    .queue>p{font-size:.83rem;color:var(--muted);margin:0 0 16px}
+    .song{appearance:none;display:flex;align-items:center;gap:13px;text-align:left;width:100%;padding:15px 12px;border:1px solid transparent;border-bottom-color:rgba(225,183,111,.15);background:transparent;color:var(--text);cursor:pointer;border-radius:9px}
+    .song:hover{background:#20190f}
+    .song.selected{border-color:rgba(225,183,111,.48);background:#241c11}
+    .song .no{min-width:26px;text-align:center;font-size:.72rem;color:var(--gold);font-weight:700}
+    .song .details{display:block;min-width:0}
+    .song strong{display:block;font-size:.94rem}
+    .song small{display:block;font-size:.76rem;color:#aca292;line-height:1.3;margin-top:3px}
+    .song .note{margin-left:auto;color:#d8b170}
+    .queue-foot{font-size:.75rem;color:#9d9588;margin-top:18px}
+    .mission{background:#11100d;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .mission-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:28px}
+    .mission-card{padding:24px;border:1px solid var(--line);border-radius:17px;background:#17140f}
+    .mission-card .num{color:var(--gold);letter-spacing:.16em;font-size:.72rem;font-weight:800}
+    .mission-card h3{font-family:'Playfair Display',serif;font-size:1.48rem;margin:15px 0 9px}
+    .mission-card p{color:var(--muted);font-size:.9rem;margin:0}
+    .submit-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:start}
+    .form-card{padding:31px;background:#13110e;border:1px solid var(--line);border-radius:22px}
+    .form-card h3{font-family:'Playfair Display',serif;font-size:1.55rem}
+    .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:18px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field.full{grid-column:1/-1}
+    .field label{font-size:.78rem;font-weight:800;color:#e6d7bd}
+    .field input,.field textarea,.field select{border:1px solid rgba(241,208,158,.24);background:#090806;border-radius:9px;color:var(--text);padding:12px;min-width:0}
+    .field textarea{min-height:110px;resize:vertical}
+    .field input:focus,.field textarea:focus,.field select:focus{outline:2px solid var(--gold);outline-offset:1px}
+    .field select{color-scheme:dark}
+    .agreement{display:flex;align-items:flex-start;gap:12px;color:#bfb3a1;font-size:.81rem;line-height:1.5}
+    .agreement input{margin:4px 0 0;accent-color:var(--gold)}
+    .fineprint{color:#9c9385;font-size:.75rem;margin-top:16px}
+    .fineprint a{text-decoration:underline;color:var(--bright)}
+    footer{border-top:1px solid var(--line);padding:37px 0 49px;color:#a99c86;font-size:.85rem}
+    .foot-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}
+    footer strong{color:#f2e3c9}
+    footer nav{display:flex;gap:20px;flex-wrap:wrap}
+    footer nav a:hover{color:var(--bright)}
+    @media(max-width:850px){.hero-grid,.radio-grid,.submit-grid{grid-template-columns:1fr}.record-art{margin:25px auto 0;width:min(80%,320px)}.mission-grid{grid-template-columns:1fr}.submit-grid{gap:22px}}
+    @media(max-width:580px){.topbar-inner{min-height:70px}.brand{font-size:.77rem;letter-spacing:.09em}.brand small{font-size:.48rem}.brand img{width:39px;height:39px}.toplinks{gap:10px;font-size:.76rem}.toplinks .optional{display:none}.hero{padding:63px 0}.section{padding:68px 0}h1{font-size:clamp(4.25rem,19vw,6.7rem)}.player,.queue{padding:22px}.field-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.foot-inner{flex-direction:column;align-items:flex-start}.signal{font-size:.62rem;letter-spacing:.09em}.signal span{padding:0 4px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.visual i{animation:none!important;transform:scaleY(.75)}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html"><img src="images/Crown.jpg" alt=""><span>HBLE RADIO<small>HBLE ENTERPRISES INC.</small></span></a>
+      <nav class="toplinks" aria-label="Radio page navigation"><a class="optional" href="podcast.html">The Common Thread Podcast</a><a class="home" href="index.html">HBLE Home ↗</a></nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">HBLE ENTERPRISES PRESENTS · COMMUNITY SOUND</div>
+          <h1>HBLE<br><em>RADIO.</em></h1>
+          <p class="hero-lead">Local sound. Legendary reach.</p>
+          <p class="hero-desc">From the music behind HBLE to the voices shaping our neighborhoods, this is a place to listen, discover and celebrate independent talent. Great music can start anywhere — and travel everywhere.</p>
+          <div class="actions"><a class="btn btn-gold" href="#listen">Listen to HBLE Radio ↗</a><a class="btn" href="#submit">Submit Your Music</a></div>
+        </div>
+        <div class="record-art" role="img" aria-label="Gold HBLE Radio label at the center of a vinyl record">
+          <div class="record-center"><span class="mini">HBLE ORIGINALS</span><strong>RADIO</strong><small>HUMBLE BEGINNINGS<br>LEGENDARY ENDINGS</small></div>
+        </div>
+      </div>
+    </section>
+    <div class="signal">THE HBLE SOUND <span>✦</span> LOCAL ARTIST SPOTLIGHT <span>✦</span> MUSIC WITH A STORY</div>
+
+    <section class="section" id="listen">
+      <div class="wrap">
+        <div class="eyebrow">01 / THE LISTENING ROOM</div>
+        <h2 class="section-title">Turn it up. Stay awhile.</h2>
+        <p class="section-lead">Listen to a selection of songs already featured across HBLE's website. Choose a track or press Play and let the playlist continue. Playback starts when you tap Play; this is a curated listening room, not a 24/7 live broadcast.</p>
+        <div class="radio-grid">
+          <section class="player" id="radio-player" aria-label="HBLE Radio music player">
+            <div class="status"><i aria-hidden="true"></i><span id="play-status">READY TO PLAY · HBLE RADIO</span></div>
+            <div class="visual" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <h3 class="track-title" id="track-title">Champions</h3>
+            <p class="track-artist" id="track-artist">Produced by J Soul Musiq</p>
+            <div class="seek-row"><time id="current-time">0:00</time><input type="range" id="seek" aria-label="Track progress" min="0" max="100" step="0.1" value="0"><time id="duration">0:00</time></div>
+            <div class="controls">
+              <button class="control" id="shuffle-btn" type="button" aria-label="Shuffle off" aria-pressed="false" title="Shuffle">⤨</button>
+              <button class="control" id="prev-btn" type="button" aria-label="Previous track" title="Previous track">⏮</button>
+              <button class="control primary" id="play-btn" type="button" aria-label="Play music" title="Play music">▶</button>
+              <button class="control" id="next-btn" type="button" aria-label="Next track" title="Next track">⏭</button>
+            </div>
+            <div class="volume"><label for="volume">VOLUME</label><input type="range" id="volume" min="0" max="1" step=".05" value=".8" aria-label="Volume"></div>
+            <p class="player-note" id="player-note" role="status" aria-live="polite">Select a song or press Play to begin. Songs automatically advance while this page stays open.</p>
+            <audio id="radio-audio" preload="none"></audio>
+          </section>
+          <section class="queue" aria-label="HBLE Radio playlist">
+            <div class="eyebrow">HBLE ARCHIVE ROTATION</div>
+            <h3>On the playlist</h3>
+            <p>Three tracks already featured on HBLE.</p>
+            <div id="song-list">
+              <button class="song selected" type="button" data-index="0" aria-label="Play Champions"><span class="no">01</span><span class="details"><strong>Champions</strong><small>Produced by J Soul Musiq</small></span><span class="note">♪</span></button>
+              <button class="song" type="button" data-index="1" aria-label="Play NewHard"><span class="no">02</span><span class="details"><strong>NewHard</strong><small>Mr Doe · Doe Beats Productions</small></span><span class="note">♪</span></button>
+              <button class="song" type="button" data-index="2" aria-label="Play Love Her All The Time by Jru Starz"><span class="no">03</span><span class="details"><strong>Love Her All The Time</strong><small>Jru Starz</small></span><span class="note">♪</span></button>
+            </div>
+            <p class="queue-foot">Additional independent artists can join the rotation after track review and permission confirmation.</p>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section mission">
+      <div class="wrap">
+        <span class="eyebrow">02 / MORE THAN THE MUSIC</span>
+        <h2 class="section-title">A platform for the sound of home.</h2>
+        <p class="section-lead">HBLE Radio connects music to the people and communities behind it — giving independent talent a place to be heard alongside HBLE originals.</p>
+        <div class="mission-grid">
+          <article class="mission-card"><span class="num">01 / HBLE</span><h3>Our Sound</h3><p>Music and production that have accompanied the HBLE journey, brought together in one listening space.</p></article>
+          <article class="mission-card"><span class="num">02 / ARTISTS</span><h3>Local Voices</h3><p>Spotlight opportunities for independent musicians, producers and emerging talent from our communities.</p></article>
+          <article class="mission-card"><span class="num">03 / CULTURE</span><h3>Real Connections</h3><p>Discover the stories, creative energy and hometown roots behind the songs you hear.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="submit">
+      <div class="wrap submit-grid">
+        <div>
+          <div class="eyebrow">03 / ARTIST SUBMISSIONS</div>
+          <h2 class="section-title">Your music deserves a chance to be heard.</h2>
+          <p class="section-lead">Independent artists, producers and creators: introduce yourself and send a private listening link. HBLE will review submissions for future radio features. No artist is added automatically.</p>
+          <p class="section-lead">Please submit only original music that you own or have permission to share. Any broadcast or on-demand use requires appropriate authorization from all rights holders.</p>
+        </div>
+        <div class="form-card">
+          <h3>Get into the rotation.</h3>
+          <p style="color:var(--muted);font-size:.9rem">Share your music with the HBLE team.</p>
+          <form name="hble-radio-artist-submission" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="hble-radio-artist-submission">
+            <p hidden><label>Do not fill this out <input name="bot-field"></label></p>
+            <div class="field-grid">
+              <div class="field"><label for="artist-name">Artist / stage name *</label><input id="artist-name" name="artist-name" required maxlength="120" autocomplete="nickname"></div>
+              <div class="field"><label for="artist-email">Email *</label><input id="artist-email" name="email" type="email" required maxlength="180" autocomplete="email"></div>
+              <div class="field"><label for="song-title">Song title *</label><input id="song-title" name="song-title" required maxlength="180"></div>
+              <div class="field"><label for="hometown">City / hometown</label><input id="hometown" name="hometown" maxlength="120"></div>
+              <div class="field full"><label for="music-link">Private listening link *</label><input id="music-link" name="music-link" type="url" required placeholder="https://..." maxlength="500"></div>
+              <div class="field full"><label for="artist-story">Tell us about your music</label><textarea id="artist-story" name="artist-story" maxlength="2200" placeholder="Your sound, your story, and what you want listeners to know..."></textarea></div>
+              <div class="field full">
+                <label class="agreement" for="rights-check">
+                  <input id="rights-check" name="rights-confirmation" type="checkbox" value="confirmed" required>
+                  <span>I confirm I own or have permission to share this music for HBLE to review. I understand that separate written authorization may be required before public playback.</span>
+                </label>
+              </div>
+              <div class="field full"><button class="btn btn-gold" type="submit">Send Music for Review ↗</button></div>
+            </div>
+            <p class="fineprint">Submissions are reviewed; airplay is not guaranteed. We may contact you about rights and artist credits. See our <a href="policies.html#privacy">Privacy Policy</a>.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap"><div class="foot-inner"><div><strong>HBLE RADIO</strong><div>HBLE Enterprises Inc. · Humble Beginnings. Legendary Endings.</div></div><nav aria-label="Footer"><a href="index.html">HBLE Home</a><a href="podcast.html">The Common Thread</a><a href="policies.html#privacy">Privacy</a></nav></div><p class="fineprint">© <span id="year">2026</span> HBLE Enterprises Inc. All rights reserved.</p></div></footer>
+  <script>
+    (function(){
+      'use strict';
+      const tracks=[
+        {title:'Champions',artist:'Produced by J Soul Musiq',src:'audio/Champions.mp3'},
+        {title:'NewHard',artist:'Mr Doe · Doe Beats Productions',src:'audio/NewHard.mp3'},
+        {title:'Love Her All The Time',artist:'Jru Starz',src:'audio/JruStarz.mp3'}
+      ];
+      const audio=document.getElementById('radio-audio');
+      const player=document.getElementById('radio-player');
+      const title=document.getElementById('track-title');
+      const artist=document.getElementById('track-artist');
+      const status=document.getElementById('play-status');
+      const note=document.getElementById('player-note');
+      const playBtn=document.getElementById('play-btn');
+      const prevBtn=document.getElementById('prev-btn');
+      const nextBtn=document.getElementById('next-btn');
+      const shuffleBtn=document.getElementById('shuffle-btn');
+      const seek=document.getElementById('seek');
+      const volume=document.getElementById('volume');
+      const elapsed=document.getElementById('current-time');
+      const duration=document.getElementById('duration');
+      const songs=Array.from(document.querySelectorAll('.song'));
+      let index=0;
+      let shuffle=false;
+      let initialized=false;
+      audio.volume=.8;
+      function format(s){if(!Number.isFinite(s)||s<0)return '0:00';return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0')}
+      function renderSelection(){
+        const track=tracks[index];
+        title.textContent=track.title;
+        artist.textContent=track.artist;
+        songs.forEach(function(button){
+          const selected=Number(button.dataset.index)===index;
+          button.classList.toggle('selected',selected);
+          button.setAttribute('aria-current',selected?'true':'false');
+        });
+      }
+      function loadTrack(){
+        audio.src=tracks[index].src;
+        initialized=true;
+        audio.load();
+        seek.value=0;elapsed.textContent='0:00';duration.textContent='0:00';
+        renderSelection();
+      }
+      function playCurrent(){
+        if(!initialized)loadTrack();
+        const promise=audio.play();
+        if(promise&&typeof promise.catch==='function')promise.catch(function(){
+          note.textContent='Playback could not start. Tap Play again or try a different track.';
+        });
+      }
+      function pauseCurrent(){audio.pause()}
+      function pickNext(direction){
+        if(!shuffle){index=(index+direction+tracks.length)%tracks.length;return}
+        if(tracks.length<2)return;
+        const candidates=tracks.map(function(_,i){return i}).filter(function(i){return i!==index});
+        index=candidates[Math.floor(Math.random()*candidates.length)];
+      }
+      function skip(direction){pickNext(direction);loadTrack();playCurrent()}
+      function selectTrack(i){if(i===index&&initialized){if(audio.paused)playCurrent();return}index=i;loadTrack();playCurrent()}
+      playBtn.addEventListener('click',function(){if(audio.paused)playCurrent();else pauseCurrent()});
+      prevBtn.addEventListener('click',function(){if(audio.currentTime>3){audio.currentTime=0;return}skip(-1)});
+      nextBtn.addEventListener('click',function(){skip(1)});
+      shuffleBtn.addEventListener('click',function(){
+        shuffle=!shuffle;shuffleBtn.classList.toggle('active',shuffle);
+        shuffleBtn.setAttribute('aria-pressed',String(shuffle));
+        shuffleBtn.setAttribute('aria-label',shuffle?'Shuffle on':'Shuffle off');
+      });
+      songs.forEach(function(button){button.addEventListener('click',function(){selectTrack(Number(button.dataset.index))})});
+      volume.addEventListener('input',function(){audio.volume=Number(volume.value)});
+      seek.addEventListener('input',function(){if(Number.isFinite(audio.duration)&&audio.duration>0)audio.currentTime=Number(seek.value)/100*audio.duration});
+      audio.addEventListener('timeupdate',function(){
+        elapsed.textContent=format(audio.currentTime);
+        if(Number.isFinite(audio.duration)&&audio.duration>0)seek.value=String(audio.currentTime/audio.duration*100);
+      });
+      audio.addEventListener('loadedmetadata',function(){duration.textContent=format(audio.duration)});
+      audio.addEventListener('play',function(){
+        player.classList.add('is-playing');
+        status.textContent='NOW PLAYING · HBLE RADIO';
+        playBtn.textContent='Ⅱ';
+        playBtn.setAttribute('aria-label','Pause music');
+        note.textContent='Enjoy the music. This playlist advances automatically.';
+      });
+      audio.addEventListener('pause',function(){
+        player.classList.remove('is-playing');
+        status.textContent='PAUSED · HBLE RADIO';
+        playBtn.textContent='▶';
+        playBtn.setAttribute('aria-label','Play music');
+      });
+      audio.addEventListener('ended',function(){skip(1)});
+      audio.addEventListener('error',function(){
+        player.classList.remove('is-playing');
+        status.textContent='TRACK UNAVAILABLE';
+        note.textContent='This track could not load. Please choose another song.';
+      });
+      document.getElementById('year').textContent=String(new Date().getFullYear());
+      renderSelection();
+    })();
+  </script>
+</body>
+</html>
