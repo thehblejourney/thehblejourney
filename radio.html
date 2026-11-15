@@ -289,9 +289,12 @@
       .showcase-v2 .showcase-main-image{animation:none!important;transform:none!important}
     }
 
+  .download-dialog{border:1px solid var(--gold);border-radius:18px;background:#17130e;color:var(--text);padding:25px;width:min(430px,92vw);box-shadow:0 15px 55px #000b}.download-dialog::backdrop{background:#000b}.download-dialog label{display:block;margin:12px 0 5px}.download-dialog input[type=email]{width:100%;padding:12px;background:#0d0b09;color:white;border:1px solid var(--gold);border-radius:8px}.download-dialog button{margin-top:15px;padding:10px 16px;border-radius:8px;border:1px solid var(--gold);background:var(--gold);color:#18120b;font-weight:700}.download-dialog .cancel{background:transparent;color:var(--text);margin-left:8px}.download-dialog p{color:var(--muted)}
   </style>
 </head>
 <body>
+  <form name="hble-music-downloads" data-netlify="true" netlify-honeypot="bot-field" hidden><input name="form-name" value="hble-music-downloads"><input name="email" type="email"><input name="song"><input name="downloaded_at"><input name="bot-field"></form>
+  <dialog id="hble-download-dialog" class="download-dialog" aria-labelledby="download-dialog-title"><form id="hble-download-request"><h2 id="download-dialog-title">Download HBLE Music</h2><p id="download-song-label"></p><label for="download-email">Your email address</label><input id="download-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com"><p>Your email and selected song will be recorded for download tracking. No marketing emails without separate consent.</p><p id="download-status" role="status" aria-live="polite"></p><button type="submit" id="download-submit">Continue to MP3</button><button type="button" class="cancel" id="download-cancel">Cancel</button></form></dialog>
   <a class="skip" href="#main">Skip to content</a>
   <header class="topbar">
     <div class="wrap topbar-inner">
@@ -499,6 +502,34 @@
       function downloadName(track){
         return 'HBLE-'+track.title.normalize('NFKD').replace(/[^a-zA-Z0-9]+/g,'-').replace(/^-|-$/g,'')+'.mp3';
       }
+      const downloadDialog=document.getElementById('hble-download-dialog');
+      const downloadForm=document.getElementById('hble-download-request');
+      const downloadStatus=document.getElementById('download-status');
+      let requestedDownload=-1;
+      function requestDownload(i){
+        if(!downloadable.has(i))return;
+        requestedDownload=i;
+        document.getElementById('download-song-label').textContent=tracks[i].title;
+        downloadStatus.textContent='';
+        downloadDialog.showModal();
+      }
+      document.getElementById('download-cancel').addEventListener('click',()=>downloadDialog.close());
+      downloadForm.addEventListener('submit',async function(e){
+        e.preventDefault();
+        const i=requestedDownload;
+        if(!downloadable.has(i))return;
+        const submit=document.getElementById('download-submit');
+        submit.disabled=true;
+        downloadStatus.textContent='Recording your download request…';
+        try{
+          const payload=new URLSearchParams({'form-name':'hble-music-downloads',email:document.getElementById('download-email').value.trim(),song:tracks[i].title,downloaded_at:new Date().toISOString()});
+          const response=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:payload.toString()});
+          if(!response.ok)throw new Error('Form submission failed');
+          const link=document.createElement('a');link.href=tracks[i].src;link.download=downloadName(tracks[i]);document.body.appendChild(link);link.click();link.remove();
+          downloadDialog.close();
+        }catch(error){downloadStatus.textContent='Unable to record your request. Please try again.';}
+        finally{submit.disabled=false;}
+      });
       songs.forEach(function(button){
         const i=Number(button.dataset.index);
         if(!downloadable.has(i))return;
@@ -508,12 +539,13 @@
         row.appendChild(button);
         const link=document.createElement('a');
         link.className='hble-download song-download';
-        link.href=tracks[i].src;
-        link.download=downloadName(tracks[i]);
+        link.href='#download-music';
+        link.addEventListener('click',function(e){e.preventDefault();requestDownload(i);});
         link.textContent='↓ MP3';
         link.setAttribute('aria-label','Download '+tracks[i].title+' MP3');
         row.appendChild(link);
       });
+      downloadCurrent.addEventListener('click',function(e){e.preventDefault();requestDownload(index);});
       const gate=document.getElementById('radio-sound-gate');
       const gateStart=document.getElementById('radio-sound-gate-start');
       const gateClose=document.getElementById('radio-sound-gate-close');
@@ -530,7 +562,7 @@
         title.textContent=track.title;
         artist.textContent=track.artist;
         downloadCurrent.hidden=!downloadable.has(index);
-        if(downloadable.has(index)){downloadCurrent.href=track.src;downloadCurrent.download=downloadName(track);downloadCurrent.setAttribute("aria-label","Download "+track.title+" MP3");}
+        if(downloadable.has(index)){downloadCurrent.href='#download-music';downloadCurrent.removeAttribute('download');downloadCurrent.setAttribute("aria-label","Download "+track.title+" MP3");}
         songs.forEach(function(button){
           const selected=Number(button.dataset.index)===index;
           button.classList.toggle('selected',selected);
