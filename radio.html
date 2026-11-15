@@ -328,7 +328,7 @@
               <button class="control primary" id="play-btn" type="button" aria-label="Play music" title="Play music">▶</button>
               <button class="control" id="next-btn" type="button" aria-label="Next track" title="Next track">⏭</button>
             </div>
-            <div style="text-align:center"><a id="download-current" class="hble-download" href="audio/hble-radio/da-casso.mp3" download="HBLE-Da-Casso.mp3" aria-label="Download current HBLE track">↓ Download MP3</a></div>\n            <div class="volume"><label for="volume">VOLUME</label><input type="range" id="volume" min="0" max="1" step=".05" value=".8" aria-label="Volume"></div>
+            <div style="text-align:center"><a id="download-current" class="hble-download" href="#" hidden aria-label="Download current HBLE track">↓ Download MP3</a></div>\n            <div class="volume"><label for="volume">VOLUME</label><input type="range" id="volume" min="0" max="1" step=".05" value=".8" aria-label="Volume"></div>
             <p class="player-note" id="player-note" role="status" aria-live="polite">HBLE Radio starts automatically when your browser permits sound. If prompted, tap to start listening.</p>
             <audio id="radio-audio" preload="auto" playsinline></audio>
           </section>
@@ -486,7 +486,7 @@
       const songs=Array.from(document.querySelectorAll('.song'));
       const downloadCurrent=document.getElementById('download-current');
       // Downloads are restricted to HBLE originals; guest/collaborator songs stay streaming-only.
-      const downloadable=new Set([0,1,2,3,4,5,6]);
+      const downloadable=new Set([1,2,3,4,5,6]);
       function downloadName(track){
         return 'HBLE-'+track.title.normalize('NFKD').replace(/[^a-zA-Z0-9]+/g,'-').replace(/^-|-$/g,'')+'.mp3';
       }
