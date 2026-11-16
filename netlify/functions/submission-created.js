@@ -8,7 +8,7 @@ exports.handler = async (event) => {
   const data = submission.payload?.data || submission.data || {};
   const formName = submission.payload?.form_name || submission.form_name || data['form-name'];
   const email = String(data.email || '').trim();
-  const validEmail = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email);
+  const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let subject, message;
 
