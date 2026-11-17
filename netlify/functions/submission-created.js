@@ -12,7 +12,15 @@ exports.handler = async (event) => {
   // Diagnostics intentionally omit email addresses, submitted content, and secrets.
   console.log('HBLE email: submission received', { formName: formName || '(missing)', hasEmail: Boolean(email), validEmail });
   const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  let subject, message;
+  let subject, message, musicSong = '', musicDownloadUrl = '';
+  const approvedDownloads = {
+    'Every Way': 'every-way.mp3',
+    'Every Way — Slow Roll': 'every-way-slow-roll.mp3',
+    'Believe': 'believe.mp3',
+    '20/20 Perfect Sight': '20-20-perfect-sight.mp3',
+    "Don't Be!": 'dont-be.mp3',
+    'Spittin Image — Remix 2.0': 'spittin-image-remix-2.mp3'
+  };
 
   if (formName === 'hble-music-downloads') {
     const song = String(data.song || '').trim().slice(0, 120);
@@ -20,7 +28,13 @@ exports.handler = async (event) => {
       console.warn('HBLE email: invalid music download submission', { validEmail, hasSong: Boolean(song) });
       return { statusCode: 400, body: 'Missing download details' };
     }
-    subject = 'Thank you for supporting HBLE Music!';
+    if (!Object.prototype.hasOwnProperty.call(approvedDownloads, song)) {
+      console.warn('HBLE email: unsupported song title');
+      return { statusCode: 400, body: 'Song unavailable for download' };
+    }
+    musicSong = song;
+    musicDownloadUrl = 'https://hble.org/audio/hble-radio/' + encodeURIComponent(approvedDownloads[song]);
+    subject = 'Your HBLE Music download — ' + song;
     message = 'Thank you for downloading <strong>' + escapeHtml(song) + '</strong>. We appreciate your support of HBLE Radio and independent creativity.';
   } else if (formName === 'hble-project-inquiry') {
     if (!validEmail) {
@@ -38,18 +52,22 @@ exports.handler = async (event) => {
   // Email-safe, responsive layout with HBLE's black-and-gold identity.
   const isMusic = formName === 'hble-music-downloads';
   const destination = isMusic ? 'https://hble.org/radio.html' : 'https://hble.org/';
-  const cta = isMusic ? 'RETURN TO HBLE RADIO' : 'EXPLORE HBLE STUDIOS';
+  const cta = isMusic ? 'BACK TO HBLE RADIO' : 'EXPLORE HBLE STUDIOS';
+  const downloadPanel = isMusic ? `<div style="font-size:16px;font-weight:bold;color:#f3d28a;letter-spacing:2px;margin:0 0 12px">YOUR MUSIC DOWNLOAD IS READY!</div>
+<div style="font-size:23px;font-weight:bold;color:#f4c75e;background:#20170a;border:1px solid #b98a39;border-radius:10px;padding:16px;margin-bottom:20px">♫ ${escapeHtml(musicSong)}</div>
+<a href="${musicDownloadUrl}" style="display:inline-block;padding:16px 24px;border-radius:24px;background:#e8bb58;color:#1a1005;font-weight:bold;text-decoration:none;margin-bottom:12px">↓ DOWNLOAD YOUR SONG</a>
+<p style="font-size:12px;color:#b9ac97;line-height:1.5">If the song opens in your browser, use its download or save option.</p>` : '';
   const html = `<!doctype html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#0b0b0b;color:#f6f0e6;font-family:Arial,Helvetica,sans-serif">
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background:#0b0b0b"><tr><td align="center" style="padding:36px 14px">
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:560px;background:#141414;border:1px solid #866a38;border-radius:14px">
 <tr><td align="center" style="padding:34px 24px 20px;border-bottom:1px solid #4e3b20">
-<div style="font-size:34px;color:#dfbd78;line-height:1" aria-hidden="true">&#9819;</div>
-<div style="font-size:26px;font-weight:700;letter-spacing:3px;color:#dfbd78;margin-top:12px">HBLE</div>
+<div style="font-size:48px;color:#dfbd78;line-height:1" aria-hidden="true">&#9819;</div>
+<div style="font-size:36px;font-weight:900;letter-spacing:4px;color:#dfbd78;margin-top:12px">HBLE STUDIOS</div><div style="font-size:20px;font-weight:800;letter-spacing:2px;color:#f6ead0;margin-top:10px">♫ HBLE RADIO ♫</div>
 <div style="font-size:11px;letter-spacing:3px;color:#c6a76b;margin-top:8px">HUMBLE BEGINNINGS. LEGENDARY ENDINGS.</div></td></tr>
 <tr><td style="padding:30px 28px 14px">
-<h1 style="font-size:24px;line-height:1.3;margin:0 0 20px;color:#f8f3e9">${isMusic ? 'Thank you for supporting HBLE Music!' : 'We received your inquiry.'}</h1>
-<p style="font-size:16px;line-height:1.7;color:#e3d9c9;margin:0 0 26px">${message}</p>
+<h1 style="font-size:24px;line-height:1.3;margin:0 0 20px;color:#f8f3e9">${isMusic ? 'THANK YOU FOR SUPPORTING HBLE MUSIC!' : 'We received your inquiry.'}</h1>
+<p style="font-size:16px;line-height:1.7;color:#e3d9c9;margin:0 0 26px">${message}</p>${downloadPanel}
 <table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="background:#d7b374;border-radius:5px"><a href="${destination}" style="display:inline-block;padding:15px 23px;color:#17120b;text-decoration:none;font-weight:bold;font-size:12px;letter-spacing:1px">${cta}</a></td></tr></table>
 <p style="font-size:13px;line-height:1.6;color:#b6aa97;margin:25px 0 0">Thank you for being part of the HBLE journey.</p>
 </td></tr>
@@ -77,7 +95,7 @@ exports.handler = async (event) => {
         subject,
         html,
         text: formName === 'hble-music-downloads'
-          ? 'Thank you for supporting HBLE Music. We appreciate your download. Visit https://hble.org.'
+          ? 'Thank you for supporting HBLE Music! Your download for ' + musicSong + ' is ready: ' + musicDownloadUrl + ' . Back to HBLE Radio: https://hble.org/radio.html'
           : 'Thank you for contacting HBLE Studios. We received your inquiry and will review it. Our team will follow up using your contact information. Visit https://hble.org.'
       })
     });
