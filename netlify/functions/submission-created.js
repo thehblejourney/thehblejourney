@@ -33,7 +33,7 @@ exports.handler = async (event) => {
       return { statusCode: 400, body: 'Song unavailable for download' };
     }
     musicSong = song;
-    musicDownloadUrl = 'https://hble.org/audio/hble-radio/' + encodeURIComponent(approvedDownloads[song]);
+    musicDownloadUrl = 'https://hble.org/music-download.html?song=' + encodeURIComponent(song);
     subject = 'Your HBLE Music download — ' + song;
     message = 'Thank you for downloading <strong>' + escapeHtml(song) + '</strong>. We appreciate your support of HBLE Radio and independent creativity.';
   } else if (formName === 'hble-project-inquiry') {
@@ -56,7 +56,7 @@ exports.handler = async (event) => {
   const downloadPanel = isMusic ? `<div style="font-size:16px;font-weight:bold;color:#f3d28a;letter-spacing:2px;margin:0 0 12px">YOUR MUSIC DOWNLOAD IS READY!</div>
 <div style="font-size:23px;font-weight:bold;color:#f4c75e;background:#20170a;border:1px solid #b98a39;border-radius:10px;padding:16px;margin-bottom:20px">♫ ${escapeHtml(musicSong)}</div>
 <a href="${musicDownloadUrl}" style="display:inline-block;padding:16px 24px;border-radius:24px;background:#e8bb58;color:#1a1005;font-weight:bold;text-decoration:none;margin-bottom:12px">↓ DOWNLOAD YOUR SONG</a>
-<p style="font-size:12px;color:#b9ac97;line-height:1.5">If the song opens in your browser, use its download or save option.</p>` : '';
+<p style="font-size:12px;color:#b9ac97;line-height:1.5">If your download does not start automatically, tap the gold download button on the page.</p>` : '';
   const html = `<!doctype html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#0b0b0b;color:#f6f0e6;font-family:Arial,Helvetica,sans-serif">
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background:#0b0b0b"><tr><td align="center" style="padding:36px 14px">
