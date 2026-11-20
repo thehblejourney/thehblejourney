@@ -33,6 +33,8 @@ h1{font:normal clamp(40px,7vw,78px)/1.05 Georgia,serif;letter-spacing:-.03em;mar
 footer{text-align:center;padding:35px 20px;border-top:1px solid #51402b;color:#b9a88c}
 @media(max-width:720px){nav{padding:16px 0}.brand{font-size:18px}.hero{padding:56px 18px 38px}.grid{grid-template-columns:1fr}.photo{height:360px}.info{padding:22px}.info h2{font-size:29px}}
 .poster{height:auto;min-height:260px;aspect-ratio:16/9}.poster img{object-fit:contain;display:block}.collection .grid{grid-template-columns:1fr}.collection .product{max-width:1100px;margin:auto;width:100%}.collection .info{padding:22px 28px}.collection .info h2{font-size:30px}.hero-logo{display:block;width:min(460px,90%);max-height:240px;object-fit:contain;margin:0 auto 28px}.hero-logo.missing{display:none}@media(max-width:720px){.poster{min-height:180px}.collection .info{padding:20px}.hero-logo{max-height:160px}}
+
+.sizing{padding:12px 0 90px}.sizing-head{text-align:center;max-width:740px;margin:0 auto 28px}.sizing h2{font:normal clamp(32px,5vw,48px) Georgia,serif;color:#f5e3be;margin:12px 0}.sizing p{color:#d6cbbd;line-height:1.7}.size-panel{background:linear-gradient(150deg,#211911,#120f0c);border:1px solid #705534;border-radius:14px;padding:clamp(18px,4vw,34px)}.size-table{width:100%;border-collapse:collapse;margin-top:14px}.size-table th,.size-table td{text-align:left;padding:15px 12px;border-bottom:1px solid #55412a}.size-table th{color:var(--gold);font-size:13px;letter-spacing:.08em}.size-table td{color:#eee3d4}.fit-note{font-size:14px;color:#d6cbbd}.measure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:24px}.measure-card{border:1px solid #56432e;border-radius:10px;padding:18px}.measure-card h3{color:var(--gold);font:normal 21px Georgia,serif;margin:0 0 8px}.measure-card p{margin:0;font-size:14px}.size-disclaimer{margin-top:24px;font-size:13px;border-left:3px solid var(--gold);padding-left:16px}@media(max-width:720px){.measure-grid{grid-template-columns:1fr}.size-table th,.size-table td{padding:12px 8px;font-size:13px}}
 </style>
 </head>
 <body>
@@ -43,6 +45,21 @@ footer{text-align:center;padding:35px 20px;border-top:1px solid #51402b;color:#b
 <article class="product"><div class="photo poster"><img src="images/hble-queen-of-spades.jpg" alt="The Queen of Spades signature tracksuit" onerror="this.parentElement.classList.add('missing')"><div class="placeholder">THE QUEEN OF SPADES<br>Approved collection photograph coming soon</div></div><div class="info"><span class="detail">Signature Tracksuit</span><h2>The Queen of Spades</h2><p>A distinctive statement of refined luxury, tailored comfort, and confident style.</p><span class="detail">Comfort · Premium Quality · Style</span></div></article>
 <article class="product"><div class="photo poster"><img src="images/hble-the-dove.png" alt="The Dove white and gold signature tracksuit" onerror="this.parentElement.classList.add('missing')"><div class="placeholder">THE DOVE<br>Approved collection photograph coming soon</div></div><div class="info"><span class="detail">Signature Tracksuit</span><h2>The Dove</h2><p>Elegant white-and-gold styling with a personalized fit and timeless presence.</p><span class="detail">Comfort · Premium Quality · Style</span></div></article>
 </div></section>
+
+<section class="sizing wrap" id="custom-sizing" aria-labelledby="size-heading">
+ <div class="sizing-head"><div class="eyebrow">Made for your fit</div><h2 id="size-heading">Custom Fit &amp; Sizing Guide</h2><p>Luxury should fit you. Use this guide to prepare your measurements for a personalized HBLE tracksuit. Final sizing and customization are confirmed before an order is accepted.</p></div>
+ <div class="size-panel"><div class="detail">Your custom fit profile</div><table class="size-table"><thead><tr><th scope="col">Measurement</th><th scope="col">What to measure</th></tr></thead><tbody>
+<tr><td>Chest / Bust</td><td>Fullest part of the chest, tape level</td></tr>
+<tr><td>Waist</td><td>Natural waistline, without pulling tight</td></tr>
+<tr><td>Hips</td><td>Fullest part of hips and seat</td></tr>
+<tr><td>Inseam</td><td>Inner leg, from crotch to desired hem</td></tr>
+<tr><td>Sleeve</td><td>Shoulder point to preferred cuff length</td></tr>
+<tr><td>Height</td><td>Full standing height, without shoes</td></tr>
+</tbody></table><p class="fit-note">Record all measurements in inches or centimeters and use the same unit throughout.</p>
+<div class="measure-grid"><div class="measure-card"><h3>Classic Fit</h3><p>A comfortable, easy-wearing silhouette. Discuss your preferred room through the body and leg when ordering.</p></div><div class="measure-card"><h3>Tailored Fit</h3><p>A more shaped silhouette based on your individual measurements and preferred finish.</p></div></div>
+<p class="size-disclaimer">This is a measurement guide, not a finalized garment size chart. Exact size ranges, tolerances, fabric stretch, and custom-order availability must be confirmed with the clothing designer before purchase.</p>
+</div>
+</section>
 </main>
 <footer>HBLE · From Humble Beginnings to Legendary Endings</footer>
 </body>
