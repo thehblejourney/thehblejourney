@@ -49,21 +49,10 @@ footer{text-align:center;padding:35px 20px;border-top:1px solid #51402b;color:#b
 </div></section>
 
 <section class="sizing wrap" id="custom-sizing" aria-labelledby="size-heading">
- <div class="sizing-head"><div class="eyebrow">Made for your fit</div><h2 id="size-heading">Custom Fit &amp; Sizing Guide</h2><p>Luxury should fit you. Use this guide to prepare your measurements for a personalized HBLE tracksuit. Final sizing and customization are confirmed before an order is accepted.</p></div>
- <div class="size-panel"><div class="detail">Your custom fit profile</div><table class="size-table"><thead><tr><th scope="col">Measurement</th><th scope="col">What to measure</th></tr></thead><tbody>
-<tr><td>Chest / Bust</td><td>Fullest part of the chest, tape level</td></tr>
-<tr><td>Waist</td><td>Natural waistline, without pulling tight</td></tr>
-<tr><td>Hips</td><td>Fullest part of hips and seat</td></tr>
-<tr><td>Inseam</td><td>Inner leg, from crotch to desired hem</td></tr>
-<tr><td>Sleeve</td><td>Shoulder point to preferred cuff length</td></tr>
-<tr><td>Height</td><td>Full standing height, without shoes</td></tr>
-</tbody></table><p class="fit-note">Record all measurements in inches or centimeters and use the same unit throughout.</p>
-<div class="measure-grid"><div class="measure-card"><h3>Classic Fit</h3><p>A comfortable, easy-wearing silhouette. Discuss your preferred room through the body and leg when ordering.</p></div><div class="measure-card"><h3>Tailored Fit</h3><p>A more shaped silhouette based on your individual measurements and preferred finish.</p></div></div>
-<p class="size-disclaimer">This is a measurement guide, not a finalized garment size chart. Exact size ranges, tolerances, fabric stretch, and custom-order availability must be confirmed with the clothing designer before purchase.</p>
-
-<div class="request" id="fit-request">
-<h3>Submit Your Custom Fit Measurements</h3>
-<p>Select your preferred standard size, or choose Custom Size and provide your measurements for a personalized fitting review. This is a request, not a purchase or confirmed order.</p>
+<div class="sizing-head"><div class="eyebrow">Made for your fit</div><h2 id="size-heading">Select Your Size &amp; Fit</h2><p>Choose your preferred clothing size and fit for an HBLE signature tracksuit. No exact body measurements required. Final sizing and availability will be confirmed before any order.</p></div>
+<div class="size-panel">
+<div class="measure-grid"><div class="measure-card"><h3>Classic Fit</h3><p>A relaxed, comfortable silhouette.</p></div><div class="measure-card"><h3>Tailored Fit</h3><p>A more fitted, streamlined silhouette.</p></div></div>
+<div class="request" id="fit-request"><h3>Submit Your Size Request</h3><p>Choose your collection, clothing size and preferred fit. This is an inquiry, not a purchase or confirmed order.</p>
 <form name="hble-custom-fit-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" accept-charset="UTF-8">
 <input type="hidden" name="form-name" value="hble-custom-fit-request">
 <p class="honeypot"><label>Leave this field blank <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
@@ -71,26 +60,13 @@ footer{text-align:center;padding:35px 20px;border-top:1px solid #51402b;color:#b
 <label>Full name <input type="text" name="customer-name" autocomplete="name" required maxlength="120"></label>
 <label>Email address <input type="email" name="customer-email" autocomplete="email" required maxlength="180"></label>
 <label>Collection <select name="collection" required><option value="" selected disabled>Select collection</option><option>The Queen of Spades</option><option>The Dove</option></select></label>
-<label>Preferred size <select name="preferred-size" required><option value="" selected disabled>Select size</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option><option>4XL</option><option>5XL</option><option>Custom Size</option></select></label>
+<label>Preferred size <select name="preferred-size" required><option value="" selected disabled>Select size</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option><option>4XL</option><option>5XL</option></select></label>
 <label>Fit preference <select name="fit-preference" required><option value="" selected disabled>Select fit</option><option>Classic Fit</option><option>Tailored Fit</option><option>Not sure — please advise</option></select></label>
-<label>Measurement unit <select name="measurement-unit" required><option value="inches">Inches</option><option value="centimeters">Centimeters</option></select></label>
+<label class="full">Optional notes <textarea name="fit-notes" rows="3" maxlength="1500" placeholder="Any special requests?"></textarea></label>
 </div>
-<fieldset><legend>Body measurements (optional for standard sizes; recommended for custom fit)</legend>
-<div class="request-grid">
-<label>Chest / Bust <input type="number" name="chest" min="1" max="300" step="0.1" placeholder="Enter measurement"></label>
-<label>Waist <input type="number" name="waist" min="1" max="300" step="0.1" placeholder="Enter measurement"></label>
-<label>Hips <input type="number" name="hips" min="1" max="300" step="0.1" placeholder="Enter measurement"></label>
-<label>Inseam <input type="number" name="inseam" min="1" max="300" step="0.1" placeholder="Enter measurement"></label>
-<label>Sleeve length <input type="number" name="sleeve" min="1" max="300" step="0.1" placeholder="Enter measurement"></label>
-<label>Height <input type="number" name="height" min="1" max="300" step="0.1" placeholder="Enter measurement"></label>
-<label class="full">Special fit instructions <textarea name="fit-notes" rows="4" maxlength="1500" placeholder="Tell us how you would like your tracksuit to fit"></textarea></label>
-</div></fieldset>
-<p class="hint">Your measurements and contact information are submitted to HBLE for a fitting review. Please do not include payment details or sensitive medical information. We will confirm sizing and availability before any order.</p>
-<button type="submit">SUBMIT FIT REQUEST</button>
-</form>
-</div>
-</div>
-</section>
+<p class="hint">Your contact details and selected preferences will be sent to HBLE for review. Please do not include payment information.</p>
+<button type="submit">SUBMIT SIZE REQUEST</button>
+</form></div></div></section>
 </main>
 <footer>HBLE · From Humble Beginnings to Legendary Endings</footer>
 </body>
