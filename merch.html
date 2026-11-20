@@ -1,187 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HBLE Merch</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: black;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding-top: 6rem;
-      overflow-x: hidden;
-    }
-
-    nav {
-      background: #111;
-      padding: 1rem 1rem 0.5rem;
-      border-bottom: 2px solid #00d0ff;
-      box-shadow: 0 0 10px #ffffff, 0 0 20px #00d0ff;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 999;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 0.85rem;
-      padding: 6px 10px;
-      border-radius: 4px;
-    }
-
-    nav a:hover {
-      color: #00ffe1;
-    }
-
-    .glow-title {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #fff;
-      text-shadow: 0 0 8px #00ffe1, 0 0 20px #00ffe1;
-      margin: 2rem 0 1.5rem;
-      animation: pulse 2.5s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        text-shadow: 0 0 8px #00ffe1, 0 0 20px #00ffe1;
-      }
-      50% {
-        text-shadow: 0 0 14px #00ffe1, 0 0 30px #00ffe1;
-      }
-    }
-
-    .shop-button {
-      background-color: #00ffe1;
-      color: black;
-      border: none;
-      padding: 0.7rem 1.4rem;
-      font-size: 0.9rem;
-      font-weight: bold;
-      border-radius: 25px;
-      cursor: pointer;
-      box-shadow: 0 0 15px #00ffe1, 0 0 30px #00ffe1;
-      transition: background 0.3s;
-      margin-top: 1rem;
-    }
-
-    .shop-button:hover {
-      background-color: white;
-      color: black;
-    }
-
-    .footer-tagline {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: gold;
-      text-shadow: 0 0 4px gold;
-    }
-
-    .merch-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      padding: 2rem 1rem;
-      margin-top: 2rem;
-    }
-
-    .merch-grid a {
-      display: inline-block;
-      opacity: 0;
-      animation: spin-in 1s ease-out forwards;
-    }
-
-    .merch-grid img {
-      width: 140px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,255,255,0.3);
-      transition: transform 0.3s ease;
-    }
-
-    .merch-grid img:hover {
-      transform: scale(1.05);
-    }
-
-    .merch-grid a:nth-child(1) { animation-delay: 0.3s; transform: rotate(-360deg) translateY(100vh); }
-    .merch-grid a:nth-child(2) { animation-delay: 0.6s; transform: rotate(360deg) translateX(-100vw); }
-    .merch-grid a:nth-child(3) { animation-delay: 0.9s; transform: rotate(-360deg) translateX(100vw); }
-    .merch-grid a:nth-child(4) { animation-delay: 1.2s; transform: rotate(360deg) translateY(100vh); }
-    .merch-grid a:nth-child(5) { animation-delay: 1.5s; transform: rotate(-360deg) translate(-100vw, 100vh); }
-    .merch-grid a:nth-child(6) { animation-delay: 1.8s; transform: rotate(360deg) translate(100vw, 100vh); }
-
-    @keyframes spin-in {
-      to {
-        transform: rotate(0deg) translate(0, 0);
-        opacity: 1;
-      }
-    }
-
-    @media (max-width: 768px) {
-      nav a {
-        font-size: 0.75rem;
-      }
-
-      .glow-title {
-        font-size: 1.6rem;
-      }
-
-      .merch-grid img {
-        width: 110px;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Explore the HBLE Luxury Merch signature collection.">
+<title>HBLE Luxury Merch | Signature Collection</title>
+<style>
+:root{color-scheme:dark;--gold:#d7b56e;--ink:#0c0a09;--panel:#18130f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:#f8f2e8;font-family:Arial,Helvetica,sans-serif}
+a{color:inherit}
+header{border-bottom:1px solid #51402b;background:#110e0b}
+.wrap{max-width:1180px;margin:auto;padding:0 22px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 0}
+.brand{font:700 23px Georgia,serif;letter-spacing:.12em;color:var(--gold);text-decoration:none}
+.navlink{font-size:14px;text-decoration:none;border:1px solid #75603c;padding:10px 16px;border-radius:30px}
+.hero{text-align:center;padding:78px 20px 55px;background:radial-gradient(ellipse at top,#332619 0%,#0c0a09 70%)}
+.eyebrow{font-size:12px;letter-spacing:.32em;color:var(--gold);text-transform:uppercase}
+h1{font:normal clamp(40px,7vw,78px)/1.05 Georgia,serif;letter-spacing:-.03em;margin:20px auto}
+.hero p{max-width:680px;margin:auto;line-height:1.75;color:#d4c7b4}
+.collection{padding:40px 0 85px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.product{background:linear-gradient(155deg,#241b13,#120f0c);border:1px solid #58442b;border-radius:14px;overflow:hidden}
+.photo{height:420px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#34271b,#15100c);position:relative}
+.photo img{width:100%;height:100%;object-fit:contain}
+.placeholder{display:none;text-align:center;padding:30px;color:#c9ad79;line-height:1.7}
+.photo.missing img{display:none}.photo.missing .placeholder{display:block}
+.info{padding:28px}
+.info h2{font:normal 34px Georgia,serif;margin:8px 0 12px;color:#f5e3be}
+.info p{line-height:1.7;color:#d6cbbd}
+.detail{font-size:12px;text-transform:uppercase;letter-spacing:.2em;color:var(--gold)}
+footer{text-align:center;padding:35px 20px;border-top:1px solid #51402b;color:#b9a88c}
+@media(max-width:720px){nav{padding:16px 0}.brand{font-size:18px}.hero{padding:56px 18px 38px}.grid{grid-template-columns:1fr}.photo{height:360px}.info{padding:22px}.info h2{font-size:29px}}
+</style>
 </head>
 <body>
-
-  <!-- Fixed Top Menu -->
-  <nav>
-    <div class="nav-links">
- <a href="index.html">Home</a>
-  <a href="mission.html">Mission</a>
-  <a href="spotlight.html">Spotlight</a>
-  <a href="sports.html">Sports</a>
-  <a href="dining.html">Dining</a>
-  <a href="stories.html">Stories</a>
-  <a href="talent.html">Talent</a>
-  <a href="podcast.html">Podcast</a>
-  <a href="merch.html">Merchandise</a>
-    </div>
-  </nav>
-
-  <!-- Title -->
-  <h1 class="glow-title">🔥 HBLE Merch Drop</h1>
-
-  <!-- Merch Grid with Image Links -->
-  <div class="merch-grid">
-    <a href="https://r302qz-z0.myshopify.com" target="_blank"><img src="images/merch1.png" alt="Merch 1"></a>
-    <a href="https://r302qz-z0.myshopify.com" target="_blank"><img src="images/merch2.png" alt="Merch 2"></a>
-    <a href="https://r302qz-z0.myshopify.com" target="_blank"><img src="images/merch3.png" alt="Merch 3"></a>
-    <a href="https://r302qz-z0.myshopify.com" target="_blank"><img src="images/merch4.png" alt="Merch 4"></a>
-    <a href="https://r302qz-z0.myshopify.com" target="_blank"><img src="images/logoimage9.jpg" alt="Logo"></a>
-    <a href="https://r302qz-z0.myshopify.com" target="_blank"><img src="images/image8.jpg" alt="Model"></a>
-  </div>
-
-  <!-- CTA Button -->
-  <a href="https://r302qz-z0.myshopify.com" target="_blank">
-    <button class="shop-button">SHOP NOW</button>
-  </a>
-
-  <!-- Footer -->
-  <p class="footer-tagline">From Humble Beginnings... to Legendary Endings.</p>
-
+<header><div class="wrap"><nav><a class="brand" href="index.html">HBLE STUDIOS</a><a class="navlink" href="index.html">Home</a></nav></div></header>
+<main>
+<section class="hero"><div class="eyebrow">HBLE Signature Collection</div><h1>Luxury, Made Personal.</h1><p>Discover statement pieces created with comfort, premium quality and style in mind. Customized and tailored for your fit.</p></section>
+<section class="collection wrap" aria-label="Signature tracksuits"><div class="grid">
+<article class="product"><div class="photo"><img src="images/hble-queen-of-spades.jpg" alt="The Queen of Spades signature tracksuit" onerror="this.parentElement.classList.add('missing')"><div class="placeholder">THE QUEEN OF SPADES<br>Approved collection photograph coming soon</div></div><div class="info"><span class="detail">Signature Tracksuit</span><h2>The Queen of Spades</h2><p>A distinctive statement of refined luxury, tailored comfort, and confident style.</p><span class="detail">Comfort · Premium Quality · Style</span></div></article>
+<article class="product"><div class="photo"><img src="images/hble-the-dove.png" alt="The Dove white and gold signature tracksuit" onerror="this.parentElement.classList.add('missing')"><div class="placeholder">THE DOVE<br>Approved collection photograph coming soon</div></div><div class="info"><span class="detail">Signature Tracksuit</span><h2>The Dove</h2><p>Elegant white-and-gold styling with a personalized fit and timeless presence.</p><span class="detail">Comfort · Premium Quality · Style</span></div></article>
+</div></section>
+</main>
+<footer>HBLE · From Humble Beginnings to Legendary Endings</footer>
 </body>
 </html>
