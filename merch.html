@@ -35,6 +35,8 @@ footer{text-align:center;padding:35px 20px;border-top:1px solid #51402b;color:#b
 .poster{height:auto;min-height:260px;aspect-ratio:16/9}.poster img{object-fit:contain;display:block}.collection .grid{grid-template-columns:1fr}.collection .product{max-width:1100px;margin:auto;width:100%}.collection .info{padding:22px 28px}.collection .info h2{font-size:30px}.hero-logo{display:block;width:min(460px,90%);max-height:240px;object-fit:contain;margin:0 auto 28px}.hero-logo.missing{display:none}@media(max-width:720px){.poster{min-height:180px}.collection .info{padding:20px}.hero-logo{max-height:160px}}
 
 .sizing{padding:12px 0 90px}.sizing-head{text-align:center;max-width:740px;margin:0 auto 28px}.sizing h2{font:normal clamp(32px,5vw,48px) Georgia,serif;color:#f5e3be;margin:12px 0}.sizing p{color:#d6cbbd;line-height:1.7}.size-panel{background:linear-gradient(150deg,#211911,#120f0c);border:1px solid #705534;border-radius:14px;padding:clamp(18px,4vw,34px)}.size-table{width:100%;border-collapse:collapse;margin-top:14px}.size-table th,.size-table td{text-align:left;padding:15px 12px;border-bottom:1px solid #55412a}.size-table th{color:var(--gold);font-size:13px;letter-spacing:.08em}.size-table td{color:#eee3d4}.fit-note{font-size:14px;color:#d6cbbd}.measure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:24px}.measure-card{border:1px solid #56432e;border-radius:10px;padding:18px}.measure-card h3{color:var(--gold);font:normal 21px Georgia,serif;margin:0 0 8px}.measure-card p{margin:0;font-size:14px}.size-disclaimer{margin-top:24px;font-size:13px;border-left:3px solid var(--gold);padding-left:16px}@media(max-width:720px){.measure-grid{grid-template-columns:1fr}.size-table th,.size-table td{padding:12px 8px;font-size:13px}}
+
+.request{margin-top:30px;border-top:1px solid #6a5131;padding-top:28px}.request h3{font:normal 30px Georgia,serif;color:#f5e3be;margin:0 0 10px}.request-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.request label{display:flex;flex-direction:column;gap:8px;font-size:14px;color:#e6d6bd}.request input,.request select,.request textarea{width:100%;min-width:0;padding:13px;border:1px solid #82633c;border-radius:8px;background:#100d0a;color:#fff;font:inherit}.request input:focus,.request select:focus,.request textarea:focus{outline:2px solid #d7b56e;outline-offset:2px}.request fieldset{border:0;padding:0;margin:20px 0}.request legend{color:var(--gold);font-size:17px;margin-bottom:14px}.request .full{grid-column:1/-1}.request button{border:1px solid #e6c781;background:linear-gradient(120deg,#e6c781,#ad7e36);color:#1b1107;font-weight:700;letter-spacing:.08em;padding:15px 26px;border-radius:8px;cursor:pointer;margin-top:18px}.request .hint{font-size:13px;color:#cbbb9f}.request .honeypot{position:absolute;left:-10000px}@media(max-width:720px){.request-grid{grid-template-columns:1fr}.request h3{font-size:25px}}
 </style>
 </head>
 <body>
@@ -58,6 +60,35 @@ footer{text-align:center;padding:35px 20px;border-top:1px solid #51402b;color:#b
 </tbody></table><p class="fit-note">Record all measurements in inches or centimeters and use the same unit throughout.</p>
 <div class="measure-grid"><div class="measure-card"><h3>Classic Fit</h3><p>A comfortable, easy-wearing silhouette. Discuss your preferred room through the body and leg when ordering.</p></div><div class="measure-card"><h3>Tailored Fit</h3><p>A more shaped silhouette based on your individual measurements and preferred finish.</p></div></div>
 <p class="size-disclaimer">This is a measurement guide, not a finalized garment size chart. Exact size ranges, tolerances, fabric stretch, and custom-order availability must be confirmed with the clothing designer before purchase.</p>
+
+<div class="request" id="fit-request">
+<h3>Submit Your Custom Fit Measurements</h3>
+<p>Select your preferred standard size, or choose Custom Size and provide your measurements for a personalized fitting review. This is a request, not a purchase or confirmed order.</p>
+<form name="hble-custom-fit-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" accept-charset="UTF-8">
+<input type="hidden" name="form-name" value="hble-custom-fit-request">
+<p class="honeypot"><label>Leave this field blank <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+<div class="request-grid">
+<label>Full name <input type="text" name="customer-name" autocomplete="name" required maxlength="120"></label>
+<label>Email address <input type="email" name="customer-email" autocomplete="email" required maxlength="180"></label>
+<label>Collection <select name="collection" required><option value="" selected disabled>Select collection</option><option>The Queen of Spades</option><option>The Dove</option></select></label>
+<label>Preferred size <select name="preferred-size" required><option value="" selected disabled>Select size</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option><option>4XL</option><option>5XL</option><option>Custom Size</option></select></label>
+<label>Fit preference <select name="fit-preference" required><option value="" selected disabled>Select fit</option><option>Classic Fit</option><option>Tailored Fit</option><option>Not sure — please advise</option></select></label>
+<label>Measurement unit <select name="measurement-unit" required><option value="inches">Inches</option><option value="centimeters">Centimeters</option></select></label>
+</div>
+<fieldset><legend>Body measurements (optional for standard sizes; recommended for custom fit)</legend>
+<div class="request-grid">
+<label>Chest / Bust <input type="number" name="chest" min="1" max="300" step="0.1" placeholder="Enter measurement"></label>
+<label>Waist <input type="number" name="waist" min="1" max="300" step="0.1" placeholder="Enter measurement"></label>
+<label>Hips <input type="number" name="hips" min="1" max="300" step="0.1" placeholder="Enter measurement"></label>
+<label>Inseam <input type="number" name="inseam" min="1" max="300" step="0.1" placeholder="Enter measurement"></label>
+<label>Sleeve length <input type="number" name="sleeve" min="1" max="300" step="0.1" placeholder="Enter measurement"></label>
+<label>Height <input type="number" name="height" min="1" max="300" step="0.1" placeholder="Enter measurement"></label>
+<label class="full">Special fit instructions <textarea name="fit-notes" rows="4" maxlength="1500" placeholder="Tell us how you would like your tracksuit to fit"></textarea></label>
+</div></fieldset>
+<p class="hint">Your measurements and contact information are submitted to HBLE for a fitting review. Please do not include payment details or sensitive medical information. We will confirm sizing and availability before any order.</p>
+<button type="submit">SUBMIT FIT REQUEST</button>
+</form>
+</div>
 </div>
 </section>
 </main>
