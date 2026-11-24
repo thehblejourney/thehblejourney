@@ -323,7 +323,18 @@
       <div class="wrap">
         <div class="eyebrow">01 / THE LISTENING ROOM</div>
         <h2 class="section-title">Turn it up. Stay awhile.</h2>
-        <p class="section-lead">The HBLE Radio rotation now features 10 tracks, opening with the Da Casso brand spotlight, followed by HBLE music and collaborations. Love Her All The Time closes the rotation. Press Play once to enjoy the playlist in sequence, or turn on Shuffle for a different mix. Audio plays while this page stays open; this is not a 24/7 live broadcast.</p>
+        <p class="section-lead">The HBLE Radio rotation now features 11 tracks, opening with the Da Casso brand spotlight, followed by HBLE music and collaborations. Love Her All The Time closes the rotation. Press Play once to enjoy the playlist in sequence, or turn on Shuffle for a different mix. Audio plays while this page stays open; this is not a 24/7 live broadcast.</p>
+        <section aria-labelledby="classics-title" style="margin:1.5rem 0;padding:clamp(1rem,4vw,2rem);border:1px solid #cba65d;border-radius:18px;background:linear-gradient(125deg,#080808,#282016);color:#fff;text-align:center">
+<img src="images/Crown.jpg" alt="HBLE signature crown" style="width:76px;height:76px;object-fit:contain;border-radius:12px">
+<p style="color:#e7c77b;letter-spacing:.15em;font-weight:800;margin:.6rem 0">HBLE CLASSICS</p>
+<h3 id="classics-title" style="color:#f4d58c;font-size:clamp(1.1rem,3vw,1.7rem);margin:.4rem 0">SPOTLIGHT SONG OF THE MONTH</h3>
+<p style="color:#e7c77b;margin:.5rem 0">NOVEMBER 2026</p>
+<h4 style="font-size:clamp(1.5rem,4vw,2.4rem);margin:.5rem 0">Down on Craigville Beach</h4>
+<p style="font-size:1.15rem;margin:.4rem 0">Kelber and Greene Music</p>
+<p style="color:#ddd;margin:.4rem 0">Medway, Massachusetts · Radio Edit</p>
+<button id="classics-play" type="button" style="background:#e7c77b;color:#15100a;border:0;border-radius:30px;padding:.85rem 1.5rem;font-weight:800;cursor:pointer;margin:1rem 0">▶ Play Spotlight Song</button>
+<p style="color:#ddd;font-size:.9rem">Celebrating independent artists. Connecting communities through music.</p>
+</section>
         <div class="radio-grid">
           <div class="radio-left-stack">
           <section class="player" id="radio-player" aria-label="HBLE Radio music player">
@@ -379,7 +390,7 @@
           <section class="queue" aria-label="HBLE Radio playlist">
             <div class="eyebrow">HBLE ARCHIVE ROTATION</div>
             <h3>On the playlist</h3>
-            <p>10 tracks · Brand spotlight first, then music.</p>
+            <p>11 tracks · Brand spotlight first, then music.</p>
             <div id="song-list">
               <p class="queue-section-label">BRAND SPOTLIGHTS</p>
               <button class="song selected" type="button" data-index="0" aria-label="Play Da Casso"><span class="no">01</span><span class="details"><strong>Da Casso</strong><small>HBLE Music · Fashion Brand Spotlight</small></span><span class="note" aria-hidden="true">◈</span></button>
@@ -392,7 +403,8 @@
               <button class="song" type="button" data-index="6" aria-label="Play Spittin Image — Remix 2.0"><span class="no">07</span><span class="details"><strong>Spittin Image — Remix 2.0</strong><small>HBLE Music</small></span><span class="note" aria-hidden="true">♪</span></button>
               <button class="song" type="button" data-index="7" aria-label="Play Crazy About You"><span class="no">08</span><span class="details"><strong>Crazy About You</strong><small>Featuring Mr. Doe</small></span><span class="note" aria-hidden="true">♪</span></button>
               <button class="song" type="button" data-index="8" aria-label="Play Let's Stay Together"><span class="no">09</span><span class="details"><strong>Let's Stay Together</strong><small>Featuring Mr. Doe</small></span><span class="note" aria-hidden="true">♪</span></button>
-              <button class="song" type="button" data-index="9" aria-label="Play Love Her All The Time"><span class="no">10</span><span class="details"><strong>Love Her All The Time</strong><small>Jru Starz</small></span><span class="note" aria-hidden="true">♪</span></button>
+              <button class="song" type="button" data-index="9" aria-label="Play Down on Craigville Beach"><span class="no">10</span><span class="details"><strong>Down on Craigville Beach</strong><small>Kelber and Greene Music · HBLE Classics Spotlight</small></span><span class="note" aria-hidden="true">♪</span></button>
+              <button class="song" type="button" data-index="10" aria-label="Play Love Her All The Time"><span class="no">11</span><span class="details"><strong>Love Her All The Time</strong><small>Jru Starz</small></span><span class="note" aria-hidden="true">♪</span></button>
             </div>
             <p class="queue-foot">Select a gold Download MP3 button to save an HBLE original for offline listening. Collaborator and guest tracks are streaming-only unless separately authorized.</p>
             <p class="queue-foot">Each track plays in order, then the playlist loops to the beginning. Independent artist submissions are reviewed before joining the rotation.</p>
@@ -479,6 +491,7 @@
         {title:"Spittin Image — Remix 2.0",artist:"HBLE Music",src:"audio/hble-radio/spittin-image-remix-2.mp3"},
         {title:"Crazy About You",artist:"Featuring Mr. Doe",src:"audio/hble-radio/crazy-about-you-mr-doe.mp3"},
         {title:"Let's Stay Together",artist:"Featuring Mr. Doe",src:"audio/hble-radio/lets-stay-together-mr-doe.mp3"},
+        {title:"Down on Craigville Beach",artist:"Kelber and Greene Music · Medway, Massachusetts",src:"audio/hble-radio/Down%20on%20Craigville%20Beach%20-%20Radio%20Edit.mp3"},
         {title:"Love Her All The Time",artist:"Jru Starz",src:"audio/JruStarz.mp3"}
       ];
       const audio=document.getElementById('radio-audio');
@@ -598,6 +611,7 @@
       }
       function skip(direction){pickNext(direction);loadTrack();playCurrent()}
       function selectTrack(i){if(i===index&&initialized){if(audio.paused)playCurrent();return}index=i;loadTrack();playCurrent()}
+      document.getElementById('classics-play').addEventListener('click',function(){selectTrack(9);player.scrollIntoView({block:'nearest'});});
       playBtn.addEventListener('click',function(){if(audio.paused)playCurrent(false);else pauseCurrent()});
       gateStart.addEventListener('click',function(){playCurrent(false)});
       gateClose.addEventListener('click',hideSoundGate);
