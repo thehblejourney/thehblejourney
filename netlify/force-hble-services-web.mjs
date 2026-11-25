@@ -10,8 +10,8 @@ for (const file of files) {
   try {
     const original = await readFile(file, 'utf8');
     const updated = original
-      .replaceAll('media/hble-services-master.mp4', 'media/hble-services-web.mp4')
-      .replaceAll('/media/hble-services-master.mp4', '/media/hble-services-web.mp4');
+      .replaceAll('media/hble-services-master.mp4', 'media/hble-landing-web.mp4')
+      .replaceAll('media/hble-services-web.mp4', 'media/hble-landing-web.mp4');
 
     if (updated !== original) {
       await writeFile(file, updated, 'utf8');
@@ -28,4 +28,4 @@ for (const file of files) {
   }
 }
 
-console.log('Final HBLE Services playback source: media/hble-services-web.mp4');
+console.log('Final HBLE Services playback source: media/hble-landing-web.mp4');
