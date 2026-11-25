@@ -1,0 +1,23 @@
+# Retire legacy HBLE pages without deleting source history.
+# Temporary redirects until replacement destinations are finalized.
+/mission / 302!
+/mission.html / 302!
+/mission/ / 302!
+/spotlight / 302!
+/spotlight.html / 302!
+/spotlight/ / 302!
+/sports / 302!
+/sports.html / 302!
+/sports/ / 302!
+/dining / 302!
+/dining.html / 302!
+/dining/ / 302!
+/talent / 302!
+/talent.html / 302!
+/talent/ / 302!
+/stories / 302!
+/stories.html / 302!
+/stories/ / 302!
+/merch / 302!
+/merch.html / 302!
+/merch/ / 302!
