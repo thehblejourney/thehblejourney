@@ -277,7 +277,7 @@ for (const file of htmlFiles) {
 
   // Preserve approved original visual designs on The Common Thread and HBLE Radio.
   // Legacy approved-media restrictions remain on all other pages.
-  if (!["podcast.html", "radio.html"].includes(file) && !html.includes(TEXT_ONLY_MARKER) && /<\/head>/i.test(html)) {
+  if (!["podcast.html", "radio.html", "fashion.html"].includes(file) && !html.includes(TEXT_ONLY_MARKER) && /<\/head>/i.test(html)) {
     html = html.replace(/<\/head>/i, `${TEXT_ONLY_STYLE}\n</head>`);
     changed = true;
   }
