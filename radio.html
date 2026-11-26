@@ -612,7 +612,7 @@
       }
       function skip(direction){pickNext(direction);loadTrack();playCurrent()}
       function selectTrack(i){if(i===index&&initialized){if(audio.paused)playCurrent();return}index=i;loadTrack();playCurrent()}
-      document.getElementById('classics-play').addEventListener('click',function(){selectTrack(1);player.scrollIntoView({block:'nearest'});});
+      document.getElementById('classics-play').addEventListener('click',function(){selectTrack(1);});
       playBtn.addEventListener('click',function(){if(audio.paused)playCurrent(false);else pauseCurrent()});
       gateStart.addEventListener('click',function(){playCurrent(false)});
       gateClose.addEventListener('click',hideSoundGate);
@@ -687,7 +687,7 @@
         btn.setAttribute('aria-pressed',String(yes));
       });
       const chosen=thumbs[index];
-      if(chosen)chosen.scrollIntoView({block:'nearest',inline:'nearest',behavior:'auto'});
+      // Keep the visitor's scroll position when the active track changes.
     }
     function animate(){
       main.className='showcase-main-image';
