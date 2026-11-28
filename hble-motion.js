@@ -52,7 +52,15 @@
     category.textContent = item.category || 'HBLE';
     const heading = document.createElement('h3');
     heading.className = 'hble-motion-item-title';
-    heading.textContent = item.title || 'HBLE In Motion';
+    if (item.id === 'services-master') {
+      const link = document.createElement('a');
+      link.href = '/design-studio/';
+      link.textContent = 'HBLE Graphic Design Studio';
+      link.style.cssText = 'color:inherit;text-decoration:underline;text-decoration-color:#d5ad61;text-underline-offset:5px;cursor:pointer;overflow-wrap:break-word';
+      heading.appendChild(link);
+    } else {
+      heading.textContent = item.title || 'HBLE In Motion';
+    }
     const body = document.createElement('p');
     body.textContent = item.description || 'A living showcase of HBLE brand motion, visual direction and creative work.';
 
